@@ -1,0 +1,12 @@
+.github/
+coverage/
+node_modules/
+src/
+.babelrc
+.eslintignore
+.eslintrc
+.gitignore
+.npmignore
+.prettierrc
+.jest.config.js
+tsconfig.json
