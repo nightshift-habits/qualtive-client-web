@@ -58,6 +58,7 @@ export const post = (collection: string, entry: Entry, options?: Options): Promi
       },
       attributes: entry.customAttributes,
       attributeHints: {
+        clientLibrary: "web",
         userAgent: navigator.userAgent,
         platform: navigator.platform,
         hasTouch: hasTouch(),
