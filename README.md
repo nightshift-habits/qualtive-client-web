@@ -18,7 +18,58 @@ TypeScript types are included in this package.
 
 ## Usage
 
-First of all, make sure you have created a question on [qualtive.app](https://qualtive.app). Each feedback entry is posted to a so called collection which can be found in the question page.
+First of all, make sure you have created a question on [qualtive.io](https://qualtive.io). Each feedback entry is posted to a so called collection (ID) which can be found in the question page.
+
+### Using Built-in UI
+
+To present a feedback form, use the `present`-function. For example:
+
+```typescript
+import * as qualtive from "qualtive-web"
+
+qualtive.present("my-company/my-question")
+```
+
+There is a few options to customize the UI. For example:
+
+```typescript
+import * as qualtive from "qualtive-web"
+
+qualtive.present("my-company/my-question", {
+  title: "Leave feedback",
+  questionTitle: "What do you think about our new design?",
+  supportURL: "https://link-to-your-customer-service/", // If present, this will show a link to your customer support.
+  locale: "en-US", // Optional. The language and formatting to use. Defaults to the device default.
+})
+```
+
+If users can login on your site, you can include a user property describing the user. For example:
+
+```typescript
+import * as qualtive from "qualtive-web"
+
+qualtive.present("my-company/my-question", {
+  user: {
+    id: "user-123", // Authorized user id. Used to list feedback from the same user. Optional.
+    name: "Steve", // User friendly name. Can be the users full name or alias. Optional.
+    email: "steve@gmail.com", // Reachable email adress. Optional.
+  },
+})
+```
+
+You can even include custom attributes that will be shown on [qualtive.io](https://qualtive.io). For example:
+
+```typescript
+import * as qualtive from "qualtive-web"
+
+qualtive.present("my-company/my-question", {
+  customAttributes: {
+    age: 22,
+  },
+})
+```
+
+### Using Custom UI
 
 To post a feedback entry, use the `post`-function. For example:
 
@@ -46,7 +97,7 @@ qualtive.post("my-company/my-question", {
 })
 ```
 
-You can even include custom attributes that will be shown on [qualtive.app](https://qualtive.app). For example:
+You can even include custom attributes that will be shown on [qualtive.io](https://qualtive.io). For example:
 
 ```typescript
 import * as qualtive from "qualtive-web"
@@ -58,3 +109,10 @@ qualtive.post("my-company/my-question", {
   },
 })
 ```
+
+## Supported languages
+
+The built-in UI supports the following languages:
+
+- English
+- Swedish
