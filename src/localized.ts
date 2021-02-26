@@ -27,5 +27,6 @@ const strings = {
 
 export default (key: string, locale: string | undefined): string => {
   locale = locale || navigator.language || "en-us"
-  return strings[locale][key] || strings["en-us"][key] || key
+  locale = locale.toLowerCase()
+  return (strings[locale] || strings["en-us"])[key] || key
 }
