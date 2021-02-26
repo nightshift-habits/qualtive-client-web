@@ -40,9 +40,9 @@ export type EntryReference = {
 }
 
 /**
- * Optional options to use when posting feedback.
+ * Optional base options to use when posting feedback.
  */
-export type Options = {
+export type _Options = {
   /**
    * The remote url to post feedback to. Must include scheme and host. For debug usages only.
    */

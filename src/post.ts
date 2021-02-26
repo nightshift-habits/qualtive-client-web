@@ -1,5 +1,10 @@
-import { Entry, Options, EntryReference } from "./model"
+import { Entry, _Options, EntryReference } from "./model"
 import { getClientId, hasTouch, validateEntry, parseCollection } from "./private"
+
+/**
+ * Optional options to use when posting feedback using custom UI.
+ */
+export type PostOptions = _Options
 
 /**
  * Posts a user feedback entry.
@@ -8,7 +13,7 @@ import { getClientId, hasTouch, validateEntry, parseCollection } from "./private
  * @param options Optional options for posting.
  * @returns Promise<EntryReference>
  */
-export const post = (collection: string, entry: Entry, options?: Options): Promise<EntryReference> => {
+export const post = (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
   return new Promise((resolve, reject) => {
     let containerId: string, questionId: string
     try {
