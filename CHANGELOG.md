@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.1
+
+- Updated README.md.
+- Fixes issue with unknown locale resulting in built-in UI not being presented.
+
 ## 1.1.0
 
 ### Added
