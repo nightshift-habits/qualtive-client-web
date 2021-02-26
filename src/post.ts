@@ -73,7 +73,7 @@ export const post = (collection: string, entry: Entry, options?: Options): Promi
       },
     }
 
-    let url = options?._remoteUrl || "https://feedback-api.qualtive.app"
+    let url = options?._remoteUrl || "https://user-api.qualtive.io"
     url += "/1/entries/"
     request.open("POST", url, true)
 

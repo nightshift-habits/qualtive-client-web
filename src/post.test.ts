@@ -18,7 +18,7 @@ describe("post", () => {
 
   it("should handle connection failure", async () => {
     try {
-      await post(validCollection, validEntry, { _remoteUrl: "https://does-not-exists.qualtive.app" })
+      await post(validCollection, validEntry, { _remoteUrl: "https://does-not-exists.qualtive.io" })
     } catch (error) {
       // expected
       return

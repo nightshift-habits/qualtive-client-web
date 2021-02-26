@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qualtive/client-library-web.git"
+    "url": "git+https://github.com/nightshift-habits/qualtive-client-web.git"
   },
   "bugs": {
-    "url": "https://github.com/qualtive/client-library-web/issues"
+    "url": "https://github.com/nightshift-habits/qualtive-client-web/issues"
   },
-  "homepage": "https://github.com/qualtive/client-library-web#readme",
+  "homepage": "https://github.com/nightshift-habits/qualtive-client-web#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.7",
