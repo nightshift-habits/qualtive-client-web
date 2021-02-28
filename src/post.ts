@@ -79,7 +79,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
     }
 
     let url = options?._remoteUrl || "https://user-api.qualtive.io"
-    url += "/1/entries/"
+    url += "/feedback/entries/"
     request.open("POST", url, true)
 
     request.setRequestHeader("Content-Type", "application/json; charset=utf-8")
