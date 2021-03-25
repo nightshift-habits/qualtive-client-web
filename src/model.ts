@@ -1,4 +1,56 @@
 /**
+ * Feedback question representing a form or a question to present to the user.
+ */
+export type Question = {
+  /**
+   * Question identifier. Same as shown on qualtive.io.
+   */
+  id: string
+
+  /**
+   * Question name. Same as main title shown on qualtive.io.
+   */
+  name: string
+
+  /**
+   * Question content. The content and struction of the question to present til the user.
+   */
+  content: QuestionContent[]
+}
+
+/**
+ * Question content types. Support question content types. Note that more types can be added in the future.
+ */
+export type QuestionContent = QuestionContentTitle | QuestionContentScore | QuestionContentText
+
+/**
+ * Title static type. This type does not require any user input and is only used as visual guide in the question.
+ */
+export type QuestionContentTitle = {
+  type: "title"
+
+  /**
+   * Text to show in the title.
+   */
+  text: string
+}
+
+/**
+ * Score input type. This type allows the user to enter a score (rating) between 0 and 100.
+ */
+export type QuestionContentScore = {
+  type: "score"
+}
+
+/**
+ * Text input type. This type allows the user to enter a free-form text.
+ */
+export type QuestionContentText = {
+  type: "text"
+  placeholder: string | null
+}
+
+/**
  * Feedback entry contaning data for a user entry.
  */
 export type Entry = {

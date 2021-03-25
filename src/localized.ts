@@ -1,5 +1,7 @@
 const strings = {
   "en-us": {
+    "ops.fallback-error": "Could not complete operation.",
+
     "form.title": "Leave feedback",
     "form.question": "What do you think?",
     "form.close": "Close",
@@ -17,6 +19,8 @@ const strings = {
     "form.score.100": "Love",
   },
   "sv-se": {
+    "ops.fallback-error": "Kunde inte slutföra åtgärd.",
+
     "form.title": "Lämna feedback",
     "form.question": "Vad tycker du?",
     "form.close": "Stäng",
@@ -35,7 +39,7 @@ const strings = {
   },
 } as { [key: string]: { [key: string]: string } }
 
-export default (key: string, locale: string | undefined): string => {
+export default (key: string, locale?: string): string => {
   locale = locale || navigator.language || "en-us"
   locale = locale.toLowerCase()
   return (strings[locale] || strings["en-us"])[key] || key
