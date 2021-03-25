@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint src/ --ext .js,.ts,.tsx",
     "test": "jest --coverage",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc -p tsconfig.prod.json",
     "package": "npm run build && npm publish"
   },
   "repository": {
