@@ -50,10 +50,25 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
     }
     request.onerror = () => reject(new Error(request.statusText || _("ops.fallback-error")))
 
+    const content = entry.content || []
+    if (content.length == 0) {
+      if (typeof entry.score === "number") {
+        content.push({
+          type: "score",
+          value: entry.score,
+        })
+      }
+      if (typeof entry.text === "string") {
+        content.push({
+          type: "text",
+          value: entry.text,
+        })
+      }
+    }
+
     const body = {
       questionId,
-      score: entry.score,
-      text: entry.text,
+      content,
       user: {
         id: entry.user?.id?.toString(),
         name: entry.user?.name,

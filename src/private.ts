@@ -1,4 +1,4 @@
-import { Entry } from "./model"
+import { Entry, EntryContent } from "./model"
 
 // --- Input validation ---
 
@@ -19,12 +19,46 @@ export const parseCollection = (collection: string): string[] => {
 export const validateEntry = (entry: Entry): void => {
   if (typeof entry != "object" || entry == null) throw Error("Entry must be an object")
 
-  // Score
-  if (typeof entry.score != "number") throw Error("Score must be a number between 0 and 100")
-  if (entry.score < 0 || entry.score > 100) throw Error("Score must be a number between 0 and 100")
+  if (Array.isArray(entry.content)) {
+    if (entry.content.length == 0) throw Error("Content must be a non-empty array")
 
-  // Text
-  if (typeof entry.text != "string" && entry.text) throw Error("Text must be a string, null or undefined")
+    entry.content.forEach((content, index) => {
+      if (typeof content != "object") throw Error("Content must be an object")
+      switch (content.type) {
+        case "title":
+          if (content.text != null && typeof content.text != "undefined" && typeof content.text != "string")
+            throw Error(`Content ${index} (title) text must be a string, null or undefined`)
+          return
+
+        case "score":
+          if (content.value != null && typeof content.value != "undefined" && typeof content.value != "number")
+            throw Error(`Content ${index} (score) value must be a number, null or undefined`)
+          if (typeof content.value == "number" && (content.value < 0 || content.value > 100))
+            throw Error(`Content ${index} (score) value must be between 0 and 100`)
+          return
+
+        case "text":
+          if (content.value != null && typeof content.value != "undefined" && typeof content.value != "string")
+            throw Error(`Content ${index} (text) value must be a string, null or undefined`)
+          return
+      }
+
+      if (!(content as EntryContent).type) throw Error(`Content ${index} must have a type`)
+      throw Error(`Content ${index} type is unsupported: ${(content as EntryContent).type}`)
+    })
+  } else {
+    // Score
+    const hasScore = !!entry.score || entry.score == 0
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    if (hasScore && (typeof entry.score != "number" || entry.score! < 0 || entry.score! > 100))
+      throw Error("Score must be a number between 0 and 100")
+
+    // Text
+    const hasText = !!entry.text
+    if (hasText && typeof entry.text != "string") throw Error("Text must be a string, null or undefined")
+
+    if (!hasScore && !hasText) throw Error("Must set content or score or text")
+  }
 
   // User
   if (typeof entry.user != "undefined" && entry.user != null) {

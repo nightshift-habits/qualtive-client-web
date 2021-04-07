@@ -55,14 +55,25 @@ export type QuestionContentText = {
  */
 export type Entry = {
   /**
-   * Score value between 0 and 100. Required.
+   * Score value between 0 and 100. Optional.
+   *
+   * Note that this property is ignored if the content-property is set.
    */
-  score: number
+  score?: number | null
 
   /**
    * User typed text. Optional.
+   *
+   * Note that this property is ignored if the content-property is set.
    */
   text?: string | null
+
+  /**
+   * Entry content.
+   *
+   * If this property is set it overrides any possible value in the score and text-properties.
+   */
+  content?: EntryContent[]
 
   /**
    * User who entered feedback. For example the logged in user on the site. Optional.
@@ -77,6 +88,55 @@ export type Entry = {
    * Custom attributes
    */
   customAttributes?: { [key: string]: string | number | boolean | null } | null
+}
+
+/**
+ * Section of content for a entry. Determined by the content of a Question.
+ *
+ * Only difference between the content of a Entry and a Question is that EntryContent accepts input while QuestionContent is only for display.
+ */
+export type EntryContent = EntryContentTitle | EntryContentScore | EntryContentText
+
+/**
+ * Title static type. This type does not require any user input and is only used as visual guide in the question. Does not have any input.
+ *
+ * QuestionContentTitle is co-responding question content.
+ */
+export type EntryContentTitle = {
+  type: "title"
+
+  /**
+   * Text that has been shown in the title.
+   */
+  text: string
+}
+
+/**
+ * Score input type. This type allows the user to enter a score (rating) between 0 and 100.
+ *
+ * QuestionContentScore is co-responding question content.
+ */
+export type EntryContentScore = {
+  type: "score"
+
+  /**
+   * User selected score (rating) between 0 and 100.
+   */
+  value: number | null
+}
+
+/**
+ * Text input type. This type allows the user to enter a free-form text.
+ *
+ * QuestionContentText is co-responding question content.
+ */
+export type EntryContentText = {
+  type: "text"
+
+  /**
+   * User selected text.
+   */
+  value: string | null
 }
 
 /**

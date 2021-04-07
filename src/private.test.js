@@ -67,6 +67,58 @@ describe("validation", () => {
       })
     ).toThrowError()
 
+    // Invalid content
+    expect(() =>
+      validateEntry({
+        content: null,
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        content: [],
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        content: [
+          {
+            type: "score",
+            value: -1,
+          },
+        ],
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        content: [
+          {
+            type: "score",
+            value: 101,
+          },
+        ],
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        content: [
+          {
+            type: "score",
+            value: "50",
+          },
+        ],
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        content: [
+          {
+            type: "text",
+            value: true,
+          },
+        ],
+      })
+    ).toThrowError()
+
     // Invalid user
     expect(() =>
       validateEntry({
