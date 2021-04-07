@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "allowJs": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "/"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
