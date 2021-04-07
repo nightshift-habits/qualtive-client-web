@@ -288,6 +288,8 @@ export const present = (collection: string, options?: FormOptions): Form => {
     hasRenderedQuestion = true
 
     if (question) {
+      let contentTabindex = 9100
+
       const mainTitleElement = document.createElement("p")
       mainTitleElement.innerHTML = question.name
       contentElement.appendChild(mainTitleElement)
@@ -319,10 +321,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
               scoresElement.appendChild(optionElement)
 
               const buttonElement = document.createElement("button")
-              buttonElement.setAttribute("tabindex", 9100 + score + "")
+              buttonElement.setAttribute("tabindex", contentTabindex + "")
               buttonElement.setAttribute("title", _(`form.score.${score}`, options?.locale))
               optionButtonElements.push(buttonElement)
               optionElement.appendChild(buttonElement)
+              contentTabindex++
 
               switch (score) {
                 case 0:
@@ -369,9 +372,10 @@ export const present = (collection: string, options?: FormOptions): Form => {
               "placeholder",
               questionContent.placeholder || _("form.text-placeholder", options?.locale)
             )
-            textareaElement.setAttribute("tabindex", "9201")
+            textareaElement.setAttribute("tabindex", contentTabindex + "")
             contentElement.appendChild(textareaElement)
             textareaElements.push(textareaElement)
+            contentTabindex++
 
             textareaElement.oninput = () => {
               const text = textareaElement.value.trim() == "" ? null : textareaElement.value
