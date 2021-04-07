@@ -6,6 +6,9 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
     const collection = button.getAttribute("data-collection")
     if (!collection) throw Error(`Missing collection on button: \(button)`)
 
-    qualtive.present(collection)
+    qualtive.present(collection, {
+      darkMode: (document.getElementById("darkmode") as HTMLSelectElement).value as "auto",
+      supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
+    })
   }
 })
