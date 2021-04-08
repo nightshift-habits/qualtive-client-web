@@ -65,6 +65,11 @@ export type FormOptions = _Options & {
   darkMode?: "auto" | "never" | "always"
 
   /**
+   * Option to disallow dismissal of the form by clicking escape on the keyboard. Default is false.
+   */
+  disallowKeyboardDismiss?: boolean
+
+  /**
    * Optional function that is called when the form is dismissed. First parameter contains the reference sent entry or null if the form was cancelled.
    */
   onDismiss?: (entry: EntryReference | null) => void
@@ -184,7 +189,9 @@ export const present = (collection: string, options?: FormOptions): Form => {
     }
   }
 
-  window.addEventListener("keydown", dismissByKeyEvent)
+  if (options?.disallowKeyboardDismiss != true) {
+    window.addEventListener("keydown", dismissByKeyEvent)
+  }
 
   // Interaction
 
@@ -237,7 +244,9 @@ export const present = (collection: string, options?: FormOptions): Form => {
   }
 
   const dismiss = (): void => {
-    window.removeEventListener("keydown", dismissByKeyEvent)
+    if (options?.disallowKeyboardDismiss != true) {
+      window.removeEventListener("keydown", dismissByKeyEvent)
+    }
 
     noClickElement.parentElement?.removeChild(noClickElement)
     containerElement.className += " _q-out"
