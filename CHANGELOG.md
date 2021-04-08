@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.0
+
+### Added
+
+- Option to disallow dismissing form by escape-key.
+
+### Fixed
+
+- Form layout on mobile and small screens.
+
+## 1.3.0
+
+### Added
+
+- Function to get a question and its configuration from qualtive.io.
+- Forms now adjust to the content of it question.
+- Option to set dark mode appearance on form.
+
 ## 1.2.0
 
 - Improved accessibility
