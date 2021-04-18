@@ -447,8 +447,8 @@ export const present = (collection: string, options?: FormOptions): Form => {
   getQuestion(collection, options)
     .then((_question) => {
       question = _question
-      content = _question.content.map(
-        (x): EntryContent => {
+      content = _question.content
+        .map((x): EntryContent | undefined => {
           switch (x.type) {
             case "title":
               return { type: "title", text: x.text }
@@ -457,8 +457,8 @@ export const present = (collection: string, options?: FormOptions): Form => {
             case "text":
               return { type: "text", value: null }
           }
-        }
-      )
+        })
+        .filter((x): x is EntryContent => !!x)
     })
     .catch(() => {
       successTextElement.innerHTML = _("form.error", options?.locale)
