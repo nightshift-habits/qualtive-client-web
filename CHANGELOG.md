@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.5.0
+
+### Added
+
+- Support for select and multiselect question types.
+
+### Changed
+
+- Updated result view for forms.
+
 ## 1.4.0
 
 ### Added
