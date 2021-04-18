@@ -41,6 +41,18 @@ export const validateEntry = (entry: Entry): void => {
           if (content.value != null && typeof content.value != "undefined" && typeof content.value != "string")
             throw Error(`Content ${index} (text) value must be a string, null or undefined`)
           return
+
+        case "select":
+          if (content.value != null && typeof content.value != "undefined" && typeof content.value != "string")
+            throw Error(`Content ${index} (select) value must be a string, null or undefined`)
+          return
+
+        case "multiselect":
+          if (!Array.isArray(content.values)) throw Error(`Content ${index} (multiselect) value must be an array`)
+          content.values.forEach((x, index2) => {
+            if (typeof x != "string") throw Error(`Content ${index} (multiselect) value ${index2}) must be a string`)
+          })
+          return
       }
 
       if (!(content as EntryContent).type) throw Error(`Content ${index} must have a type`)
