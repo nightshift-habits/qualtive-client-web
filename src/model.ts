@@ -116,7 +116,12 @@ export type Entry = {
  *
  * Only difference between the content of a Entry and a Question is that EntryContent accepts input while QuestionContent is only for display.
  */
-export type EntryContent = EntryContentTitle | EntryContentScore | EntryContentText
+export type EntryContent =
+  | EntryContentTitle
+  | EntryContentScore
+  | EntryContentText
+  | EntryContentSelect
+  | EntryContentMultiselect
 
 /**
  * Title static type. This type does not require any user input and is only used as visual guide in the question. Does not have any input.
@@ -158,6 +163,34 @@ export type EntryContentText = {
    * User selected text.
    */
   value: string | null
+}
+
+/**
+ * Single select/radio input type. This type allows the user to enter one of predefined options.
+ *
+ * QuestionContentSelect is co-responding question content.
+ */
+export type EntryContentSelect = {
+  type: "select"
+
+  /**
+   * User selected option.
+   */
+  value: string | null
+}
+
+/**
+ * Multi select/checkbox input type. This type allows the user to enter zero or more of predefined options.
+ *
+ * QuestionContentMultiselect is co-responding question content.
+ */
+export type EntryContentMultiselect = {
+  type: "multiselect"
+
+  /**
+   * User selected options.
+   */
+  values: string[]
 }
 
 /**
