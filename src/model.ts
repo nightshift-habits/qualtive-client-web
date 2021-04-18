@@ -21,7 +21,12 @@ export type Question = {
 /**
  * Question content types. Support question content types. Note that more types can be added in the future.
  */
-export type QuestionContent = QuestionContentTitle | QuestionContentScore | QuestionContentText
+export type QuestionContent =
+  | QuestionContentTitle
+  | QuestionContentScore
+  | QuestionContentText
+  | QuestionContentSelect
+  | QuestionContentMultiselect
 
 /**
  * Title static type. This type does not require any user input and is only used as visual guide in the question.
@@ -48,6 +53,22 @@ export type QuestionContentScore = {
 export type QuestionContentText = {
   type: "text"
   placeholder: string | null
+}
+
+/**
+ * Single select/radio input type. This type allows the user to enter one of predefined options.
+ */
+export type QuestionContentSelect = {
+  type: "select"
+  options: string[]
+}
+
+/**
+ * Multi select/checkbox input type. This type allows the user to enter zero or more of predefined options.
+ */
+export type QuestionContentMultiselect = {
+  type: "multiselect"
+  options: string[]
 }
 
 /**
