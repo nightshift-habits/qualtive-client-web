@@ -48,9 +48,17 @@ export const validateEntry = (entry: Entry): void => {
           return
 
         case "multiselect":
-          if (!Array.isArray(content.values)) throw Error(`Content ${index} (multiselect) value must be an array`)
+          if (!Array.isArray(content.values)) throw Error(`Content ${index} (multiselect) values must be an array`)
           content.values.forEach((x, index2) => {
-            if (typeof x != "string") throw Error(`Content ${index} (multiselect) value ${index2}) must be a string`)
+            if (typeof x != "string") throw Error(`Content ${index} (multiselect) value (${index2}) must be a string`)
+          })
+          return
+
+        case "attachments":
+          if (!Array.isArray(content.values)) throw Error(`Content ${index} (attachments) values must be an array`)
+          content.values.forEach((x, index2) => {
+            if (typeof x.id != "number")
+              throw Error(`Content ${index} (attachments) value.id (${index2}) must be a number`)
           })
           return
       }
