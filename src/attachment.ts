@@ -69,7 +69,9 @@ const _upload = (attachment: _Attachment, contentType: AttachmentContentType, da
       if (request.status >= 400) {
         reject(_("ops.fallback-error"))
       } else {
-        resolve(attachment)
+        resolve({
+          id: attachment.id,
+        })
       }
     }
     request.onerror = () => reject(new Error(request.statusText || _("ops.fallback-error")))
