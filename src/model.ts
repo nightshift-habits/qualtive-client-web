@@ -27,6 +27,7 @@ export type QuestionContent =
   | QuestionContentText
   | QuestionContentSelect
   | QuestionContentMultiselect
+  | QuestionContentAttachments
 
 /**
  * Title static type. This type does not require any user input and is only used as visual guide in the question.
@@ -69,6 +70,13 @@ export type QuestionContentSelect = {
 export type QuestionContentMultiselect = {
   type: "multiselect"
   options: string[]
+}
+
+/**
+ * Attachments input type. This type allows the user to add attachments like images.
+ */
+export type QuestionContentAttachments = {
+  type: "attachments"
 }
 
 /**
@@ -122,6 +130,7 @@ export type EntryContent =
   | EntryContentText
   | EntryContentSelect
   | EntryContentMultiselect
+  | EntryContentAttachments
 
 /**
  * Title static type. This type does not require any user input and is only used as visual guide in the question. Does not have any input.
@@ -192,6 +201,32 @@ export type EntryContentMultiselect = {
    */
   values: string[]
 }
+
+/**
+ * Attachments input type. This type allows the user to add attachments like images.
+ *
+ * QuestionContentAttachments is co-responding question content.
+ */
+export type EntryContentAttachments = {
+  type: "attachments"
+
+  /**
+   * User selected attachments.
+   */
+  values: Attachment[]
+}
+
+/**
+ * User uploadable attachment reference.
+ */
+export type Attachment = {
+  id: number
+}
+
+/**
+ * A valid content type/mime type for an attachment.
+ */
+export type AttachmentContentType = "image/png" | "image/jpeg"
 
 /**
  * Reference to a posted entry.

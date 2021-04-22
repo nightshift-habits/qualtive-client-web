@@ -17,6 +17,7 @@ const strings = {
     "form.score.50": "Neutral",
     "form.score.75": "Like",
     "form.score.100": "Love",
+    "form.image.index": "Image ",
   },
   "sv-se": {
     "ops.fallback-error": "Kunde inte slutföra åtgärd.",
@@ -36,6 +37,7 @@ const strings = {
     "form.score.50": "Neutral",
     "form.score.75": "Gilla",
     "form.score.100": "Älska",
+    "form.image.index": "Bild ",
   },
 } as { [key: string]: { [key: string]: string } }
 
