@@ -1,5 +1,5 @@
 import { Question, _Options } from "./model"
-import { parseCollection } from "./private"
+import { parseCollection, preferredLocale } from "./private"
 import _ from "./localized"
 
 /**
@@ -52,6 +52,7 @@ export const getQuestion = (collection: string, options?: GetQuestionOptions): P
     request.open("GET", url, true)
 
     request.setRequestHeader("X-Container", containerId)
+    request.setRequestHeader("Accept-Language", preferredLocale(options))
 
     request.send()
   })

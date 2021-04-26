@@ -47,11 +47,6 @@ export type FormOptions = _Options & {
   supportURL?: string
 
   /**
-   * The locale to use. Default: `navigator.language || en-us`.
-   */
-  locale?: string
-
-  /**
    * Option to override if dark appearance should be used or not. Default is auto.
    *
    * - auto: Dark mode is used if the user prefers dark mode.

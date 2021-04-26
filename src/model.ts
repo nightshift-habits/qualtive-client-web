@@ -256,6 +256,10 @@ export type EntryReference = {
  */
 export type _Options = {
   /**
+   * The locale to use. Defaults to `navigator.language || en-us`.
+   */
+  locale?: string
+  /**
    * The remote url to post feedback too. Must include scheme and host. For debug usages only.
    */
   _remoteUrl?: string | null

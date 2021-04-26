@@ -1,4 +1,4 @@
-import { Entry, EntryContent } from "./model"
+import { Entry, EntryContent, _Options } from "./model"
 
 // --- Input validation ---
 
@@ -156,3 +156,8 @@ export const hasTouch = (): boolean => {
     return false
   }
 }
+
+// --- Locale ---
+
+export const preferredLocale = (options: _Options | undefined): string =>
+  options?.locale || navigator.language || "en-us"
