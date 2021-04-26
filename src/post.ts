@@ -56,6 +56,9 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
         content.push({
           type: "score",
           value: entry.score,
+          scoreType: "smilies5",
+          leadingText: null,
+          trailingText: null,
         })
       }
       if (typeof entry.text === "string") {

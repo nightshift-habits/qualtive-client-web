@@ -1,4 +1,9 @@
 /**
+ * Kind/type of score to display for a user.
+ */
+export type ScoreType = "smilies5" | "smilies3" | "thumbs" | "nps"
+
+/**
  * Feedback question representing a form or a question to present to the user.
  */
 export type Question = {
@@ -13,7 +18,7 @@ export type Question = {
   name: string
 
   /**
-   * Question content. The content and struction of the question to present til the user.
+   * Question content. The content and structure of the question to present til the user.
    */
   content: QuestionContent[]
 }
@@ -46,6 +51,9 @@ export type QuestionContentTitle = {
  */
 export type QuestionContentScore = {
   type: "score"
+  scoreType: ScoreType
+  leadingText: string | null
+  trailingText: string | null
 }
 
 /**
@@ -80,7 +88,7 @@ export type QuestionContentAttachments = {
 }
 
 /**
- * Feedback entry contaning data for a user entry.
+ * Feedback entry containing data for a user entry.
  */
 export type Entry = {
   /**
@@ -120,9 +128,9 @@ export type Entry = {
 }
 
 /**
- * Section of content for a entry. Determined by the content of a Question.
+ * Section of content for an entry. Determined by the content of a Question.
  *
- * Only difference between the content of a Entry and a Question is that EntryContent accepts input while QuestionContent is only for display.
+ * Only difference between the content of an Entry and a Question is that EntryContent accepts input while QuestionContent is only for display.
  */
 export type EntryContent =
   | EntryContentTitle
@@ -153,6 +161,9 @@ export type EntryContentTitle = {
  */
 export type EntryContentScore = {
   type: "score"
+  scoreType: ScoreType
+  leadingText: string | null
+  trailingText: string | null
 
   /**
    * User selected score (rating) between 0 and 100.
@@ -245,7 +256,7 @@ export type EntryReference = {
  */
 export type _Options = {
   /**
-   * The remote url to post feedback to. Must include scheme and host. For debug usages only.
+   * The remote url to post feedback too. Must include scheme and host. For debug usages only.
    */
   _remoteUrl?: string | null
 }

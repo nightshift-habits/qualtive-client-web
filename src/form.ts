@@ -774,7 +774,13 @@ export const present = (collection: string, options?: FormOptions): Form => {
             case "title":
               return { type: "title", text: x.text }
             case "score":
-              return { type: "score", value: null }
+              return {
+                type: "score",
+                value: null,
+                scoreType: x.scoreType,
+                leadingText: x.leadingText,
+                trailingText: x.trailingText,
+              }
             case "text":
               return { type: "text", value: null }
             case "select":
