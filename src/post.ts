@@ -92,6 +92,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
           width: window.innerWidth,
           height: window.innerHeight,
         },
+        locale: options?.locale || navigator.language || undefined,
       },
     }
 
