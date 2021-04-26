@@ -56,7 +56,7 @@ export type FormOptions = _Options & {
    *
    * - auto: Dark mode is used if the user prefers dark mode.
    * - never: Dark mode will never be used.
-   * - always: Dark mode will awlays be used.
+   * - always: Dark mode will always be used.
    */
   darkMode?: "auto" | "never" | "always"
 

@@ -8,7 +8,7 @@ import _ from "./localized"
 export type GetQuestionOptions = _Options
 
 /**
- * Fetches a question and it's struction.
+ * Fetches a question and it's structure.
  * @param collection Collection to get question from. Formatted as `container-id/question-id`. Required.
  * @param options Optional options.
  * @returns Promise<Question>
