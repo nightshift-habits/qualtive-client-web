@@ -9,6 +9,7 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
     qualtive.present(collection, {
       darkMode: (document.getElementById("darkmode") as HTMLSelectElement).value as "auto",
       supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
+      locale: (document.getElementById("locale") as HTMLInputElement).value,
     })
   }
 })
