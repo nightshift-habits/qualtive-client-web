@@ -17,6 +17,8 @@ const strings = {
     "form.score.50": "Neutral",
     "form.score.75": "Like",
     "form.score.100": "Love",
+    "form.nps.leading": "Very likely",
+    "form.nps.trailing": "Not likely",
     "form.image.index": "Image ",
   },
   "sv-se": {
@@ -37,6 +39,8 @@ const strings = {
     "form.score.50": "Neutral",
     "form.score.75": "Gilla",
     "form.score.100": "Älska",
+    "form.nps.leading": "Mycket sannolikt",
+    "form.nps.trailing": "Inte alls sannolikt",
     "form.image.index": "Bild ",
   },
 } as { [key: string]: { [key: string]: string } }

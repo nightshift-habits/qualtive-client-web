@@ -83,12 +83,14 @@ export type Form = {
  * @returns Form. The presented form.
  */
 export const present = (collection: string, options?: FormOptions): Form => {
-  const scores = [0, 25, 50, 75, 100]
+  const scoresSmilies5 = [0, 25, 50, 75, 100]
+  const scoresSmilies3 = [0, 50, 100]
+  const scoresNPS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
   const style =
-    '@font-face{font-family:Inter;font-weight:400;src:url(https://static.qualtive.io/fonts/Inter-Regular.woff)}@font-face{font-family:Inter;font-weight:500;src:url(https://static.qualtive.io/fonts/Inter-Medium.woff)}@font-face{font-family:Inter;font-weight:600;src:url(https://static.qualtive.io/fonts/Inter-SemiBold.woff)}#_q-container *{margin:0;padding:0;box-sizing:border-box;appearance:none;-webkit-appearance:none;box-sizing:border-box;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent}#_q-container :not(textarea):not(#_q-container._q-error._q-successli:first-child):not(#_q-container._q-resultp):not(#_q-container._q-result){cursor:default;user-select:none;-moz-user-select:none;-webkit-user-select:none}#_q-container button{background:0 0;border:none;cursor:pointer!important}#_q-container button *{cursor:pointer!important}#_q-container ul{list-style:none}#_q-container button>*{vertical-align:middle}#_q-container button>svg{margin:0 5px 2px 0}#_q-no-click{position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999997}#_q-container{width:100%;position:fixed;max-width:375px;max-height:100vh;overflow:scroll;background:#fff;box-shadow:0 0 50px rgba(0,0,0,.4);left:50%;top:50%;transform:translate(-50%,-50%);transition:transform .25s,opacity .25s;z-index:99999998}#_q-container._q-out{transform:translate(-50%,-50%) scale(.9);opacity:0}#_q-container>div{padding:30px 50px 0}#_q-container ._q-cancel{margin:0 0 0 auto;display:block;transform:translate(20px,0)}#_q-container ._q-cancel:focus{outline:0;opacity:.7}#_q-container h2{font-size:14px;color:#333;margin:0 0 30px;line-height:20px}#_q-container h3{font-size:16px;font-weight:600;color:#333;margin:26px 0 20px}#_q-container p{font-size:14px;font-weight:600;line-height:24px;color:#333;margin:26px 0 10px}#_q-container ._q-score{margin:10px 0;display:table;width:100%}#_q-container ._q-score li{display:inline-block;display:table-cell}#_q-container ._q-score li._q-option{width:34px}#_q-container ._q-score li svg:first-child,#_q-container ._q-score li svg:first-child *{cursor:pointer!important}#_q-container ._q-score li button:focus svg:first-child,#_q-container ._q-score li button:hover svg:first-child,#_q-container ._q-score li._q-selected svg:first-child{display:none}#_q-container ._q-score li button:focus svg:last-child,#_q-container ._q-score li button:hover svg:last-child,#_q-container ._q-score li._q-selected svg:last-child{display:inline-block}#_q-container ._q-score li button:focus{opacity:.6}#_q-container ._q-score li._q-selected button:focus{opacity:1}#_q-container ._q-score button:focus{outline:0}#_q-container ._q-score li._q-0 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-0 svg:first-child:hover [fill="#4F4F4F"]{fill:#e33737}#_q-container ._q-score li._q-0 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-0 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#e33737}#_q-container ._q-score li._q-25 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-25 svg:first-child:hover [fill="#4F4F4F"]{fill:#ae563a}#_q-container ._q-score li._q-25 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-25 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#ae563a}#_q-container ._q-score li._q-50 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [fill="#4F4F4F"]{fill:#333}#_q-container ._q-score li._q-50 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#333}#_q-container ._q-score li._q-75 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-75 svg:first-child:hover [fill="#4F4F4F"]{fill:#f3be40}#_q-container ._q-score li._q-75 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-75 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#f3be40}#_q-container ._q-score li._q-100 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-100 svg:first-child:hover [fill="#4F4F4F"]{fill:#3ca53e}#_q-container ._q-score li._q-100 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-100 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#3ca53e}#_q-container ._q-score li svg:last-child{display:none}#_q-container textarea{width:100%;resize:none;border:1px solid #333;border-radius:6px;padding:12px 12px;font-size:14px;font-weight:400;outline:0;height:100px;line-height:20px;color:#333}#_q-container textarea:active:not(:disabled),#_q-container textarea:focus:not(:disabled){border:2px solid #0b75b1;padding:11px 11px}#_q-container textarea::-webkit-input-placeholder{color:#333}#_q-container textarea:-moz-placeholder{color:#333}#_q-container textarea::-moz-placeholder{color:#333}#_q-container textarea:-ms-input-placeholder{color:#333}#_q-container textarea::placeholder{color:#333}#_q-container ._q-options{margin:10px 0 20px}#_q-container ._q-options button{display:table;width:100%;outline:0}#_q-container ._q-options button:not(:last-child){margin:0 0 10px}#_q-container ._q-options button span:first-child{display:table-cell;padding:0 14px 0 0}#_q-container ._q-options button span:first-child svg{position:relative;top:1px}#_q-container ._q-options button span:first-child svg path{fill:#c2c2c2}#_q-container ._q-options button._q-selected span:first-child svg path,#_q-container ._q-options button:active span:first-child svg path{fill:#000}#_q-container ._q-options button:focus span:first-child svg path{fill:#0b75b1}#_q-container ._q-options button span:last-child{display:table-cell;border:1px solid #c2c2c2;width:100%;text-align:left;font-size:14px;line-height:20px;padding:5px 15px}#_q-container ._q-options button._q-selected span:last-child,#_q-container ._q-options button:active span:last-child{color:#000;border-color:#000}#_q-container ._q-options button._q-selected span:last-child{box-shadow:inset 0 0 0 1px #000}#_q-container ._q-options button:focus span:last-child{color:#0b75b1;border-color:#0b75b1}#_q-container ._q-options button._q-selected:focus span:last-child{box-shadow:inset 0 0 0 1px #0b75b1}#_q-container ._q-attachments{margin:10px 0 20px;overflow:auto;white-space:nowrap}#_q-container ._q-attachments>*{vertical-align:top}#_q-container ._q-attachments label *{cursor:pointer!important}#_q-container ._q-attachments input{opacity:0;position:absolute;top:-500px}#_q-container ._q-attachments label rect{stroke:#333}#_q-container ._q-attachments label path{fill:#333}#_q-container ._q-attachments button{width:40px;height:40px;background-repeat:no-repeat;background-size:cover;text-align:right;border:1px solid #bdbdbd;margin:0 10px 0 0}#_q-container ._q-attachments button svg{margin:20px 0 0;position:relative;z-index:99999998;left:1px}#_q-container ._q-buttons{margin:30px 0;text-align:right}#_q-container._q-sent ._q-buttons{display:none}#_q-container ._q-buttons li{display:inline-block}#_q-container ._q-buttons li button{display:inline-block;font-weight:600;font-size:14px;line-height:20px;padding:8px 12px;border:2px solid transparent;border-radius:6px}#_q-container ._q-buttons li:first-child button{color:#eb5757;margin:0 10px 0 0}#_q-container ._q-buttons li:first-child button{color:#eb5757}#_q-container ._q-buttons li:first-child button:hover:not(:disabled){opacity:.7}#_q-container ._q-buttons li:first-child button:focus:not(:disabled){border-color:#eb5757;color:#eb5757;outline:0}#_q-container ._q-buttons li:first-child button:active:not(:disabled){opacity:.4}#_q-container ._q-buttons li:first-child button:active:focus:not(:disabled){border-color:#eb5757;color:#fff;background:#eb5757;opacity:1}#_q-container ._q-buttons li:last-child button{color:#333;height:40px;border-color:#333}#_q-container ._q-buttons li:last-child button:focus:not(:disabled),#_q-container ._q-buttons li:last-child button:hover:not(:disabled){border-color:#0b75b1;color:#0b75b1;outline:0}#_q-container ._q-buttons li:last-child button:focus:not(:disabled) [stroke="#333"],#_q-container ._q-buttons li:last-child button:hover:not(:disabled) [stroke="#333"]{stroke:#0b75b1}#_q-container ._q-buttons li:last-child button:active:not(:disabled){border-color:#1a6e9d;color:#fff;background:#1a6e9d}#_q-container ._q-buttons li:last-child button:active:not(:disabled) [stroke="#333"]{stroke:#fff}#_q-container ._q-buttons li button:disabled{opacity:.3;cursor:default!important}#_q-container ._q-buttons li button:disabled *{cursor:default!important}#_q-container ._q-success{display:none;width:100%;margin:30px 0}#_q-container._q-error ._q-success,#_q-container._q-sent ._q-success{display:table}#_q-container ._q-success li{display:table-cell}#_q-container ._q-success li:first-child{text-align:left;color:#219653;font-weight:600;font-size:14px;vertical-align:middle}#_q-container ._q-success li:first-child svg{margin:1px 6px 0 0}#_q-container ._q-success li:last-child{text-align:right}#_q-container ._q-success li:last-child button{text-align:right;color:#000;border:2px solid #000;border-radius:6px;font-weight:600;font-size:14px;padding:8px 16px;line-height:20px;height:40px}#_q-container ._q-success li:last-child button:focus:not(:disabled),#_q-container ._q-success li:last-child button:hover:not(:disabled){border-color:#0b75b1;color:#0b75b1;outline:0}#_q-container ._q-success li:last-child button:focus:not(:disabled) [stroke="#000"],#_q-container ._q-success li:last-child button:hover:not(:disabled) [stroke="#000"]{stroke:#0b75b1}#_q-container ._q-success li:last-child button:active:not(:disabled){color:#fff;background:#1a6e9d;border-color:#1a6e9d}#_q-container._q-error:not(._q-sent) ._q-success li:last-child{display:none}#_q-container ._q-success li:last-child button:active:not(:disabled) [stroke="#000"]{stroke:#fff}#_q-container._q-error ._q-success li:first-child svg{display:none}#_q-container._q-error ._q-success li:first-child{color:#e33737}#_q-container ._q-support-link{background:#fcf1d1;font-size:12px;text-align:right;padding:20px 30px 20px 10px;line-height:20px}#_q-container ._q-support-link a:focus{outline:0;text-decoration:underline}#_q-container a{text-decoration:none;font-weight:500;cursor:pointer!important}#_q-container a:link,#_q-container a:visited{color:#0b75b1}#_q-container a:hover{text-decoration:underline}#_q-container._q-sent ._q-attachments,#_q-container._q-sent ._q-options,#_q-container._q-sent ._q-score,#_q-container._q-sent h3,#_q-container._q-sent p:not(._q-after),#_q-container._q-sent textarea{display:none}#_q-container ._q-result{padding:0 0 0 16px;border-left:1px dashed #979797}#_q-container ._q-result ._q-scored{display:block;margin:0 0 12px}#_q-container ._q-result p{font-weight:400;font-size:16px;margin:0 0 12px}#_q-container ._q-result ._q-option{margin:0 0 10px;font-size:16px}#_q-container ._q-result ._q-option svg{vertical-align:middle;position:relative;top:-2px;margin:0 8px 0 0}#_q-container ._q-result ._q-option:first-child{padding-top:2px}#_q-container ._q-attached{white-space:nowrap;overflow:auto;margin:10px 0}#_q-container ._q-attached img{width:40px;height:40px;object-fit:cover;border:1px solid #bdbdbd;margin:0 5px 0 0}@media only screen and (max-width:550px),(max-height:550px){#_q-container{position:absolute;height:auto;overflow:auto;max-height:none;margin:20px 0 0;top:0;transform:translate(-50%,0)}#_q-container._q-out{transform:translate(-50%,0) scale(.9)}#_q-container textarea{font-size:16px}}@media only screen and (max-width:460px){#_q-container{max-width:none}}'
+    '@font-face{font-family:Inter;font-weight:400;src:url(https://static.qualtive.io/fonts/Inter-Regular.woff)}@font-face{font-family:Inter;font-weight:500;src:url(https://static.qualtive.io/fonts/Inter-Medium.woff)}@font-face{font-family:Inter;font-weight:600;src:url(https://static.qualtive.io/fonts/Inter-SemiBold.woff)}#_q-container *{margin:0;padding:0;box-sizing:border-box;appearance:none;-webkit-appearance:none;box-sizing:border-box;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent}#_q-container :not(textarea):not(#_q-container._q-error._q-successli:first-child):not(#_q-container._q-resultp):not(#_q-container._q-result){cursor:default;user-select:none;-moz-user-select:none;-webkit-user-select:none}#_q-container button{background:0 0;border:none;cursor:pointer!important}#_q-container button *{cursor:pointer!important}#_q-container ul{list-style:none}#_q-container button>*{vertical-align:middle}#_q-container button>svg{margin:0 5px 2px 0}#_q-no-click{position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999997}#_q-container{width:100%;position:fixed;max-width:375px;max-height:100vh;overflow:scroll;background:#fff;box-shadow:0 0 50px rgba(0,0,0,.4);left:50%;top:50%;transform:translate(-50%,-50%);transition:transform .25s,opacity .25s;z-index:99999998}#_q-container._q-out{transform:translate(-50%,-50%) scale(.9);opacity:0}#_q-container>div{padding:30px 50px 0}#_q-container ._q-cancel{margin:0 0 0 auto;display:block;transform:translate(20px,0)}#_q-container ._q-cancel:focus{outline:0;opacity:.7}#_q-container h2{font-size:14px;color:#333;margin:0 0 30px;line-height:20px}#_q-container h3{font-size:16px;font-weight:600;color:#333;margin:26px 0 20px}#_q-container p{font-size:14px;font-weight:600;line-height:24px;color:#333;margin:26px 0 10px}#_q-container ._q-score{margin:10px 0;display:table;width:100%}#_q-container ._q-score li{display:inline-block;display:table-cell}#_q-container ._q-score li button:focus{opacity:.6}#_q-container ._q-score li._q-selected button:focus{opacity:1}#_q-container ._q-score button:focus{outline:0}#_q-container ._q-score._q-smilies li._q-option{width:34px}#_q-container ._q-score._q-smilies li svg:first-child,#_q-container ._q-score._q-smilies li svg:first-child *{cursor:pointer!important}#_q-container ._q-score._q-smilies li button:focus svg:first-child,#_q-container ._q-score._q-smilies li button:hover svg:first-child,#_q-container ._q-score._q-smilies li._q-selected svg:first-child{display:none}#_q-container ._q-score._q-smilies li button:focus svg:last-child,#_q-container ._q-score._q-smilies li button:hover svg:last-child,#_q-container ._q-score._q-smilies li._q-selected svg:last-child{display:inline-block}#_q-container ._q-score._q-smilies li._q-0 button:focus [fill="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-0 svg:first-child:hover [fill="#4F4F4F"]{fill:#e33737}#_q-container ._q-score._q-smilies li._q-0 button:focus [stroke="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-0 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#e33737}#_q-container ._q-score._q-smilies li._q-25 button:focus [fill="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-25 svg:first-child:hover [fill="#4F4F4F"]{fill:#ae563a}#_q-container ._q-score._q-smilies li._q-25 button:focus [stroke="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-25 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#ae563a}#_q-container ._q-score._q-smilies li._q-50 button:focus [fill="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-50 svg:first-child:hover [fill="#4F4F4F"]{fill:#333}#_q-container ._q-score._q-smilies li._q-50 button:focus [stroke="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-50 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#333}#_q-container ._q-score._q-smilies li._q-75 button:focus [fill="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-75 svg:first-child:hover [fill="#4F4F4F"]{fill:#f3be40}#_q-container ._q-score._q-smilies li._q-75 button:focus [stroke="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-75 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#f3be40}#_q-container ._q-score._q-smilies li._q-100 button:focus [fill="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-100 svg:first-child:hover [fill="#4F4F4F"]{fill:#3ca53e}#_q-container ._q-score._q-smilies li._q-100 button:focus [stroke="#4F4F4F"],#_q-container ._q-score._q-smilies li._q-100 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#3ca53e}#_q-container ._q-score._q-smilies li svg:last-child{display:none}#_q-container ._q-score._q-nps li{width:20px}#_q-container ._q-score._q-nps li button,#_q-container ._q-score._q-nps li span{display:block;width:20px;height:24px;line-height:21px;text-align:center;border:1px solid #c7cacd;border-radius:6px;font-size:13px;font-weight:700;color:#000}#_q-container ._q-score._q-nps li span{width:19px}#_q-container ._q-score._q-nps li button:hover{border-color:#000;box-shadow:inset 0 0 0 1px #000}#_q-container ._q-score._q-nps li._q-selected button{box-shadow:none;border:none;color:#fff}#_q-container ._q-score._q-nps li._q-selected span{border-color:transparent;color:#fff}#_q-container ._q-score._q-nps li._q-selected._q-l0 button,#_q-container ._q-score._q-nps li._q-selected._q-l0 span{background:#e33737}#_q-container ._q-score._q-nps li._q-selected._q-l1 button,#_q-container ._q-score._q-nps li._q-selected._q-l1 span{background:#333}#_q-container ._q-score._q-nps li._q-selected._q-l2 button,#_q-container ._q-score._q-nps li._q-selected._q-l2 span{background:#ffb908}#_q-container ._q-score._q-nps li._q-selected._q-l3 button,#_q-container ._q-score._q-nps li._q-selected._q-l3 span{background:#2fa34b}#_q-container ._q-leading-trailing>span{color:#333;font-size:14px}#_q-container ._q-leading-trailing>span:first-child{float:right}#_q-container ._q-score._q-nps li:not(._q-selected) span{opacity:.3}#_q-container textarea{width:100%;resize:none;border:1px solid #333;border-radius:6px;padding:12px 12px;font-size:14px;font-weight:400;outline:0;height:100px;line-height:20px;color:#333}#_q-container textarea:active:not(:disabled),#_q-container textarea:focus:not(:disabled){border:2px solid #0b75b1;padding:11px 11px}#_q-container textarea::-webkit-input-placeholder{color:#333}#_q-container textarea:-moz-placeholder{color:#333}#_q-container textarea::-moz-placeholder{color:#333}#_q-container textarea:-ms-input-placeholder{color:#333}#_q-container textarea::placeholder{color:#333}#_q-container ._q-options{margin:10px 0 20px}#_q-container ._q-options button{display:table;width:100%;outline:0}#_q-container ._q-options button:not(:last-child){margin:0 0 10px}#_q-container ._q-options button span:first-child{display:table-cell;padding:0 14px 0 0}#_q-container ._q-options button span:first-child svg{position:relative;top:1px}#_q-container ._q-options button span:first-child svg path{fill:#c2c2c2}#_q-container ._q-options button._q-selected span:first-child svg path,#_q-container ._q-options button:active span:first-child svg path{fill:#000}#_q-container ._q-options button:focus span:first-child svg path{fill:#0b75b1}#_q-container ._q-options button span:last-child{display:table-cell;border:1px solid #c2c2c2;width:100%;text-align:left;font-size:14px;line-height:20px;padding:5px 15px}#_q-container ._q-options button._q-selected span:last-child,#_q-container ._q-options button:active span:last-child{color:#000;border-color:#000}#_q-container ._q-options button._q-selected span:last-child{box-shadow:inset 0 0 0 1px #000}#_q-container ._q-options button:focus span:last-child{color:#0b75b1;border-color:#0b75b1}#_q-container ._q-options button._q-selected:focus span:last-child{box-shadow:inset 0 0 0 1px #0b75b1}#_q-container ._q-attachments{margin:10px 0 20px;overflow:auto;white-space:nowrap}#_q-container ._q-attachments>*{vertical-align:top}#_q-container ._q-attachments label *{cursor:pointer!important}#_q-container ._q-attachments input{opacity:0;position:absolute;top:-500px}#_q-container ._q-attachments label rect{stroke:#333}#_q-container ._q-attachments label path{fill:#333}#_q-container ._q-attachments button{width:40px;height:40px;background-repeat:no-repeat;background-size:cover;text-align:right;border:1px solid #bdbdbd;margin:0 10px 0 0}#_q-container ._q-attachments button svg{margin:20px 0 0;position:relative;z-index:99999998;left:1px}#_q-container ._q-buttons{margin:30px 0;text-align:right}#_q-container._q-sent ._q-buttons{display:none}#_q-container ._q-buttons li{display:inline-block}#_q-container ._q-buttons li button{display:inline-block;font-weight:600;font-size:14px;line-height:20px;padding:8px 12px;border:2px solid transparent;border-radius:6px}#_q-container ._q-buttons li:first-child button{color:#eb5757;margin:0 10px 0 0}#_q-container ._q-buttons li:first-child button{color:#eb5757}#_q-container ._q-buttons li:first-child button:hover:not(:disabled){opacity:.7}#_q-container ._q-buttons li:first-child button:focus:not(:disabled){border-color:#eb5757;color:#eb5757;outline:0}#_q-container ._q-buttons li:first-child button:active:not(:disabled){opacity:.4}#_q-container ._q-buttons li:first-child button:active:focus:not(:disabled){border-color:#eb5757;color:#fff;background:#eb5757;opacity:1}#_q-container ._q-buttons li:last-child button{color:#333;height:40px;border-color:#333}#_q-container ._q-buttons li:last-child button:focus:not(:disabled),#_q-container ._q-buttons li:last-child button:hover:not(:disabled){border-color:#0b75b1;color:#0b75b1;outline:0}#_q-container ._q-buttons li:last-child button:focus:not(:disabled) [stroke="#333"],#_q-container ._q-buttons li:last-child button:hover:not(:disabled) [stroke="#333"]{stroke:#0b75b1}#_q-container ._q-buttons li:last-child button:active:not(:disabled){border-color:#1a6e9d;color:#fff;background:#1a6e9d}#_q-container ._q-buttons li:last-child button:active:not(:disabled) [stroke="#333"]{stroke:#fff}#_q-container ._q-buttons li button:disabled{opacity:.3;cursor:default!important}#_q-container ._q-buttons li button:disabled *{cursor:default!important}#_q-container ._q-success{display:none;width:100%;margin:30px 0}#_q-container._q-error ._q-success,#_q-container._q-sent ._q-success{display:table}#_q-container ._q-success li{display:table-cell}#_q-container ._q-success li:first-child{text-align:left;color:#219653;font-weight:600;font-size:14px;vertical-align:middle}#_q-container ._q-success li:first-child svg{margin:1px 6px 0 0}#_q-container ._q-success li:last-child{text-align:right}#_q-container ._q-success li:last-child button{text-align:right;color:#000;border:2px solid #000;border-radius:6px;font-weight:600;font-size:14px;padding:8px 16px;line-height:20px;height:40px}#_q-container ._q-success li:last-child button:focus:not(:disabled),#_q-container ._q-success li:last-child button:hover:not(:disabled){border-color:#0b75b1;color:#0b75b1;outline:0}#_q-container ._q-success li:last-child button:focus:not(:disabled) [stroke="#000"],#_q-container ._q-success li:last-child button:hover:not(:disabled) [stroke="#000"]{stroke:#0b75b1}#_q-container ._q-success li:last-child button:active:not(:disabled){color:#fff;background:#1a6e9d;border-color:#1a6e9d}#_q-container._q-error:not(._q-sent) ._q-success li:last-child{display:none}#_q-container ._q-success li:last-child button:active:not(:disabled) [stroke="#000"]{stroke:#fff}#_q-container._q-error ._q-success li:first-child svg{display:none}#_q-container._q-error ._q-success li:first-child{color:#e33737}#_q-container ._q-support-link{background:#fcf1d1;font-size:12px;text-align:right;padding:20px 30px 20px 10px;line-height:20px}#_q-container ._q-support-link a:focus{outline:0;text-decoration:underline}#_q-container a{text-decoration:none;font-weight:500;cursor:pointer!important}#_q-container a:link,#_q-container a:visited{color:#0b75b1}#_q-container a:hover{text-decoration:underline}#_q-container._q-sent ._q-attachments,#_q-container._q-sent ._q-leading-trailing,#_q-container._q-sent ._q-options,#_q-container._q-sent ._q-score,#_q-container._q-sent h3,#_q-container._q-sent p:not(._q-after),#_q-container._q-sent textarea{display:none}#_q-container ._q-result ._q-leading-trailing{display:block}#_q-container ._q-result{padding:0 0 0 16px;border-left:1px dashed #979797}#_q-container ._q-result ._q-score{display:table}#_q-container ._q-result ._q-scored{display:block;margin:0 0 12px}#_q-container ._q-result p{font-weight:400;font-size:16px;margin:0 0 12px}#_q-container ._q-result ._q-option{margin:0 0 10px;font-size:16px}#_q-container ._q-result ._q-option svg{vertical-align:middle;position:relative;top:-2px;margin:0 8px 0 0}#_q-container ._q-result ._q-option:first-child{padding-top:2px}#_q-container ._q-attached{white-space:nowrap;overflow:auto;margin:10px 0}#_q-container ._q-attached img{width:40px;height:40px;object-fit:cover;border:1px solid #bdbdbd;margin:0 5px 0 0}@media only screen and (max-width:550px),(max-height:550px){#_q-container{position:absolute;height:auto;overflow:auto;max-height:none;margin:20px 0 0;top:0;transform:translate(-50%,0)}#_q-container._q-out{transform:translate(-50%,0) scale(.9)}#_q-container textarea{font-size:16px}}@media only screen and (max-width:460px){#_q-container{max-width:none}}'
   const styleDarkMode =
-    '#_q-container{background:#111}#_q-container ._q-cancel [stroke="#000"]{stroke:#fff}#_q-container h2{color:#fff}#_q-container h3,#_q-container p{color:#fff}#_q-container ._q-score svg:first-child [fill="#4F4F4F"]{fill:#aaa}#_q-container ._q-score svg:first-child [stroke="#4F4F4F"]{stroke:#aaa}#_q-container ._q-score li._q-50 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [fill="#4F4F4F"]{fill:#eee}#_q-container ._q-score li._q-50 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#eee}#_q-container ._q-score li._q-50 svg:last-child:hover [fill="#4F4F4F"]{fill:#eee}#_q-container ._q-score li._q-50 svg:last-child:hover [stroke="#4F4F4F"]{stroke:#eee}#_q-container textarea{background:#000;border-color:#aaa;color:#fff}#_q-container textarea:active:not(:disabled),#_q-container textarea:focus:not(:disabled){border:2px solid #1ac8ff;padding:11px 11px}#_q-container textarea::-webkit-input-placeholder{color:#ddd}#_q-container textarea:-moz-placeholder{color:#ddd}#_q-container textarea::-moz-placeholder{color:#ddd}#_q-container textarea:-ms-input-placeholder{color:#ddd}#_q-container textarea::placeholder{color:#ddd}#_q-container ._q-options{margin:0 0 20px}#_q-container ._q-options button span:first-child svg path{fill:#ddd}#_q-container ._q-options button._q-selected span:first-child svg path,#_q-container ._q-options button:active span:first-child svg path{fill:#fff}#_q-container ._q-options button:focus span:first-child svg path{fill:#1ac8ff}#_q-container ._q-options button span:last-child{border-color:#ddd;color:#fff}#_q-container ._q-options button._q-selected span:last-child,#_q-container ._q-options button:active span:last-child{color:#fff;border-color:#fff}#_q-container ._q-options button._q-selected span:last-child{box-shadow:inset 0 0 0 1px #fff}#_q-container ._q-options button:focus span:last-child{color:#1ac8ff;border-color:#1ac8ff}#_q-container ._q-options button._q-selected:focus span:last-child{box-shadow:inset 0 0 0 1px #1ac8ff}#_q-container ._q-attachments label rect{stroke:#ddd}#_q-container ._q-attachments label path{fill:#ddd}#_q-container ._q-buttons li:last-child button{color:#ddd;border-color:#ddd}#_q-container ._q-buttons li:last-child button [stroke="#333"]{stroke:#ddd}#_q-container ._q-buttons li button:disabled{color:#ddd}#_q-container ._q-success{display:none;width:100%;margin:30px 0}#_q-container ._q-success li:last-child button{color:#ddd;border-color:#ddd}#_q-container ._q-success li:last-child button [stroke="#000"]{stroke:#ddd}#_q-container ._q-success li:last-child button:active:not(:disabled){color:#fff;background:#1ac8ff;border-color:#1ac8ff}#_q-container ._q-success li:last-child button:active:not(:disabled) [stroke="#000"]{stroke:#fff}#_q-container ._q-support-link{background:#2e2d2a}#_q-container ._q-result{border-left-color:#ddd}#_q-container ._q-result ._q-option{color:#fff}#_q-container ._q-result ._q-option svg path{fill:#fff}'
+    '#_q-container{background:#111}#_q-container ._q-cancel [stroke="#000"]{stroke:#fff}#_q-container h2{color:#fff}#_q-container h3,#_q-container p{color:#fff}#_q-container ._q-score svg:first-child [fill="#4F4F4F"]{fill:#aaa}#_q-container ._q-score svg:first-child [stroke="#4F4F4F"]{stroke:#aaa}#_q-container ._q-score li._q-50 button:focus [fill="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [fill="#4F4F4F"]{fill:#eee}#_q-container ._q-score li._q-50 button:focus [stroke="#4F4F4F"],#_q-container ._q-score li._q-50 svg:first-child:hover [stroke="#4F4F4F"]{stroke:#eee}#_q-container ._q-score li._q-50 svg:last-child:hover [fill="#4F4F4F"]{fill:#eee}#_q-container ._q-score li._q-50 svg:last-child:hover [stroke="#4F4F4F"]{stroke:#eee}#_q-container ._q-score._q-nps li button,#_q-container ._q-score._q-nps li span{border-color:1px solid #eee;color:#fff}#_q-container ._q-score._q-nps li button:hover{border-color:#fff;box-shadow:inset 0 0 0 1px #fff}#_q-container ._q-score._q-nps li._q-selected._q-l1 button,#_q-container ._q-score._q-nps li._q-selected._q-l1 span{background:#ccc}#_q-container ._q-leading-trailing>span{color:#fff}#_q-container textarea{background:#000;border-color:#aaa;color:#fff}#_q-container textarea:active:not(:disabled),#_q-container textarea:focus:not(:disabled){border:2px solid #1ac8ff;padding:11px 11px}#_q-container textarea::-webkit-input-placeholder{color:#ddd}#_q-container textarea:-moz-placeholder{color:#ddd}#_q-container textarea::-moz-placeholder{color:#ddd}#_q-container textarea:-ms-input-placeholder{color:#ddd}#_q-container textarea::placeholder{color:#ddd}#_q-container ._q-options{margin:0 0 20px}#_q-container ._q-options button span:first-child svg path{fill:#ddd}#_q-container ._q-options button._q-selected span:first-child svg path,#_q-container ._q-options button:active span:first-child svg path{fill:#fff}#_q-container ._q-options button:focus span:first-child svg path{fill:#1ac8ff}#_q-container ._q-options button span:last-child{border-color:#ddd;color:#fff}#_q-container ._q-options button._q-selected span:last-child,#_q-container ._q-options button:active span:last-child{color:#fff;border-color:#fff}#_q-container ._q-options button._q-selected span:last-child{box-shadow:inset 0 0 0 1px #fff}#_q-container ._q-options button:focus span:last-child{color:#1ac8ff;border-color:#1ac8ff}#_q-container ._q-options button._q-selected:focus span:last-child{box-shadow:inset 0 0 0 1px #1ac8ff}#_q-container ._q-attachments label rect{stroke:#ddd}#_q-container ._q-attachments label path{fill:#ddd}#_q-container ._q-buttons li:last-child button{color:#ddd;border-color:#ddd}#_q-container ._q-buttons li:last-child button [stroke="#333"]{stroke:#ddd}#_q-container ._q-buttons li button:disabled{color:#ddd}#_q-container ._q-success{display:none;width:100%;margin:30px 0}#_q-container ._q-success li:last-child button{color:#ddd;border-color:#ddd}#_q-container ._q-success li:last-child button [stroke="#000"]{stroke:#ddd}#_q-container ._q-success li:last-child button:active:not(:disabled){color:#fff;background:#1ac8ff;border-color:#1ac8ff}#_q-container ._q-success li:last-child button:active:not(:disabled) [stroke="#000"]{stroke:#fff}#_q-container ._q-support-link{background:#2e2d2a}#_q-container ._q-result{border-left-color:#ddd}#_q-container ._q-result ._q-option{color:#fff}#_q-container ._q-result ._q-option svg path{fill:#fff}'
 
   const iconScore0 =
     '<svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect x="0.5" y="0.5" width="33" height="33" rx="4.5" stroke="#4F4F4F"/><path d="M13.3811 16.1842C13.3811 14.9617 12.3862 13.9668 11.1637 13.9668C9.94116 13.9668 8.94629 14.9617 8.94629 16.1842C8.94629 17.4067 9.94116 18.4016 11.1637 18.4016C12.3862 18.4016 13.3811 17.4067 13.3811 16.1842ZM10.4246 16.1842C10.4246 15.7769 10.7564 15.4451 11.1637 15.4451C11.5709 15.4451 11.9028 15.7769 11.9028 16.1842C11.9028 16.5914 11.5709 16.9233 11.1637 16.9233C10.7564 16.9233 10.4246 16.5914 10.4246 16.1842Z" fill="#4F4F4F"/><path d="M22.9898 13.9668C21.7673 13.9668 20.7725 14.9617 20.7725 16.1842C20.7725 17.4067 21.7673 18.4016 22.9898 18.4016C24.2124 18.4016 25.2072 17.4067 25.2072 16.1842C25.2072 14.9617 24.2124 13.9668 22.9898 13.9668ZM22.9898 16.9233C22.5818 16.9233 22.2507 16.5914 22.2507 16.1842C22.2507 15.7769 22.5818 15.4451 22.9898 15.4451C23.3978 15.4451 23.729 15.7769 23.729 16.1842C23.729 16.5914 23.3978 16.9233 22.9898 16.9233Z" fill="#4F4F4F"/><path d="M20.0354 11.0114C20.1463 11.0114 20.2594 10.9863 20.3651 10.9338L23.3216 9.45555C23.6867 9.27298 23.8345 8.82877 23.652 8.46364C23.4687 8.09851 23.0245 7.94994 22.6601 8.13324L19.7035 9.61151C19.3384 9.79407 19.1906 10.2383 19.3732 10.6034C19.5032 10.8621 19.7642 11.0114 20.0354 11.0114Z" fill="#4F4F4F"/><path d="M10.8338 9.4542L13.7903 10.9325C13.896 10.9849 14.0091 11.0101 14.1199 11.0101C14.3912 11.0101 14.6521 10.8608 14.7822 10.6013C14.9648 10.2362 14.8169 9.79198 14.4518 9.60942L11.4953 8.13116C11.1287 7.94785 10.6859 8.09716 10.5034 8.46155C10.3201 8.82742 10.4686 9.2709 10.8338 9.4542Z" fill="#4F4F4F"/><path d="M17.0776 21.3574C14.3214 21.3574 11.696 22.5252 9.87475 24.5601C9.60275 24.8646 9.62862 25.3317 9.9324 25.6037C10.2369 25.8765 10.7041 25.8498 10.9761 25.5461C12.5179 23.8232 14.7412 22.8357 17.0776 22.8357C19.4125 22.8357 21.6365 23.8232 23.1791 25.5461C23.3247 25.7094 23.5272 25.7922 23.7298 25.7922C23.9057 25.7922 24.0823 25.7301 24.2228 25.6037C24.5265 25.331 24.5524 24.8646 24.2804 24.5601C22.4577 22.5245 19.8331 21.3574 17.0776 21.3574Z" fill="#4F4F4F"/></svg>'
@@ -366,26 +368,76 @@ export const present = (collection: string, options?: FormOptions): Form => {
             case "title":
               break
             case "score": {
-              const scoreElement = document.createElement("div")
-              scoreElement.className = "_q-scored"
-              switch (content.value) {
-                case 0:
-                  scoreElement.innerHTML = iconScore0Filled
+              switch (content.scoreType) {
+                case "smilies3":
+                case "smilies5": {
+                  const scoreElement = document.createElement("div")
+                  scoreElement.className = "_q-scored"
+                  switch (content.value) {
+                    case 0:
+                      scoreElement.innerHTML = iconScore0Filled
+                      break
+                    case 25:
+                      scoreElement.innerHTML = iconScore25Filled
+                      break
+                    case 50:
+                      scoreElement.innerHTML = iconScore50Filled
+                      break
+                    case 75:
+                      scoreElement.innerHTML = iconScore75Filled
+                      break
+                    case 100:
+                      scoreElement.innerHTML = iconScore100Filled
+                      break
+                  }
+                  currentResultElement.appendChild(scoreElement)
                   break
-                case 25:
-                  scoreElement.innerHTML = iconScore25Filled
+                }
+                case "nps": {
+                  const textContainerElement = document.createElement("div")
+                  textContainerElement.setAttribute("class", "_q-leading-trailing")
+                  currentResultElement.appendChild(textContainerElement)
+
+                  const trailingTextElement = document.createElement("span")
+                  trailingTextElement.innerText = content.trailingText || _(`form.nps.trailing`, options?.locale)
+                  textContainerElement.appendChild(trailingTextElement)
+
+                  const leadingTextElement = document.createElement("span")
+                  leadingTextElement.innerText = content.leadingText || _(`form.nps.leading`, options?.locale)
+                  textContainerElement.appendChild(leadingTextElement)
+
+                  const scoresElement = document.createElement("ul")
+                  scoresElement.setAttribute("class", "_q-score _q-nps")
+                  scoresNPS.forEach((score) => {
+                    if (score != 0) {
+                      const spaceElement = document.createElement("li")
+                      spaceElement.innerHTML = "&nbsp;"
+                      scoresElement.appendChild(spaceElement)
+                    }
+
+                    let level: number
+                    if (score <= 2) {
+                      level = 0
+                    } else if (score <= 6) {
+                      level = 1
+                    } else if (score <= 8) {
+                      level = 2
+                    } else {
+                      level = 3
+                    }
+
+                    const liElement = document.createElement("li")
+                    liElement.setAttribute("class", `_q-l${level}${content.value == score ? " _q-selected" : ""}`)
+                    scoresElement.appendChild(liElement)
+
+                    const spanElement = document.createElement("span")
+                    spanElement.innerHTML = score / 10 + ""
+                    liElement.appendChild(spanElement)
+                  })
+                  currentResultElement.appendChild(scoresElement)
                   break
-                case 50:
-                  scoreElement.innerHTML = iconScore50Filled
-                  break
-                case 75:
-                  scoreElement.innerHTML = iconScore75Filled
-                  break
-                case 100:
-                  scoreElement.innerHTML = iconScore100Filled
-                  break
+                }
               }
-              currentResultElement.appendChild(scoreElement)
               break
             }
             case "text": {
@@ -484,49 +536,111 @@ export const present = (collection: string, options?: FormOptions): Form => {
           }
           case "score": {
             const scoresElement = document.createElement("ul")
-            scoresElement.setAttribute("class", "_q-score")
-            contentElement.appendChild(scoresElement)
             scoreElements.push(scoresElement)
 
             const optionButtonElements: HTMLButtonElement[] = []
-            const optionElements: HTMLLIElement[] = scores.map((score) => {
-              if (score != 0) {
-                const spaceElement = document.createElement("li")
-                spaceElement.innerHTML = "&nbsp;"
-                scoresElement.appendChild(spaceElement)
+            let optionElements: HTMLLIElement[]
+            let scores: number[]
+
+            switch (questionContent.scoreType) {
+              case "smilies5":
+              case "smilies3":
+                scoresElement.setAttribute("class", "_q-score _q-smilies")
+
+                scores = questionContent.scoreType == "smilies5" ? scoresSmilies5 : scoresSmilies3
+                optionElements = scores.map((score) => {
+                  if (score != 0) {
+                    const spaceElement = document.createElement("li")
+                    spaceElement.innerHTML = "&nbsp;"
+                    scoresElement.appendChild(spaceElement)
+                  }
+
+                  const optionElement = document.createElement("li")
+                  optionElement.setAttribute("class", `_q-option _q-${score}`)
+                  scoresElement.appendChild(optionElement)
+
+                  const buttonElement = document.createElement("button")
+                  buttonElement.setAttribute("tabindex", contentTabindex + "")
+                  buttonElement.setAttribute("title", _(`form.score.${score}`, options?.locale))
+                  optionButtonElements.push(buttonElement)
+                  optionElement.appendChild(buttonElement)
+                  contentTabindex++
+
+                  switch (score) {
+                    case 0:
+                      buttonElement.innerHTML = iconScore0 + iconScore0Filled
+                      break
+                    case 25:
+                      buttonElement.innerHTML = iconScore25 + iconScore25Filled
+                      break
+                    case 50:
+                      buttonElement.innerHTML = iconScore50 + iconScore50Filled
+                      break
+                    case 75:
+                      buttonElement.innerHTML = iconScore75 + iconScore75Filled
+                      break
+                    case 100:
+                      buttonElement.innerHTML = iconScore100 + iconScore100Filled
+                      break
+                  }
+
+                  return optionElement
+                })
+                break
+              case "nps": {
+                scoresElement.setAttribute("class", "_q-score _q-nps")
+
+                const textContainerElement = document.createElement("div")
+                textContainerElement.setAttribute("class", "_q-leading-trailing")
+                contentElement.appendChild(textContainerElement)
+
+                const trailingTextElement = document.createElement("span")
+                trailingTextElement.innerText = questionContent.trailingText || _(`form.nps.trailing`, options?.locale)
+                textContainerElement.appendChild(trailingTextElement)
+
+                const leadingTextElement = document.createElement("span")
+                leadingTextElement.innerText = questionContent.leadingText || _(`form.nps.leading`, options?.locale)
+                textContainerElement.appendChild(leadingTextElement)
+
+                scores = scoresNPS
+                optionElements = scores.map((score) => {
+                  if (score != 0) {
+                    const spaceElement = document.createElement("li")
+                    spaceElement.innerHTML = "&nbsp;"
+                    scoresElement.appendChild(spaceElement)
+                  }
+
+                  let level: number
+                  if (score <= 2) {
+                    level = 0
+                  } else if (score <= 6) {
+                    level = 1
+                  } else if (score <= 8) {
+                    level = 2
+                  } else {
+                    level = 3
+                  }
+
+                  const optionElement = document.createElement("li")
+                  optionElement.setAttribute("class", `_q-option _q-l${level}`)
+                  scoresElement.appendChild(optionElement)
+
+                  const buttonElement = document.createElement("button")
+                  buttonElement.setAttribute("tabindex", contentTabindex + "")
+                  buttonElement.innerHTML = score / 10 + ""
+                  optionButtonElements.push(buttonElement)
+                  optionElement.appendChild(buttonElement)
+                  contentTabindex++
+
+                  return optionElement
+                })
+                break
               }
+              default:
+                return // Not implemented yet
+            }
 
-              const optionElement = document.createElement("li")
-              optionElement.setAttribute("class", `_q-option _q-${score}`)
-              scoresElement.appendChild(optionElement)
-
-              const buttonElement = document.createElement("button")
-              buttonElement.setAttribute("tabindex", contentTabindex + "")
-              buttonElement.setAttribute("title", _(`form.score.${score}`, options?.locale))
-              optionButtonElements.push(buttonElement)
-              optionElement.appendChild(buttonElement)
-              contentTabindex++
-
-              switch (score) {
-                case 0:
-                  buttonElement.innerHTML = iconScore0 + iconScore0Filled
-                  break
-                case 25:
-                  buttonElement.innerHTML = iconScore25 + iconScore25Filled
-                  break
-                case 50:
-                  buttonElement.innerHTML = iconScore50 + iconScore50Filled
-                  break
-                case 75:
-                  buttonElement.innerHTML = iconScore75 + iconScore75Filled
-                  break
-                case 100:
-                  buttonElement.innerHTML = iconScore100 + iconScore100Filled
-                  break
-              }
-
-              return optionElement
-            })
+            contentElement.appendChild(scoresElement)
 
             optionButtonElements.forEach((buttonElement, index) => {
               buttonElement.onclick = () => {
@@ -758,7 +872,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
   const initialAnimateInTimeout = setTimeout(animateInIfNeeded, 150)
 
-  // Get question and dispaly content
+  // Get question and display content
 
   getQuestion(collection, options)
     .then((_question) => {
