@@ -416,11 +416,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
                     }
 
                     let level: number
-                    if (score <= 2) {
+                    if (score <= 20) {
                       level = 0
-                    } else if (score <= 6) {
+                    } else if (score <= 60) {
                       level = 1
-                    } else if (score <= 8) {
+                    } else if (score <= 80) {
                       level = 2
                     } else {
                       level = 3
@@ -611,11 +611,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
                   }
 
                   let level: number
-                  if (score <= 2) {
+                  if (score <= 20) {
                     level = 0
-                  } else if (score <= 6) {
+                  } else if (score <= 60) {
                     level = 1
-                  } else if (score <= 8) {
+                  } else if (score <= 80) {
                     level = 2
                   } else {
                     level = 3
