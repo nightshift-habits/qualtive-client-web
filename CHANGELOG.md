@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.7.0
+
+### Added
+
+- Support for different score types currently including smilies3, smilies5 and nps.
+- Added support for translated questions.
+
 ## 1.6.1
 
 ### Fixed
