@@ -1,6 +1,6 @@
 import { Question, _Options } from "./model"
-import { parseCollection } from "./collection"
-import { localized, preferredLocale } from "./localized"
+import { _parseCollection } from "./collection"
+import { _localized, _locale } from "./localized"
 
 /**
  * Optional options to use when fetching feedback question using custom UI.
@@ -17,7 +17,7 @@ export const getQuestion = (collection: string, options?: GetQuestionOptions): P
   return new Promise((resolve, reject) => {
     let containerId: string, questionId: string
     try {
-      const collectionComponents = parseCollection(collection)
+      const collectionComponents = _parseCollection(collection)
       containerId = collectionComponents[0]
       questionId = collectionComponents[1]
     } catch (error) {
@@ -32,7 +32,7 @@ export const getQuestion = (collection: string, options?: GetQuestionOptions): P
         json = JSON.parse(request.responseText)
       } catch (error) {
         if (request.status >= 400) {
-          reject(new Error(localized("ops.fallback-error")))
+          reject(new Error(_localized("ops.fallback-error")))
         } else {
           reject(error)
         }
@@ -40,19 +40,19 @@ export const getQuestion = (collection: string, options?: GetQuestionOptions): P
       }
 
       if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
+        reject((json as { reason?: string }).reason || _localized("ops.fallback-error"))
       } else {
         resolve(json as Question)
       }
     }
-    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
+    request.onerror = () => reject(new Error(request.statusText || _localized("ops.fallback-error")))
 
     let url = options?._remoteUrl || "https://user-api.qualtive.io"
     url += `/feedback/questions/${questionId}/`
     request.open("GET", url, true)
 
     request.setRequestHeader("X-Container", containerId)
-    request.setRequestHeader("Accept-Language", preferredLocale(options))
+    request.setRequestHeader("Accept-Language", _locale(options))
 
     request.send()
   })

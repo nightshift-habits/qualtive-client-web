@@ -1,4 +1,4 @@
-export const getClientId = (): string => {
+export const _clientId = (): string => {
   const rand = (length: number): string => {
     let result = ""
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -33,7 +33,7 @@ export const getClientId = (): string => {
   return clientId
 }
 
-export const hasTouch = (): boolean => {
+export const _hasTouch = (): boolean => {
   try {
     document.createEvent("TouchEvent")
     return true

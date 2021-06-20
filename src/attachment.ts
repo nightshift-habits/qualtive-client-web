@@ -1,5 +1,5 @@
 import { Attachment, AttachmentContentType, _Options } from "./model"
-import { localized } from "./localized"
+import { _localized } from "./localized"
 
 /**
  * Optional options to use when uploading an attachment.
@@ -32,13 +32,13 @@ export const uploadAttachment = (
         json = JSON.parse(initRequest.responseText)
       } catch (error) {
         if (initRequest.status >= 400) {
-          return reject(new Error(localized("ops.fallback-error")))
+          return reject(new Error(_localized("ops.fallback-error")))
         }
         return reject(error)
       }
 
       if (initRequest.status >= 400) {
-        return reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
+        return reject((json as { reason?: string }).reason || _localized("ops.fallback-error"))
       }
 
       const attachment = json as _Attachment
@@ -46,20 +46,20 @@ export const uploadAttachment = (
       const uploadRequest = new XMLHttpRequest()
       uploadRequest.onload = () => {
         if (uploadRequest.status >= 400) {
-          return reject(localized("ops.fallback-error"))
+          return reject(_localized("ops.fallback-error"))
         }
         resolve({
           id: attachment.id,
         })
       }
-      uploadRequest.onerror = () => reject(new Error(uploadRequest.statusText || localized("ops.fallback-error")))
+      uploadRequest.onerror = () => reject(new Error(uploadRequest.statusText || _localized("ops.fallback-error")))
 
       uploadRequest.open("PUT", attachment.uploadUrl, true)
       uploadRequest.setRequestHeader("Content-Type", contentType)
 
       uploadRequest.send(data)
     }
-    initRequest.onerror = () => reject(new Error(initRequest.statusText || localized("ops.fallback-error")))
+    initRequest.onerror = () => reject(new Error(initRequest.statusText || _localized("ops.fallback-error")))
     initRequest.open("POST", (options?._remoteUrl || "https://user-api.qualtive.io") + "/feedback/attachments/", true)
 
     initRequest.setRequestHeader("Content-Type", "application/json; charset=utf-8")

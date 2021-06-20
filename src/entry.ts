@@ -77,7 +77,7 @@ export const validateEntry = (entry: Entry): void => {
     throw Error("Custom attributes must be an object, null or undefined")
 }
 
-export const parseCustomAttributes = (
+export const _parseCustomAttributes = (
   attributes: { [key: string]: string | number | boolean | null } | null | undefined
 ): { [key: string]: string } => {
   const result: { [key: string]: string } = {}

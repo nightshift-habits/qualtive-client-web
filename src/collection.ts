@@ -1,4 +1,4 @@
-export const parseCollection = (collection: string): string[] => {
+export const _parseCollection = (collection: string): string[] => {
   if (typeof collection != "string")
     throw Error("Invalid collection. First parameter to `post` must be formatted as `container-id/question-id`")
 

@@ -1,8 +1,8 @@
 import { Entry, _Options, EntryReference } from "./model"
 import { validateEntry } from "./entry"
-import { getClientId, hasTouch } from "./client"
-import { localized } from "./localized"
-import { parseCollection } from "./collection"
+import { _clientId, _hasTouch } from "./client"
+import { _localized } from "./localized"
+import { _parseCollection } from "./collection"
 
 /**
  * Optional options to use when posting feedback using custom UI.
@@ -20,7 +20,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
   return new Promise((resolve, reject) => {
     let containerId: string, questionId: string
     try {
-      const collectionComponents = parseCollection(collection)
+      const collectionComponents = _parseCollection(collection)
       containerId = collectionComponents[0]
       questionId = collectionComponents[1]
 
@@ -36,19 +36,19 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
         json = JSON.parse(request.responseText)
       } catch (error) {
         if (request.status >= 400) {
-          return void reject(new Error(localized("ops.fallback-error")))
+          return void reject(new Error(_localized("ops.fallback-error")))
         } else {
           return void reject(error)
         }
       }
 
       if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
+        reject((json as { reason?: string }).reason || _localized("ops.fallback-error"))
       } else {
         resolve(json as EntryReference)
       }
     }
-    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
+    request.onerror = () => reject(new Error(request.statusText || _localized("ops.fallback-error")))
 
     const content = entry.content || []
     if (content.length == 0) {
@@ -76,14 +76,14 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
         id: entry.user?.id?.toString(),
         name: entry.user?.name,
         email: entry.user?.email,
-        clientId: getClientId(),
+        clientId: _clientId(),
       },
       attributes: entry.customAttributes,
       attributeHints: {
         clientLibrary: "web",
         userAgent: navigator.userAgent,
         platform: navigator.platform,
-        hasTouch: hasTouch(),
+        hasTouch: _hasTouch(),
         screenSize: {
           width: window.screen.width,
           height: window.screen.height,

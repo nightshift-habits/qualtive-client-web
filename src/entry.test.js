@@ -1,4 +1,4 @@
-import { validateEntry, parseCustomAttributes } from "./entry"
+import { validateEntry, _parseCustomAttributes } from "./entry"
 
 describe("validation", () => {
   it("should catch validate entry", () => {
@@ -153,7 +153,7 @@ describe("validation", () => {
 
   it("should catch custom attributes failures", () => {
     expect(() =>
-      parseCustomAttributes({
+      _parseCustomAttributes({
         obj: { abc: 123 },
         arr: [456],
         s: "Hello",
@@ -161,9 +161,9 @@ describe("validation", () => {
     ).toThrowError()
   })
   it("should parse custom attributes successfully", () => {
-    parseCustomAttributes(undefined)
-    parseCustomAttributes(null)
-    parseCustomAttributes({
+    _parseCustomAttributes(undefined)
+    _parseCustomAttributes(null)
+    _parseCustomAttributes({
       n: 1,
       b: false,
       s: "Hello",

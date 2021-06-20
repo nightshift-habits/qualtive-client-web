@@ -1,10 +1,10 @@
-import { getClientId, hasTouch } from "./client"
+import { _clientId, _hasTouch } from "./client"
 
 describe("data", () => {
   it("should client id generate new", () => {
-    const id = getClientId()
+    const id = _clientId()
     expect(id.length).toBeGreaterThan(0)
-    expect(id).toBe(getClientId())
+    expect(id).toBe(_clientId())
   })
 
   it("should touch not have", () => {
@@ -12,12 +12,12 @@ describe("data", () => {
       if (name == "TouchEvent") throw Error()
       return true
     }
-    expect(hasTouch()).toBe(false)
+    expect(_hasTouch()).toBe(false)
   })
   it("should touch have", () => {
     document.createEvent = () => {
       return true
     }
-    expect(hasTouch()).toBe(true)
+    expect(_hasTouch()).toBe(true)
   })
 })

@@ -12,9 +12,9 @@ import {
   EntryContentAttachments,
   AttachmentContentType,
 } from "./model"
-import { parseCollection } from "./collection"
+import { _parseCollection } from "./collection"
 import { getQuestion } from "./get"
-import { localized } from "./localized"
+import { _localized } from "./localized"
 import { post } from "./post"
 import { uploadAttachment } from "./attachment"
 
@@ -125,7 +125,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
   const iconRemoveAttachment =
     '<svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect width="19" height="19" fill="#EB5757" /><rect x="5" y="8.625" width="9" height="1.75" fill="#fff" /></svg>'
 
-  const [containerId] = parseCollection(collection)
+  const [containerId] = _parseCollection(collection)
 
   let entryReference: EntryReference | null
 
@@ -154,14 +154,14 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
   const closeElement = document.createElement("button")
   closeElement.setAttribute("class", "_q-cancel")
-  closeElement.setAttribute("title", localized("form.close", options?.locale))
+  closeElement.setAttribute("title", _localized("form.close", options?.locale))
   closeElement.setAttribute("tabindex", "9001")
   closeElement.innerHTML =
     '<svg fill="none" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L17 17M17 1L1 17L17 1Z" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>'
   contentElement.appendChild(closeElement)
 
   const titleElement = document.createElement("h2")
-  titleElement.textContent = options?.title || localized("form.title", options?.locale)
+  titleElement.textContent = options?.title || _localized("form.title", options?.locale)
   contentElement.appendChild(titleElement)
 
   const buttonsElement = document.createElement("ul")
@@ -171,7 +171,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
   buttonsElement.appendChild(cancelElement)
 
   const cancelButtonElement = document.createElement("button")
-  cancelButtonElement.textContent = localized("form.cancel", options?.locale)
+  cancelButtonElement.textContent = _localized("form.cancel", options?.locale)
   cancelButtonElement.setAttribute("tabindex", "9202")
   cancelElement.appendChild(cancelButtonElement)
 
@@ -183,14 +183,14 @@ export const present = (collection: string, options?: FormOptions): Form => {
   sendButtonElement.disabled = true
   sendButtonElement.innerHTML =
     '<svg width="16" height="15" viewBox="0 0 16 15" fill="none"><path d="M15 3V9C15 10.1046 14.1046 11 13 11H5.82843C5.29799 11 4.78929 11.2107 4.41421 11.5858L2.70711 13.2929C2.07714 13.9229 1 13.4767 1 12.5858V3C1 1.89543 1.89543 1 3 1H13C14.1046 1 15 1.89543 15 3Z" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-    localized("form.send", options?.locale)
+    _localized("form.send", options?.locale)
   sendElement.appendChild(sendButtonElement)
 
   const successElement = document.createElement("ul")
   successElement.setAttribute("class", "_q-success")
 
   const successTextElement = document.createElement("li")
-  successTextElement.textContent = localized("form.sending", options?.locale)
+  successTextElement.textContent = _localized("form.sending", options?.locale)
   successElement.appendChild(successTextElement)
 
   const successCloseElement = document.createElement("li")
@@ -200,7 +200,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
   sendButtonElement.setAttribute("tabindex", "9204")
   successButtonElement.innerHTML =
     '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1L11 11M11 1L1 11L11 1Z" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-    localized("form.close", options?.locale)
+    _localized("form.close", options?.locale)
   successCloseElement.appendChild(successButtonElement)
 
   const scoreElements: HTMLUListElement[] = []
@@ -325,7 +325,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
         successTextElement.innerHTML =
           '<svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M15 1L6.3738 9.62623C5.98325 10.0167 5.35008 10.0167 4.95956 9.62623L1 5.66663" stroke="#219653" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-          localized("form.sent", options?.locale)
+          _localized("form.sent", options?.locale)
 
         let currentResultElement: HTMLDivElement | null
         content.forEach((content) => {
@@ -400,11 +400,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
                   const trailingTextElement = document.createElement("span")
                   trailingTextElement.innerText =
-                    content.trailingText || localized(`form.nps.trailing`, options?.locale)
+                    content.trailingText || _localized(`form.nps.trailing`, options?.locale)
                   textContainerElement.appendChild(trailingTextElement)
 
                   const leadingTextElement = document.createElement("span")
-                  leadingTextElement.innerText = content.leadingText || localized(`form.nps.leading`, options?.locale)
+                  leadingTextElement.innerText = content.leadingText || _localized(`form.nps.leading`, options?.locale)
                   textContainerElement.appendChild(leadingTextElement)
 
                   const scoresElement = document.createElement("ul")
@@ -484,7 +484,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
                 const imgElement = document.createElement("img")
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 imgElement.setAttribute("src", (attachment as any).localUrl)
-                imgElement.setAttribute("title", localized("form.image.index") + (index + 1))
+                imgElement.setAttribute("title", _localized("form.image.index") + (index + 1))
                 divElement.appendChild(imgElement)
               })
               break
@@ -499,7 +499,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
       })
       .catch((error) => {
         containerElement.className = containerElement.className = " _q-error"
-        successTextElement.textContent = localized("form.error", options?.locale)
+        successTextElement.textContent = _localized("form.error", options?.locale)
         console.error("Error sending Qualtive entry", error)
 
         resultElements.forEach((x) => contentElement.removeChild(x))
@@ -562,7 +562,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
                   const buttonElement = document.createElement("button")
                   buttonElement.setAttribute("tabindex", contentTabindex + "")
-                  buttonElement.setAttribute("title", localized(`form.score.${score}`, options?.locale))
+                  buttonElement.setAttribute("title", _localized(`form.score.${score}`, options?.locale))
                   optionButtonElements.push(buttonElement)
                   optionElement.appendChild(buttonElement)
                   contentTabindex++
@@ -597,12 +597,12 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
                 const trailingTextElement = document.createElement("span")
                 trailingTextElement.innerText =
-                  questionContent.trailingText || localized(`form.nps.trailing`, options?.locale)
+                  questionContent.trailingText || _localized(`form.nps.trailing`, options?.locale)
                 textContainerElement.appendChild(trailingTextElement)
 
                 const leadingTextElement = document.createElement("span")
                 leadingTextElement.innerText =
-                  questionContent.leadingText || localized(`form.nps.leading`, options?.locale)
+                  questionContent.leadingText || _localized(`form.nps.leading`, options?.locale)
                 textContainerElement.appendChild(leadingTextElement)
 
                 scores = scoresNPS
@@ -667,7 +667,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
             const textareaElement = document.createElement("textarea")
             textareaElement.setAttribute(
               "placeholder",
-              questionContent.placeholder || localized("form.text-placeholder", options?.locale)
+              questionContent.placeholder || _localized("form.text-placeholder", options?.locale)
             )
             textareaElement.setAttribute("tabindex", contentTabindex + "")
             contentElement.appendChild(textareaElement)
@@ -843,7 +843,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
       linkElement.setAttribute("target", "_blank")
       linkElement.setAttribute("rel", "noopener noreferrer")
       linkElement.setAttribute("tabindex", "9205")
-      linkElement.textContent = localized("form.support", options.locale) + " ->"
+      linkElement.textContent = _localized("form.support", options.locale) + " ->"
       footerElement.appendChild(linkElement)
     }
 
@@ -906,7 +906,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
         .filter((x): x is EntryContent => !!x)
     })
     .catch(() => {
-      successTextElement.textContent = localized("form.error", options?.locale)
+      successTextElement.textContent = _localized("form.error", options?.locale)
     })
     .finally(() => {
       if (canRenderQuestionDirectly) {
