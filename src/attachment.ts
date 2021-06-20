@@ -25,60 +25,50 @@ export const uploadAttachment = (
   options?: UploadOptions
 ): Promise<Attachment> => {
   return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest()
-    request.onload = () => {
+    const initRequest = new XMLHttpRequest()
+    initRequest.onload = () => {
       let json: unknown
       try {
-        json = JSON.parse(request.responseText)
+        json = JSON.parse(initRequest.responseText)
       } catch (error) {
-        if (request.status >= 400) {
-          reject(new Error(localized("ops.fallback-error")))
-        } else {
-          reject(error)
+        if (initRequest.status >= 400) {
+          return reject(new Error(localized("ops.fallback-error")))
         }
-        return
+        return reject(error)
       }
 
-      if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
-      } else {
-        resolve(_upload(json as _Attachment, contentType, data))
+      if (initRequest.status >= 400) {
+        return reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
       }
-    }
-    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
 
-    let url = options?._remoteUrl || "https://user-api.qualtive.io"
-    url += "/feedback/attachments/"
-    request.open("POST", url, true)
+      const attachment = json as _Attachment
 
-    request.setRequestHeader("Content-Type", "application/json; charset=utf-8")
-    request.setRequestHeader("X-Container", containerId)
-
-    request.send(
-      JSON.stringify({
-        contentType,
-      })
-    )
-  })
-}
-
-const _upload = (attachment: _Attachment, contentType: AttachmentContentType, data: File): Promise<Attachment> => {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest()
-    request.onload = () => {
-      if (request.status >= 400) {
-        reject(localized("ops.fallback-error"))
-      } else {
+      const uploadRequest = new XMLHttpRequest()
+      uploadRequest.onload = () => {
+        if (uploadRequest.status >= 400) {
+          return reject(localized("ops.fallback-error"))
+        }
         resolve({
           id: attachment.id,
         })
       }
+      uploadRequest.onerror = () => reject(new Error(uploadRequest.statusText || localized("ops.fallback-error")))
+
+      uploadRequest.open("PUT", attachment.uploadUrl, true)
+      uploadRequest.setRequestHeader("Content-Type", contentType)
+
+      uploadRequest.send(data)
     }
-    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
+    initRequest.onerror = () => reject(new Error(initRequest.statusText || localized("ops.fallback-error")))
+    initRequest.open("POST", (options?._remoteUrl || "https://user-api.qualtive.io") + "/feedback/attachments/", true)
 
-    request.open("PUT", attachment.uploadUrl, true)
-    request.setRequestHeader("Content-Type", contentType)
+    initRequest.setRequestHeader("Content-Type", "application/json; charset=utf-8")
+    initRequest.setRequestHeader("X-Container", containerId)
 
-    request.send(data)
+    initRequest.send(
+      JSON.stringify({
+        contentType,
+      })
+    )
   })
 }
