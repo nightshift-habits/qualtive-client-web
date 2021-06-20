@@ -1,5 +1,5 @@
 import { Attachment, AttachmentContentType, _Options } from "./model"
-import _ from "./localized"
+import { localized } from "./localized"
 
 /**
  * Optional options to use when uploading an attachment.
@@ -32,7 +32,7 @@ export const uploadAttachment = (
         json = JSON.parse(request.responseText)
       } catch (error) {
         if (request.status >= 400) {
-          reject(new Error(_("ops.fallback-error")))
+          reject(new Error(localized("ops.fallback-error")))
         } else {
           reject(error)
         }
@@ -40,12 +40,12 @@ export const uploadAttachment = (
       }
 
       if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || _("ops.fallback-error"))
+        reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
       } else {
         resolve(_upload(json as _Attachment, contentType, data))
       }
     }
-    request.onerror = () => reject(new Error(request.statusText || _("ops.fallback-error")))
+    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
 
     let url = options?._remoteUrl || "https://user-api.qualtive.io"
     url += "/feedback/attachments/"
@@ -67,14 +67,14 @@ const _upload = (attachment: _Attachment, contentType: AttachmentContentType, da
     const request = new XMLHttpRequest()
     request.onload = () => {
       if (request.status >= 400) {
-        reject(_("ops.fallback-error"))
+        reject(localized("ops.fallback-error"))
       } else {
         resolve({
           id: attachment.id,
         })
       }
     }
-    request.onerror = () => reject(new Error(request.statusText || _("ops.fallback-error")))
+    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
 
     request.open("PUT", attachment.uploadUrl, true)
     request.setRequestHeader("Content-Type", contentType)

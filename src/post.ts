@@ -1,6 +1,6 @@
 import { Entry, _Options, EntryReference } from "./model"
 import { getClientId, hasTouch, validateEntry, parseCollection } from "./private"
-import _ from "./localized"
+import { localized } from "./localized"
 
 /**
  * Optional options to use when posting feedback using custom UI.
@@ -24,8 +24,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
 
       validateEntry(entry)
     } catch (error) {
-      reject(error)
-      return
+      return void reject(error)
     }
 
     const request = new XMLHttpRequest()
@@ -35,20 +34,19 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
         json = JSON.parse(request.responseText)
       } catch (error) {
         if (request.status >= 400) {
-          reject(new Error(_("ops.fallback-error")))
+          return void reject(new Error(localized("ops.fallback-error")))
         } else {
-          reject(error)
+          return void reject(error)
         }
-        return
       }
 
       if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || _("ops.fallback-error"))
+        reject((json as { reason?: string }).reason || localized("ops.fallback-error"))
       } else {
         resolve(json as EntryReference)
       }
     }
-    request.onerror = () => reject(new Error(request.statusText || _("ops.fallback-error")))
+    request.onerror = () => reject(new Error(request.statusText || localized("ops.fallback-error")))
 
     const content = entry.content || []
     if (content.length == 0) {
