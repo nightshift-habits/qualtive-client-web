@@ -1,6 +1,7 @@
 import { Entry, _Options, EntryReference } from "./model"
-import { getClientId, hasTouch, validateEntry, parseCollection } from "./private"
+import { getClientId, hasTouch, validateEntry } from "./private"
 import { localized } from "./localized"
+import { parseCollection } from "./collection"
 
 /**
  * Optional options to use when posting feedback using custom UI.

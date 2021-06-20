@@ -1,5 +1,6 @@
 import { Question, _Options } from "./model"
-import { parseCollection, preferredLocale } from "./private"
+import { preferredLocale } from "./private"
+import { parseCollection } from "./collection"
 import { localized } from "./localized"
 
 /**

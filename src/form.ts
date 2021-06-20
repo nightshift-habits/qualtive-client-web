@@ -12,7 +12,7 @@ import {
   EntryContentAttachments,
   AttachmentContentType,
 } from "./model"
-import { parseCollection } from "./private"
+import { parseCollection } from "./collection"
 import { getQuestion } from "./get"
 import { localized } from "./localized"
 import { post } from "./post"
