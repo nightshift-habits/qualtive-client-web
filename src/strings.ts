@@ -1,4 +1,4 @@
-export const strings = {
+export const strings: { [collection: string]: { [key: string]: string | undefined } | undefined } = {
   "en-us": {
     "ops.fallback-error": "Could not complete operation.",
 
