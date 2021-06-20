@@ -147,7 +147,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
   const containerElement = document.createElement("div")
   containerElement.setAttribute("id", "_q-container")
   containerElement.setAttribute("class", "_q-out")
-  containerElement.style.minHeight = "425px"
+  containerElement.style.minHeight = "498px"
 
   const contentElement = document.createElement("div")
   containerElement.appendChild(contentElement)
