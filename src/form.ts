@@ -867,8 +867,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
     if (!hasRenderedQuestion) {
       setTimeout(() => {
-        renderQuestionContent()
-        canRenderQuestionDirectly = true
+        if (question) {
+          renderQuestionContent()
+        } else {
+          canRenderQuestionDirectly = true
+        }
       }, 300)
     }
   }
