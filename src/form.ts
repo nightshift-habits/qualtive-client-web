@@ -803,6 +803,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
                               if (!fileLabelElement.parentElement) {
                                 attachmentsElement.appendChild(fileLabelElement)
                               }
+                              invalidateCanSend()
                               break
                             }
                           }
