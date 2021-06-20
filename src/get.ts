@@ -1,7 +1,6 @@
 import { Question, _Options } from "./model"
-import { preferredLocale } from "./private"
 import { parseCollection } from "./collection"
-import { localized } from "./localized"
+import { localized, preferredLocale } from "./localized"
 
 /**
  * Optional options to use when fetching feedback question using custom UI.

@@ -1,5 +1,5 @@
 import { Entry, _Options, EntryReference } from "./model"
-import { validateEntry } from "./private"
+import { validateEntry } from "./entry"
 import { getClientId, hasTouch } from "./client"
 import { localized } from "./localized"
 import { parseCollection } from "./collection"

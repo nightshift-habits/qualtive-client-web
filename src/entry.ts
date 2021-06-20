@@ -1,4 +1,4 @@
-import { Entry, EntryContent, _Options } from "./model"
+import { Entry, EntryContent } from "./model"
 
 export const validateEntry = (entry: Entry): void => {
   if (typeof entry != "object" || entry == null) throw Error("Entry must be an object")
@@ -94,8 +94,3 @@ export const parseCustomAttributes = (
 
   return result
 }
-
-// --- Locale ---
-
-export const preferredLocale = (options: _Options | undefined): string =>
-  options?.locale || navigator.language || "en-us"
