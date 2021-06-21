@@ -60,6 +60,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
   const containerElement = document.createElement("div")
   containerElement.setAttribute("id", "_q-container")
   containerElement.setAttribute("class", "_q-out")
+  containerElement.style.maxWidth = options?.size == "wide" ? "640px" : "375px"
   containerElement.style.minHeight = "498px"
 
   const contentElement = document.createElement("div")

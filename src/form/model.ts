@@ -5,7 +5,7 @@ import { EntryReference, _Options } from "../model"
  */
 export type FormOptions = _Options & {
   /**
-   * Localized form title to show on top of the form. Default: `"Leave feedback"`.
+   * Localized form title to show on top of the form. Default is `"Leave feedback"`.
    */
   title?: string
 
@@ -24,7 +24,7 @@ export type FormOptions = _Options & {
   customAttributes?: { [key: string]: string | number | boolean | null } | null
 
   /**
-   * Optional link to customer support. If this property has a value a link the custom support will be displayed in the form. Default: `null`.
+   * Optional link to customer support. If this property has a value a link the custom support will be displayed in the form. Default is `null`.
    */
   supportURL?: string
 
@@ -36,6 +36,14 @@ export type FormOptions = _Options & {
    * - always: Dark mode will always be used.
    */
   darkMode?: "auto" | "never" | "always"
+
+  /**
+   * Option to set size of form. Default is compact.
+   *
+   * - compact: Compact width. Preferred to be used in short forms.
+   * - wide: Wider width. Preferred to be used in longer forms.
+   */
+  size?: "compact" | "wide"
 
   /**
    * Option to disallow dismissal of the form by clicking escape on the keyboard. Default is false.
