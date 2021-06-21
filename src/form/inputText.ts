@@ -1,4 +1,4 @@
-import { _InputRenderingContext } from "."
+import { _InputRenderingContext } from "./model"
 import { _localized } from "../localized"
 import { EntryContentText, QuestionContentText } from "../model"
 

@@ -1,4 +1,4 @@
-import { _PreviewRenderingContext } from "."
+import { _PreviewRenderingContext } from "./model"
 import { _localized } from "../localized"
 import { EntryContentScore } from "../model"
 import { _constants } from "./constants"

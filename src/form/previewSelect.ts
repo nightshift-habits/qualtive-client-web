@@ -1,4 +1,4 @@
-import { _PreviewRenderingContext } from "."
+import { _PreviewRenderingContext } from "./model"
 import { EntryContentSelect } from "../model"
 import { _constants } from "./constants"
 

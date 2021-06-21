@@ -1,4 +1,4 @@
-import { _InputRenderingContext } from "."
+import { _InputRenderingContext } from "./model"
 import { QuestionContentTitle } from "../model"
 
 export const _renderInputTitle = (context: _InputRenderingContext, questionContent: QuestionContentTitle): void => {

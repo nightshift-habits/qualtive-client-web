@@ -1,4 +1,4 @@
-import { _PreviewRenderingContext } from "."
+import { _PreviewRenderingContext } from "./model"
 import { EntryContentText } from "../model"
 
 export const _renderPreviewText = (context: _PreviewRenderingContext, content: EntryContentText): void => {

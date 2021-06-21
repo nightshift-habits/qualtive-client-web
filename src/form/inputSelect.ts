@@ -1,4 +1,4 @@
-import { _InputRenderingContext } from "."
+import { _InputRenderingContext } from "./model"
 import { EntryContentSelect, QuestionContentSelect } from "../model"
 import { _constants } from "./constants"
 

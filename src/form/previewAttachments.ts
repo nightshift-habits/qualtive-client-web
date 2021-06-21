@@ -1,4 +1,4 @@
-import { _PreviewRenderingContext } from "."
+import { _PreviewRenderingContext } from "./model"
 import { _localized } from "../localized"
 import { EntryContentAttachments } from "../model"
 
