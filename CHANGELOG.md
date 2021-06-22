@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.8.1
+
+### Fixed
+
+- Ignoring compact build in npm package.
+
 ## 1.8.0
 
 ### Added
