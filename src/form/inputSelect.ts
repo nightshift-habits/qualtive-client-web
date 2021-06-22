@@ -40,12 +40,46 @@ export const _renderInputSelect = (
       selectElement.appendChild(optionElement)
     })
 
+    // Other option
+    const otherTabIndex = context.tabIndex
+    context.tabIndex++
+
+    let otherOptionElement: HTMLOptionElement | null
+    let otherTextareaElement: HTMLTextAreaElement | null
+    if (questionContent.allowsCustomInput) {
+      otherOptionElement = document.createElement("option")
+      otherOptionElement.innerHTML = _localized("form.other", context.options?.locale)
+      otherOptionElement.value = "_o"
+      selectElement.appendChild(otherOptionElement)
+    }
+
     // Interaction
     selectElement.onchange = () => {
       if (placeholderOptionElement.selected) {
         entryContent.value = null
+        if (otherTextareaElement && otherTextareaElement.parentElement)
+          selectContainerElement.removeChild(otherTextareaElement)
+      } else if (otherOptionElement && otherOptionElement.selected) {
+        if (otherTextareaElement) {
+          selectContainerElement.appendChild(otherTextareaElement)
+        } else {
+          otherTextareaElement = document.createElement("textarea")
+          otherTextareaElement.tabIndex = otherTabIndex
+          otherTextareaElement.placeholder = _localized("form.text-placeholder", context.options?.locale)
+          selectContainerElement.appendChild(otherTextareaElement)
+
+          otherTextareaElement.oninput = () => {
+            if (!otherOptionElement || !otherOptionElement.selected || !otherTextareaElement) return
+
+            const text = otherTextareaElement.value.trim() == "" ? null : otherTextareaElement.value
+            entryContent.value = text
+            context.invalidateCanSend()
+          }
+        }
       } else {
         entryContent.value = selectElement.value
+        if (otherTextareaElement && otherTextareaElement.parentElement)
+          selectContainerElement.removeChild(otherTextareaElement)
       }
 
       context.invalidateCanSend()

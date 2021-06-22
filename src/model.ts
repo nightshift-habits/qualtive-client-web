@@ -70,6 +70,7 @@ export type QuestionContentText = {
 export type QuestionContentSelect = {
   type: "select"
   options: string[]
+  allowsCustomInput: boolean
 }
 
 /**
