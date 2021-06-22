@@ -20,6 +20,7 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.nps.leading": "Very likely",
     "form.nps.trailing": "Not likely",
     "form.image.index": "Image ",
+    "form.choose": "Choose…",
   },
   "sv-se": {
     "ops.fallback-error": "Kunde inte slutföra åtgärd.",
@@ -42,5 +43,6 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.nps.leading": "Mycket sannolikt",
     "form.nps.trailing": "Inte alls sannolikt",
     "form.image.index": "Bild ",
+    "form.choose": "Välj…",
   },
 } as { [key: string]: { [key: string]: string } }
