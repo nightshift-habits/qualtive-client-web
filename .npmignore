@@ -12,3 +12,5 @@ src/
 .prettierrc
 jest.config.js
 tsconfig.json
+mini.js
+tsconfig.prod.json
