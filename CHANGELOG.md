@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.8.0
+
+### Added
+
+- Support for custom user input in select inputs.
+- Option for wider form width.
+- Improved language selection. Now handeleds language-only locales.
+
+### Fixed
+
+- Can still submit after removing an attachment.
+- Slow loading forms now behave correctly.
+- Support link could be rendered twice if on a slow network.
+- Scrollbars always visible on Windows.
+- NPS score values.
+
 ## 1.7.0
 
 ### Added
