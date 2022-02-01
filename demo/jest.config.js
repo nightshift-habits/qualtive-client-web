@@ -1,5 +1,6 @@
 module.exports = {
   preset: "ts-jest",
+  testEnvironment: "jsdom",
   clearMocks: true,
   coveragePathIgnorePatterns: ["/node_modules/", "/src/@types/"],
   collectCoverageFrom: ["src/**/*.{tsx,ts,js}"],

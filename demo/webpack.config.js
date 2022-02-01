@@ -35,13 +35,7 @@ module.exports = {
   devServer: {
     host: "0.0.0.0",
     port: 3030,
-    contentBase: path.resolve(__dirname, "dist"),
     historyApiFallback: true,
-    watchContentBase: true,
     hot: true,
-    watchOptions: {
-      poll: true,
-      ignored: /node_modules/,
-    },
   },
 }
