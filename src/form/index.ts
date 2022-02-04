@@ -19,6 +19,7 @@ import { _renderInputSelect } from "./inputSelect"
 import { _renderInputMultiselect } from "./inputMultiselect"
 import { _renderInputAttachments } from "./inputAttachment"
 import { _constants } from "./constants"
+import { _styles } from "./styles"
 import { _renderPreviewScore } from "./previewScore"
 import { _renderPreviewText } from "./previewText"
 import { _renderPreviewSelect } from "./previewSelect"
@@ -40,11 +41,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
   let content: EntryContent[] = []
 
   const styleElement = document.createElement("style")
-  let computedStyle = _constants.style
+  let computedStyle = _styles.core
   if (!options?.darkMode || options.darkMode == "auto") {
-    computedStyle += "@media (prefers-color-scheme:dark){" + _constants.styleDarkMode + "}"
+    computedStyle += "@media (prefers-color-scheme:dark){" + _styles.dark + "}"
   } else if (options?.darkMode == "always") {
-    computedStyle += _constants.styleDarkMode
+    computedStyle += _styles.dark
   }
   styleElement.innerHTML = computedStyle
   document.head.appendChild(styleElement)

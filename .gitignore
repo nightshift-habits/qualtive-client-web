@@ -3,3 +3,4 @@ node_modules
 dist
 coverage
 /mini.js
+/src/form/styles.ts
