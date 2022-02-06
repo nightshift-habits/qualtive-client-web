@@ -284,6 +284,8 @@ export const present = (collection: string, options?: FormOptions): Form => {
     if (question) {
       const renderingContext: _InputRenderingContext = {
         containerId,
+        containerElement,
+        noClickElement,
         contentElement,
         options,
         tabIndex: 9100,

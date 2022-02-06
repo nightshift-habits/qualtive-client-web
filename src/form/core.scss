@@ -605,6 +605,33 @@
       display: none;
     }
   }
+
+  div > *:not(._q-attachments) {
+    transition: 0.2s opacity;
+  }
+  &._q-dragging {
+    div > *:not(._q-attachments) {
+      opacity: 0.2;
+    }
+    ._q-cancel {
+      opacity: 0 !important;
+    }
+  }
+}
+
+#_q-drop-indication {
+  position: fixed;
+  z-index: 99999999;
+  margin: 20px;
+  border-radius: 2px;
+  border: 2px dashed #c7cacd;
+  pointer-events: none;
+
+  opacity: 1;
+  transition: 0.2s opacity;
+  &._q-out {
+    opacity: 0;
+  }
 }
 
 @media only screen and (max-width: 550px), (max-height: 550px) {

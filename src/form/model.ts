@@ -68,6 +68,8 @@ export type Form = {
 
 export type _InputRenderingContext = {
   containerId: string
+  containerElement: HTMLElement
+  noClickElement: HTMLElement
   contentElement: HTMLElement
   tabIndex: number
   options: FormOptions | undefined
