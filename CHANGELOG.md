@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.9.0
+
+### Added
+
+- Support for drag and drop attachments.
+
+### Fixed
+
+- Form position on mobile when scrolled down.
+- Sending state not shown in some cases.
+- Font face name is now more unique to not conflict with others.
+
 ## 1.8.1
 
 ### Fixed
