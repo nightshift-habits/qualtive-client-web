@@ -394,8 +394,11 @@
     margin: 30px 0;
     text-align: right;
   }
-  &._q-sent ._q-buttons {
-    display: none;
+  &._q-sent,
+  &._q-sending {
+    ._q-buttons {
+      display: none;
+    }
   }
   ._q-buttons li {
     display: inline-block;
@@ -463,69 +466,93 @@
   ._q-buttons li button:disabled * {
     cursor: default !important;
   }
-  ._q-success {
+
+  ._q-status {
     display: none;
     width: 100%;
     margin: 30px 0;
+
+    li {
+      display: table-cell;
+
+      &:first-child {
+        text-align: left;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+        vertical-align: middle;
+
+        svg {
+          margin: 1px 6px 0 0;
+        }
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+    button {
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 8px 16px;
+      line-height: 20px;
+      height: 40px;
+
+      &:focus,
+      &:hover {
+        border-color: #0b75b1;
+        color: #0b75b1;
+        outline: 0;
+
+        [stroke="#000"] {
+          stroke: #0b75b1;
+        }
+      }
+      &:active {
+        color: #fff;
+        background: #1a6e9d;
+        border-color: #1a6e9d;
+
+        [stroke="#000"] {
+          stroke: #fff;
+        }
+      }
+    }
   }
-  &._q-error ._q-success,
-  &._q-sent ._q-success {
-    display: table;
+  &._q-error,
+  &._q-sent,
+  &._q-sending {
+    ._q-status {
+      display: table;
+    }
   }
-  ._q-success li {
-    display: table-cell;
+  &._q-sending,
+  &._q-error {
+    ._q-status {
+      li:last-child {
+        visibility: hidden;
+      }
+    }
   }
-  ._q-success li:first-child {
-    text-align: left;
-    color: #219653;
-    font-weight: 600;
-    font-size: 14px;
-    vertical-align: middle;
+  &._q-error {
+    ._q-status {
+      margin-bottom: -30px;
+
+      li:first-child {
+        color: #e33737;
+      }
+    }
   }
-  ._q-success li:first-child svg {
-    margin: 1px 6px 0 0;
+  &._q-sent {
+    ._q-status {
+      li:first-child {
+        color: #219653;
+      }
+    }
   }
-  ._q-success li:last-child {
-    text-align: right;
-  }
-  ._q-success li:last-child button {
-    text-align: right;
-    color: #000;
-    border: 2px solid #000;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 8px 16px;
-    line-height: 20px;
-    height: 40px;
-  }
-  ._q-success li:last-child button:focus:not(:disabled),
-  ._q-success li:last-child button:hover:not(:disabled) {
-    border-color: #0b75b1;
-    color: #0b75b1;
-    outline: 0;
-  }
-  ._q-success li:last-child button:focus:not(:disabled) [stroke="#000"],
-  ._q-success li:last-child button:hover:not(:disabled) [stroke="#000"] {
-    stroke: #0b75b1;
-  }
-  ._q-success li:last-child button:active:not(:disabled) {
-    color: #fff;
-    background: #1a6e9d;
-    border-color: #1a6e9d;
-  }
-  &._q-error:not(._q-sent) ._q-success li:last-child {
-    display: none;
-  }
-  ._q-success li:last-child button:active:not(:disabled) [stroke="#000"] {
-    stroke: #fff;
-  }
-  &._q-error ._q-success li:first-child svg {
-    display: none;
-  }
-  &._q-error ._q-success li:first-child {
-    color: #e33737;
-  }
+
   ._q-support-link {
     background: #fcf1d1;
     font-size: 12px;

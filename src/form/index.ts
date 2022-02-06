@@ -93,25 +93,22 @@ export const present = (collection: string, options?: FormOptions): Form => {
   sendButtonElement.innerHTML = _constants.iconSend + _localized("form.send", options?.locale)
   sendElement.appendChild(sendButtonElement)
 
-  const successElement = document.createElement("ul")
-  successElement.setAttribute("class", "_q-success")
+  const sendStatusElement = document.createElement("ul")
+  sendStatusElement.setAttribute("class", "_q-status")
 
-  const successTextElement = document.createElement("li")
-  successTextElement.textContent = _localized("form.sending", options?.locale)
-  successElement.appendChild(successTextElement)
+  const sendStatusTextElement = document.createElement("li")
+  sendStatusElement.appendChild(sendStatusTextElement)
 
-  const successCloseElement = document.createElement("li")
-  successElement.appendChild(successCloseElement)
+  const sendStatusCloseElement = document.createElement("li")
+  sendStatusElement.appendChild(sendStatusCloseElement)
 
-  const successButtonElement = document.createElement("button")
+  const sendStatusButtonElement = document.createElement("button")
   sendButtonElement.setAttribute("tabindex", "9204")
-  successButtonElement.innerHTML = _constants.iconMessage + _localized("form.close", options?.locale)
-  successCloseElement.appendChild(successButtonElement)
+  sendStatusButtonElement.innerHTML = _constants.iconMessage + _localized("form.close", options?.locale)
+  sendStatusCloseElement.appendChild(sendStatusButtonElement)
 
   document.body.appendChild(noClickElement)
   document.body.appendChild(containerElement)
-
-  let resultElements: HTMLElement[] = []
 
   // Handle keyboard events
 
@@ -170,7 +167,11 @@ export const present = (collection: string, options?: FormOptions): Form => {
     options?.onDismiss?.(entryReference)
   }
   const send = (): void => {
-    containerElement.className.replace("_q-error", "")
+    if (containerElement.className.indexOf("_q-sending") != -1) return
+
+    containerElement.className = containerElement.className.replace("_q-error", "") + " _q-sending"
+
+    sendStatusTextElement.textContent = _localized("form.sending", options?.locale)
 
     post(collection, {
       content: content.map((x) => {
@@ -192,9 +193,9 @@ export const present = (collection: string, options?: FormOptions): Form => {
       .then((newEntryReference) => {
         entryReference = newEntryReference
 
-        containerElement.className += " _q-sent"
+        containerElement.className = containerElement.className.replace("_q-sending", "_q-sent")
 
-        successTextElement.innerHTML = _constants.iconSuccess + _localized("form.sent", options?.locale)
+        sendStatusTextElement.innerHTML = _constants.iconSuccess + _localized("form.sent", options?.locale)
 
         let currentResultElement: HTMLDivElement | null
         content.forEach((content) => {
@@ -204,7 +205,6 @@ export const present = (collection: string, options?: FormOptions): Form => {
               pElement.className = "_q-after"
               pElement.innerText = content.text
               contentElement.appendChild(pElement)
-              resultElements.push(pElement)
               break
             }
             case "score":
@@ -224,7 +224,6 @@ export const present = (collection: string, options?: FormOptions): Form => {
             currentResultElement = document.createElement("div")
             currentResultElement.className = "_q-result"
             contentElement.appendChild(currentResultElement)
-            resultElements.push(currentResultElement)
           }
 
           const context: _PreviewRenderingContext = {
@@ -253,23 +252,21 @@ export const present = (collection: string, options?: FormOptions): Form => {
           }
         })
 
-        contentElement.removeChild(successElement)
+        contentElement.removeChild(sendStatusElement)
         contentElement.removeChild(buttonsElement)
-        contentElement.appendChild(successElement)
+        contentElement.appendChild(sendStatusElement)
         contentElement.appendChild(buttonsElement)
       })
       .catch((error) => {
-        containerElement.className = containerElement.className = " _q-error"
-        successTextElement.textContent = _localized("form.error", options?.locale)
-        console.error("Error sending Qualtive entry", error)
+        containerElement.className = containerElement.className.replace("_q-sending", "_q-error")
 
-        resultElements.forEach((x) => contentElement.removeChild(x))
-        resultElements = []
+        sendStatusTextElement.textContent = _localized("form.error", options?.locale)
+        console.error("Error sending Qualtive entry", error)
       })
   }
 
   cancelButtonElement.onclick = dismiss
-  successButtonElement.onclick = dismiss
+  sendStatusButtonElement.onclick = dismiss
   sendButtonElement.onclick = send
   closeElement.onclick = dismiss
 
@@ -319,7 +316,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
       })
     }
 
-    contentElement.appendChild(successElement)
+    contentElement.appendChild(sendStatusElement)
     contentElement.appendChild(buttonsElement)
 
     if (options?.supportURL) {
@@ -398,7 +395,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
         .filter((x): x is EntryContent => !!x)
     })
     .catch(() => {
-      successTextElement.textContent = _localized("form.error", options?.locale)
+      sendStatusTextElement.textContent = _localized("form.error", options?.locale)
     })
     .finally(() => {
       if (canRenderQuestionDirectly) {

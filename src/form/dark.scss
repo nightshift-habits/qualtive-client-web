@@ -126,26 +126,6 @@
   ._q-buttons li button:disabled {
     color: #ddd;
   }
-  ._q-success {
-    display: none;
-    width: 100%;
-    margin: 30px 0;
-  }
-  ._q-success li:last-child button {
-    color: #ddd;
-    border-color: #ddd;
-  }
-  ._q-success li:last-child button [stroke="#000"] {
-    stroke: #ddd;
-  }
-  ._q-success li:last-child button:active:not(:disabled) {
-    color: #fff;
-    background: #1ac8ff;
-    border-color: #1ac8ff;
-  }
-  ._q-success li:last-child button:active:not(:disabled) [stroke="#000"] {
-    stroke: #fff;
-  }
   ._q-support-link {
     background: #2e2d2a;
   }
@@ -157,6 +137,22 @@
   }
   ._q-result ._q-option svg path {
     fill: #fff;
+  }
+
+  ._q-status {
+    li {
+      &:first-child {
+        color: #ddd;
+      }
+    }
+    button {
+      color: #ddd;
+      border-color: #ddd;
+
+      [stroke="#000"] {
+        stroke: #ddd;
+      }
+    }
   }
 }
 
