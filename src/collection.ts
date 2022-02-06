@@ -1,4 +1,4 @@
-export const _parseCollection = (collection: string): string[] => {
+export const _parseCollection = (collection: string): [string, string] => {
   if (typeof collection != "string")
     throw Error("Invalid collection. First parameter to `post` must be formatted as `container-id/question-id`")
 
@@ -9,5 +9,5 @@ export const _parseCollection = (collection: string): string[] => {
   if (!components[0]) throw Error("Invalid container id")
   if (!components[1]) throw Error("Invalid question id")
 
-  return components
+  return components as [string, string]
 }
