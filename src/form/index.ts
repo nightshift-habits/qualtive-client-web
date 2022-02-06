@@ -27,6 +27,18 @@ import { _renderPreviewMultiselect } from "./previewMultiselect"
 import { _renderPreviewAttachments } from "./previewAttachments"
 import { Form, FormOptions, _InputRenderingContext, _PreviewRenderingContext } from "./model"
 
+declare global {
+  interface Window {
+    webkit?: {
+      messageHandlers?: {
+        qualtive?: {
+          postMessage: (message: { collection: [string, string] }) => Promise<EntryReference>
+        }
+      }
+    }
+  }
+}
+
 /**
  * Posts a user feedback entry.
  * @param collection Collection to post to. Formatted as `container-id/question-id`. Required.
@@ -34,7 +46,25 @@ import { Form, FormOptions, _InputRenderingContext, _PreviewRenderingContext } f
  * @returns Form. The presented form.
  */
 export const present = (collection: string, options?: FormOptions): Form => {
-  const [containerId] = _parseCollection(collection)
+  const [containerId, questionId] = _parseCollection(collection)
+
+  // Native app takeover?
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.qualtive) {
+    window.webkit.messageHandlers.qualtive
+      .postMessage({
+        collection: [containerId, questionId],
+      })
+      .catch((error) => {
+        if (!`${error}`.includes("CancellationError")) {
+          console.error("Error sending Qualtive entry", error)
+        }
+      })
+    return {
+      dismiss: () => {
+        // Can not dismiss native form.
+      },
+    }
+  }
 
   let entryReference: EntryReference | null
 
