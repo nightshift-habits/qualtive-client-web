@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.10.0
+
+### Added
+
+- Support for presenting a form nativly when web is runned inside a web view.
+
 ## 1.9.0
 
 ### Added
