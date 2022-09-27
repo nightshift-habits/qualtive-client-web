@@ -126,6 +126,13 @@ export type Entry = {
    * Custom attributes
    */
   customAttributes?: { [key: string]: string | number | boolean | null } | null
+
+  /**
+   * Source of where the entry was created from. Optional.
+   */
+  source?: {
+    webpageUrl?: string | null
+  }
 }
 
 /**
