@@ -75,6 +75,14 @@ export const validateEntry = (entry: Entry): void => {
   // Custom attributes
   if (typeof entry.customAttributes != "object" && entry.customAttributes)
     throw Error("Custom attributes must be an object, null or undefined")
+
+  // Source
+  if (typeof entry.source == "object") {
+    if (entry.source.webpageUrl && typeof entry.source.webpageUrl != "string")
+      throw Error("Source webpage URL must be a string, null or undefined")
+  } else if (entry.source) {
+    throw Error("Source must be an object, null or undefined")
+  }
 }
 
 export const _parseCustomAttributes = (

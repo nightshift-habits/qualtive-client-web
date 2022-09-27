@@ -138,6 +138,22 @@ describe("validation", () => {
         customAttributes: true,
       })
     ).toThrowError()
+
+    // Invalid source
+    expect(() =>
+      validateEntry({
+        score: 50,
+        source: "test",
+      })
+    ).toThrowError()
+    expect(() =>
+      validateEntry({
+        score: 50,
+        source: {
+          webpageUrl: ["hello"],
+        },
+      })
+    ).toThrowError()
   })
   it("should validate entry successfully", () => {
     validateEntry({
@@ -147,6 +163,13 @@ describe("validation", () => {
         id: 1,
         name: "Testsson",
         email: "dev",
+      },
+    })
+    validateEntry({
+      score: 50,
+      text: "Hello world!",
+      source: {
+        webpageUrl: "https://qualtive.io/?abc=123",
       },
     })
   })
