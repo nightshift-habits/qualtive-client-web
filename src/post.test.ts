@@ -9,6 +9,9 @@ describe("post", () => {
     user: {
       id: "ci-web",
     },
+    source: {
+      webpageUrl: "https://qualtive.io/path/?query#hash",
+    },
   }
 
   it("should handle success", async () => {

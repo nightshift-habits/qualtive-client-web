@@ -94,6 +94,9 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
         },
         locale: options?.locale || navigator.language || undefined,
       },
+      source: {
+        webpageUrl: entry.source?.webpageUrl || window.location.href,
+      },
     }
 
     let url = options?._remoteUrl || "https://user-api.qualtive.io"
