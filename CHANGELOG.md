@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.11.0
+
+### Added
+
+- Includes URL of the webpage feedback was posted from. Defaults to the browser location href, but can be overwritten if needed.
+
 ## 1.10.0
 
 ### Added
