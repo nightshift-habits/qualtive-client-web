@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.11.1
+
+### Fixed
+
+- Export of get methods directly from package index.
+
 ## 1.11.0
 
 ### Added
