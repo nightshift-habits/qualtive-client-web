@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.12.0
+
+This release adds partly support for running in Node 18 without any additional configuration.
+
+### Added
+
+- Support for fetch as a network layer. Automatically chosen based on runtime support.
+- Option to force a specific network layer or a custom networking function.
+
+### Fixed
+
+- All errors are now thrown as an Error instead of a string in sometimes.
+
 ## 1.11.1
 
 ### Fixed
