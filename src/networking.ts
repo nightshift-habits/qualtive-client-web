@@ -53,6 +53,12 @@ const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
   new Promise((resolve, reject) => {
     const request = new XMLHttpRequest()
     request.onload = () => {
+      switch (request.status) {
+        case 404:
+          reject("NotFound")
+          return
+      }
+
       let json: unknown
       try {
         json = JSON.parse(request.responseText)
@@ -87,6 +93,11 @@ const handleFetch: RequestCaller = async (method, url, headers, body) => {
     headers,
     body: body ? JSON.stringify(body) : undefined,
   })
+
+  switch (response.status) {
+    case 404:
+      throw "NotFound"
+  }
 
   let json: unknown
   try {
