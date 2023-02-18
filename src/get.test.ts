@@ -14,7 +14,7 @@ describe("get", () => {
     try {
       await getQuestion("ci-test/does-not-exists")
     } catch (error) {
-      expect(error).toEqual("NotFound")
+      expect((error as Error).message).toEqual("NotFound")
       return
     }
     fail("did not throw error")

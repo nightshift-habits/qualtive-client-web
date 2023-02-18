@@ -55,7 +55,7 @@ const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
     request.onload = () => {
       switch (request.status) {
         case 404:
-          reject("NotFound")
+          reject(new Error("NotFound"))
           return
       }
 
@@ -72,7 +72,7 @@ const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
       }
 
       if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || _localized("ops.fallback-error"))
+        reject(new Error((json as { reason?: string }).reason || _localized("ops.fallback-error")))
       } else {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         resolve(json as any)
@@ -96,7 +96,7 @@ const handleFetch: RequestCaller = async (method, url, headers, body) => {
 
   switch (response.status) {
     case 404:
-      throw "NotFound"
+      throw new Error("NotFound")
   }
 
   let json: unknown
@@ -110,7 +110,7 @@ const handleFetch: RequestCaller = async (method, url, headers, body) => {
   }
 
   if (response.status >= 400) {
-    throw (json as { reason?: string }).reason || _localized("ops.fallback-error")
+    throw new Error((json as { reason?: string }).reason || _localized("ops.fallback-error"))
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
