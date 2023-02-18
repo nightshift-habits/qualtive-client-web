@@ -27,7 +27,11 @@ export const _fetch = <T>(options: Options): Promise<T> => {
 
 const getCaller = (): RequestCaller | null => {
   if (typeof window !== "undefined") {
+    if (typeof window.fetch !== "undefined") return handleFetch
     if (typeof window.XMLHttpRequest !== "undefined") return handleXMLHttpRequest
+  }
+  if (typeof global !== "undefined") {
+    if (typeof global.fetch !== "undefined") return handleFetch
   }
   return null
 }
@@ -70,3 +74,28 @@ const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
 
     request.send(body ? JSON.stringify(body) : undefined)
   })
+
+const handleFetch: RequestCaller = async (method, url, headers, body) => {
+  const response = await fetch(url, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
+  })
+
+  let json: unknown
+  try {
+    json = await response.json()
+  } catch (error) {
+    if (response.status >= 400) {
+      throw new Error(_localized("ops.fallback-error"))
+    }
+    throw error
+  }
+
+  if (response.status >= 400) {
+    throw (json as { reason?: string }).reason || _localized("ops.fallback-error")
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return json as any
+}
