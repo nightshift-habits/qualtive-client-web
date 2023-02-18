@@ -1,8 +1,8 @@
 import { Entry, _Options, EntryReference } from "./model"
 import { validateEntry } from "./entry"
 import { _clientId, _hasTouch } from "./client"
-import { _localized } from "./localized"
 import { _parseCollection } from "./collection"
+import { _fetch } from "./networking"
 
 /**
  * Optional options to use when posting feedback using custom UI.
@@ -16,96 +16,67 @@ export type PostOptions = _Options
  * @param options Optional options for posting.
  * @returns Promise<EntryReference>
  */
-export const post = (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
-  return new Promise((resolve, reject) => {
-    let containerId: string, questionId: string
-    try {
-      const collectionComponents = _parseCollection(collection)
-      containerId = collectionComponents[0]
-      questionId = collectionComponents[1]
+export const post = async (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
+  const collectionComponents = _parseCollection(collection)
+  const containerId = collectionComponents[0]
+  const questionId = collectionComponents[1]
 
-      validateEntry(entry)
-    } catch (error) {
-      return void reject(error)
+  validateEntry(entry)
+
+  const content = entry.content || []
+  if (content.length == 0) {
+    if (typeof entry.score === "number") {
+      content.push({
+        type: "score",
+        value: entry.score,
+        scoreType: "smilies5",
+        leadingText: null,
+        trailingText: null,
+      })
     }
-
-    const request = new XMLHttpRequest()
-    request.onload = () => {
-      let json: unknown
-      try {
-        json = JSON.parse(request.responseText)
-      } catch (error) {
-        if (request.status >= 400) {
-          return void reject(new Error(_localized("ops.fallback-error")))
-        } else {
-          return void reject(error)
-        }
-      }
-
-      if (request.status >= 400) {
-        reject((json as { reason?: string }).reason || _localized("ops.fallback-error"))
-      } else {
-        resolve(json as EntryReference)
-      }
+    if (typeof entry.text === "string") {
+      content.push({
+        type: "text",
+        value: entry.text,
+      })
     }
-    request.onerror = () => reject(new Error(request.statusText || _localized("ops.fallback-error")))
+  }
 
-    const content = entry.content || []
-    if (content.length == 0) {
-      if (typeof entry.score === "number") {
-        content.push({
-          type: "score",
-          value: entry.score,
-          scoreType: "smilies5",
-          leadingText: null,
-          trailingText: null,
-        })
-      }
-      if (typeof entry.text === "string") {
-        content.push({
-          type: "text",
-          value: entry.text,
-        })
-      }
-    }
-
-    const body = {
-      questionId,
-      content,
-      user: {
-        id: entry.user?.id?.toString(),
-        name: entry.user?.name,
-        email: entry.user?.email,
-        clientId: _clientId(),
+  const body = {
+    questionId,
+    content,
+    user: {
+      id: entry.user?.id?.toString(),
+      name: entry.user?.name,
+      email: entry.user?.email,
+      clientId: _clientId(),
+    },
+    attributes: entry.customAttributes,
+    attributeHints: {
+      clientLibrary: "web",
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      hasTouch: _hasTouch(),
+      screenSize: {
+        width: window.screen.width,
+        height: window.screen.height,
       },
-      attributes: entry.customAttributes,
-      attributeHints: {
-        clientLibrary: "web",
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        hasTouch: _hasTouch(),
-        screenSize: {
-          width: window.screen.width,
-          height: window.screen.height,
-        },
-        windowSize: {
-          width: window.innerWidth,
-          height: window.innerHeight,
-        },
-        locale: options?.locale || navigator.language || undefined,
+      windowSize: {
+        width: window.innerWidth,
+        height: window.innerHeight,
       },
-      source: {
-        webpageUrl: entry.source?.webpageUrl || window.location.href,
-      },
-    }
+      locale: options?.locale || navigator.language || undefined,
+    },
+    source: {
+      webpageUrl: entry.source?.webpageUrl || window.location.href,
+    },
+  }
 
-    let url = options?._remoteUrl || "https://user-api.qualtive.io"
-    url += "/feedback/entries/"
-    request.open("POST", url, true)
-
-    request.setRequestHeader("Content-Type", "application/json; charset=utf-8")
-    request.setRequestHeader("X-Container", containerId)
-
-    request.send(JSON.stringify(body))
+  return await _fetch({
+    ...(options || {}),
+    method: "POST",
+    path: "/feedback/entries/",
+    containerId,
+    body,
   })
 }
