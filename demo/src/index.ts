@@ -10,6 +10,7 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
       darkMode: (document.getElementById("darkmode") as HTMLSelectElement).value as "auto",
       supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
       locale: (document.getElementById("locale") as HTMLInputElement).value,
+      networking: (document.getElementById("networking") as HTMLSelectElement).value as "auto",
     })
   }
 })

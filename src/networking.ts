@@ -1,5 +1,5 @@
 import { _locale, _localized } from "./localized"
-import { _Options } from "./model"
+import { RequestCaller, _Options } from "./model"
 
 type Options = _Options & {
   method: "GET" | "POST" | "PUT" | "DELETE"
@@ -9,8 +9,8 @@ type Options = _Options & {
 }
 
 export const _fetch = <T>(options: Options): Promise<T> => {
-  const caller = getCaller()
-  if (!caller) return Promise.reject(new Error("Unsupported environment."))
+  const caller = getCaller(options)
+  if (!caller) return Promise.reject(new Error("Unsupported networking environment."))
 
   let url = options._remoteUrl || "https://user-api.qualtive.io"
   url += options.path
@@ -25,7 +25,20 @@ export const _fetch = <T>(options: Options): Promise<T> => {
   return caller(options.method, url, headers, options.body)
 }
 
-const getCaller = (): RequestCaller | null => {
+const getCaller = (options: Options): RequestCaller | null => {
+  if (options.networking && options.networking != "auto") {
+    if (typeof options.networking === "function") {
+      return options.networking
+    }
+    switch (options.networking) {
+      case "fetch":
+        return handleFetch
+      case "xmlhttprequest":
+        return handleXMLHttpRequest
+      default:
+        return null
+    }
+  }
   if (typeof window !== "undefined") {
     if (typeof window.fetch !== "undefined") return handleFetch
     if (typeof window.XMLHttpRequest !== "undefined") return handleXMLHttpRequest
@@ -35,13 +48,6 @@ const getCaller = (): RequestCaller | null => {
   }
   return null
 }
-
-type RequestCaller = <T>(
-  method: string,
-  url: string,
-  headers: { [key: string]: string },
-  body: unknown | undefined
-) => Promise<T>
 
 const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
   new Promise((resolve, reject) => {

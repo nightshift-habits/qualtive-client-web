@@ -268,7 +268,27 @@ export type _Options = {
    */
   locale?: string
   /**
+   * Method to use for networking.
+   *
+   * Possible values:
+   * - "auto", undefined, null: The package will automatically choose the preferred method of doing networking.
+   * - "fetch": The Fetch API will be used: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+   * - "xmlhttprequest": The XMLHttpRequest API will be used: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+   * - a function: Allows you to handle request yourself. See RequestCaller-type for variables and expected result.
+   */
+  networking?: "auto" | "fetch" | "xmlhttprequest" | RequestCaller | null
+  /**
    * The remote url to post feedback too. Must include scheme and host. For debug usages only.
    */
   _remoteUrl?: string | null
 }
+
+/**
+ * Interface for handling custom networking. See _Options.
+ */
+export type RequestCaller = <T>(
+  method: string,
+  url: string,
+  headers: { [key: string]: string },
+  body: unknown | undefined
+) => Promise<T>
