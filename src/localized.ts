@@ -2,7 +2,7 @@ import { _Options } from "./model"
 import { strings } from "./strings"
 
 export const _localized = (key: string, locale?: string): string => {
-  locale = (locale || navigator.language || "en-us").replace(/_/g, "-").toLowerCase()
+  locale = (locale || navigator?.language || "en-us").replace(/_/g, "-").toLowerCase()
 
   const directFind = strings[locale]
   if (directFind) {
@@ -27,4 +27,4 @@ export const _localized = (key: string, locale?: string): string => {
   return key
 }
 
-export const _locale = (options: _Options | undefined): string => options?.locale || navigator.language || "en-us"
+export const _locale = (options: _Options | undefined): string => options?.locale || navigator?.language || "en-us"

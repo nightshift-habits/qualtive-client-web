@@ -264,7 +264,7 @@ export type EntryReference = {
  */
 export type _Options = {
   /**
-   * The locale to use. Defaults to `navigator.language || en-us`.
+   * The locale to use. Defaults to `navigator?.language || en-us`.
    */
   locale?: string
   /**
