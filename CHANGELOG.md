@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.13.0
+
+### Added
+
+- Option for level of metadata collection.
+- Option for user tracking consent.
+
 ## 1.12.0
 
 This release adds partly support for running in Node 18 without any additional configuration.
