@@ -7,7 +7,24 @@ import { _fetch } from "./networking"
 /**
  * Optional options to use when posting feedback using custom UI.
  */
-export type PostOptions = _Options
+export type PostOptions = _Options & {
+  /**
+   * Preference of metdata collected. Defaults to "nonPersonal".
+   *
+   * Possible values:
+   * - "auto", undefined, null: Only non-personally identifiable metadata will be collected. E.g. browser.
+   * - "none": No metadata will be collected.
+   */
+  metadataCollection?: "nonPersonal" | "none" | null
+  /**
+   * Preference of if user has consented to tracking. Defaults to "granted".
+   *
+   * Possible values:
+   * - "granted", undefined, null: A unique id is stored on device to identify if the same user posts more feedback in the future.
+   * - "denied": No unique id will be stored on device.
+   */
+  userTrackingConsent?: "granted" | "denied" | null
+}
 
 /**
  * Posts a user feedback entry.
@@ -42,6 +59,45 @@ export const post = async (collection: string, entry: Entry, options?: PostOptio
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let attributeHints: any = {
+    clientLibrary: "web",
+  }
+  let source:
+    | {
+        webpageUrl?: string
+      }
+    | undefined
+  switch (options?.metadataCollection || "nonPersonal") {
+    case "nonPersonal":
+      attributeHints = {
+        ...attributeHints,
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        hasTouch: _hasTouch(),
+        screenSize: {
+          width: window.screen.width,
+          height: window.screen.height,
+        },
+        windowSize: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+        locale: options?.locale || navigator.language || undefined,
+      }
+      source = {
+        webpageUrl: entry.source?.webpageUrl || window.location.href,
+      }
+      break
+    case "none":
+      break
+    default:
+      console.warn(
+        `Qualtive: \`metadataCollection\` has a unexpected value of "${options?.metadataCollection}". Fallbacking to "none".`,
+      )
+      break
+  }
+
   const body = {
     questionId,
     content,
@@ -49,27 +105,11 @@ export const post = async (collection: string, entry: Entry, options?: PostOptio
       id: entry.user?.id?.toString(),
       name: entry.user?.name,
       email: entry.user?.email,
-      clientId: _clientId(),
+      clientId: _clientId(options),
     },
     attributes: entry.customAttributes,
-    attributeHints: {
-      clientLibrary: "web",
-      userAgent: navigator.userAgent,
-      platform: navigator.platform,
-      hasTouch: _hasTouch(),
-      screenSize: {
-        width: window.screen.width,
-        height: window.screen.height,
-      },
-      windowSize: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
-      locale: options?.locale || navigator.language || undefined,
-    },
-    source: {
-      webpageUrl: entry.source?.webpageUrl || window.location.href,
-    },
+    attributeHints,
+    source,
   }
 
   return await _fetch({

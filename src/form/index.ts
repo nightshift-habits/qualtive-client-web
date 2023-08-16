@@ -203,23 +203,27 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
     sendStatusTextElement.textContent = _localized("form.sending", options?.locale)
 
-    post(collection, {
-      content: content.map((x) => {
-        switch (x.type) {
-          case "attachments":
-            return {
-              type: "attachments",
-              values: x.values.map((y) => ({
-                id: y.id,
-              })),
-            }
-          default:
-            return x
-        }
-      }),
-      user: options?.user,
-      customAttributes: options?.customAttributes,
-    })
+    post(
+      collection,
+      {
+        content: content.map((x) => {
+          switch (x.type) {
+            case "attachments":
+              return {
+                type: "attachments",
+                values: x.values.map((y) => ({
+                  id: y.id,
+                })),
+              }
+            default:
+              return x
+          }
+        }),
+        user: options?.user,
+        customAttributes: options?.customAttributes,
+      },
+      options,
+    )
       .then((newEntryReference) => {
         entryReference = newEntryReference
 

@@ -11,6 +11,8 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
       supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
       locale: (document.getElementById("locale") as HTMLInputElement).value,
       networking: (document.getElementById("networking") as HTMLSelectElement).value as "auto",
+      metadataCollection: (document.getElementById("metadataCollection") as HTMLSelectElement).value as "nonPersonal",
+      userTrackingConsent: (document.getElementById("userTrackingConsent") as HTMLSelectElement).value as "granted",
     })
   }
 })

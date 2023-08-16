@@ -1,9 +1,10 @@
-import { EntryReference, _Options } from "../model"
+import { EntryReference } from "../model"
+import { type PostOptions } from "../post"
 
 /**
  * Optional options to use when posting feedback using built in form-UI.
  */
-export type FormOptions = _Options & {
+export type FormOptions = PostOptions & {
   /**
    * Localized form title to show on top of the form. Default is `"Leave feedback"`.
    */
