@@ -6,7 +6,7 @@ import { _constants } from "./constants"
 export const _renderInputAttachments = (
   context: _InputRenderingContext,
   questionContent: QuestionContentAttachments,
-  entryContent: EntryContentAttachments
+  entryContent: EntryContentAttachments,
 ): void => {
   // Container
   const attachmentsElement = document.createElement("div")

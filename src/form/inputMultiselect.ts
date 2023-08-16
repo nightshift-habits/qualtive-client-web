@@ -5,7 +5,7 @@ import { _constants } from "./constants"
 export const _renderInputMultiselect = (
   context: _InputRenderingContext,
   questionContent: QuestionContentMultiselect,
-  entryContent: EntryContentMultiselect
+  entryContent: EntryContentMultiselect,
 ): void => {
   // Container
   const selectContainerElement = document.createElement("div")

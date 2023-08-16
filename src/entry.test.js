@@ -14,27 +14,27 @@ describe("validation", () => {
     expect(() =>
       validateEntry({
         score: -1,
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
         score: 101,
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
         score: "50",
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
         score: true,
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
         score: {},
-      })
+      }),
     ).toThrowError()
 
     // Invalid text
@@ -42,19 +42,19 @@ describe("validation", () => {
       validateEntry({
         score: 50,
         text: true,
-      })
+      }),
     ).toThrowError()
 
     // Invalid content
     expect(() =>
       validateEntry({
         content: null,
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
         content: [],
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -64,7 +64,7 @@ describe("validation", () => {
             value: -1,
           },
         ],
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -74,7 +74,7 @@ describe("validation", () => {
             value: 101,
           },
         ],
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -84,7 +84,7 @@ describe("validation", () => {
             value: "50",
           },
         ],
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -94,7 +94,7 @@ describe("validation", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).toThrowError()
 
     // Invalid user
@@ -102,7 +102,7 @@ describe("validation", () => {
       validateEntry({
         score: 50,
         user: true,
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -110,7 +110,7 @@ describe("validation", () => {
         user: {
           id: true,
         },
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -119,7 +119,7 @@ describe("validation", () => {
           id: 1,
           name: 123,
         },
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -128,7 +128,7 @@ describe("validation", () => {
           id: 1,
           email: 123,
         },
-      })
+      }),
     ).toThrowError()
 
     // Invalid custom attributes
@@ -136,7 +136,7 @@ describe("validation", () => {
       validateEntry({
         score: 50,
         customAttributes: true,
-      })
+      }),
     ).toThrowError()
 
     // Invalid source
@@ -144,7 +144,7 @@ describe("validation", () => {
       validateEntry({
         score: 50,
         source: "test",
-      })
+      }),
     ).toThrowError()
     expect(() =>
       validateEntry({
@@ -152,7 +152,7 @@ describe("validation", () => {
         source: {
           webpageUrl: ["hello"],
         },
-      })
+      }),
     ).toThrowError()
   })
   it("should validate entry successfully", () => {
@@ -180,7 +180,7 @@ describe("validation", () => {
         obj: { abc: 123 },
         arr: [456],
         s: "Hello",
-      })
+      }),
     ).toThrowError()
   })
   it("should parse custom attributes successfully", () => {

@@ -6,7 +6,7 @@ import { _localized } from "../localized"
 export const _renderInputSelect = (
   context: _InputRenderingContext,
   questionContent: QuestionContentSelect,
-  entryContent: EntryContentSelect
+  entryContent: EntryContentSelect,
 ): void => {
   const selectContainerElement = document.createElement("div")
   selectContainerElement.className = "_q-options _q-select"

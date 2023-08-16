@@ -6,7 +6,7 @@ import { _constants } from "./constants"
 export const _renderInputScore = (
   context: _InputRenderingContext,
   questionContent: QuestionContentScore,
-  entryContent: EntryContentScore
+  entryContent: EntryContentScore,
 ): void => {
   const scoresElement = document.createElement("ul")
 

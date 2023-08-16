@@ -290,5 +290,5 @@ export type RequestCaller = <T>(
   method: string,
   url: string,
   headers: { [key: string]: string },
-  body: unknown | undefined
+  body: unknown | undefined,
 ) => Promise<T>

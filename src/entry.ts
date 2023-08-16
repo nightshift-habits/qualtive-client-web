@@ -86,7 +86,7 @@ export const validateEntry = (entry: Entry): void => {
 }
 
 export const _parseCustomAttributes = (
-  attributes: { [key: string]: string | number | boolean | null } | null | undefined
+  attributes: { [key: string]: string | number | boolean | null } | null | undefined,
 ): { [key: string]: string } => {
   const result: { [key: string]: string } = {}
   if (!attributes) return result

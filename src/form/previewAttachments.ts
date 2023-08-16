@@ -4,7 +4,7 @@ import { EntryContentAttachments } from "../model"
 
 export const _renderPreviewAttachments = (
   context: _PreviewRenderingContext,
-  content: EntryContentAttachments
+  content: EntryContentAttachments,
 ): void => {
   const divElement = document.createElement("div")
   divElement.className = "_q-attached"

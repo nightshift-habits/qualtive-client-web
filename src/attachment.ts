@@ -22,7 +22,7 @@ export const uploadAttachment = (
   containerId: string,
   contentType: AttachmentContentType,
   data: File,
-  options?: UploadOptions
+  options?: UploadOptions,
 ): Promise<Attachment> => {
   return new Promise((resolve, reject) => {
     const initRequest = new XMLHttpRequest()
@@ -68,7 +68,7 @@ export const uploadAttachment = (
     initRequest.send(
       JSON.stringify({
         contentType,
-      })
+      }),
     )
   })
 }

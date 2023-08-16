@@ -4,7 +4,7 @@ import { _constants } from "./constants"
 
 export const _renderPreviewMultiselect = (
   context: _PreviewRenderingContext,
-  content: EntryContentMultiselect
+  content: EntryContentMultiselect,
 ): void => {
   content.values.forEach((value) => {
     const divElement = document.createElement("div")
