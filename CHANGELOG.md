@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.14.0
+
+### Added
+
+- Support for non-white label workspaces/containers.
+
 ## 1.13.0
 
 ### Added
