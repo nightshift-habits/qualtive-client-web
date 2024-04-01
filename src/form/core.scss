@@ -30,7 +30,12 @@
     appearance: none;
     -webkit-appearance: none;
     box-sizing: border-box;
-    font-family: QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-family:
+      QF,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Helvetica Neue",
+      sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -46,7 +51,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: transform 0.25s, opacity 0.25s;
+  transition:
+    transform 0.25s,
+    opacity 0.25s;
   z-index: 99999998;
   &._q-out {
     transform: translate(-50%, -50%) scale(0.9);
@@ -642,6 +649,22 @@
     }
     ._q-cancel {
       opacity: 0 !important;
+    }
+  }
+
+  ._q-qlogo {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    font-size: 12px;
+    &:link,
+    &:visited {
+      color: #000000;
+    }
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

@@ -427,6 +427,17 @@ export const present = (collection: string, options?: FormOptions): Form => {
           }
         })
         .filter((x): x is EntryContent => !!x)
+
+      if (!_question.container.isWhiteLabel) {
+        const qualtiveLink = document.createElement("a")
+        qualtiveLink.setAttribute("class", "_q-qlogo")
+        qualtiveLink.setAttribute("href", "https://qualtive.io/")
+        qualtiveLink.setAttribute("target", "_blank")
+        qualtiveLink.setAttribute("rel", "noopener")
+        qualtiveLink.innerHTML =
+          "<span>" + _localized("form.strengthen", options?.locale) + "</span>" + _constants.qualtive
+        containerElement.appendChild(qualtiveLink)
+      }
     })
     .catch(() => {
       sendStatusTextElement.textContent = _localized("form.error", options?.locale)

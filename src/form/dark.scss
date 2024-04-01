@@ -154,6 +154,18 @@
       }
     }
   }
+
+  ._q-qlogo {
+    &:link,
+    &:visited {
+      color: #fff;
+    }
+    svg {
+      path[fill] {
+        fill: #fff;
+      }
+    }
+  }
 }
 
 #_q-drop-indication {

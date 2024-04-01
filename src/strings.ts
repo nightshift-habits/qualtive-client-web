@@ -22,6 +22,7 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.image.index": "Image ",
     "form.choose": "Choose…",
     "form.other": "Other:",
+    "form.strengthen": "Strengthen by ",
   },
   "sv-se": {
     "ops.fallback-error": "Kunde inte slutföra åtgärd.",
@@ -46,5 +47,6 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.image.index": "Bild ",
     "form.choose": "Välj…",
     "form.other": "Annat:",
+    "form.strengthen": "Förstärkt med ",
   },
 } as { [key: string]: { [key: string]: string } }

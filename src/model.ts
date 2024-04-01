@@ -21,6 +21,18 @@ export type Question = {
    * Question content. The content and structure of the question to present til the user.
    */
   content: QuestionContent[]
+
+  /**
+   * Details about the container the question belongs to.
+   */
+  container: QuestionContainer
+}
+
+export type QuestionContainer = {
+  /**
+   * `true` if the container is allowed to hide the Qualtive-branding, else, `false` meaning Qualtive branding must be shown.
+   */
+  isWhiteLabel: boolean
 }
 
 /**
