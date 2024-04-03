@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.14.1
+
+### Fix
+
+- Previewing user submitted text not sanitized
+
 ## 1.14.0
 
 ### Added
