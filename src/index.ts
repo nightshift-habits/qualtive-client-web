@@ -1,3 +1,4 @@
+export * from "./attachment"
 export * from "./model"
 export * from "./get"
 export * from "./post"
