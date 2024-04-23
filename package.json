@@ -12,7 +12,7 @@
     "build:css": "sh ./scripts/build-css.sh",
     "build": "npm run build:css && rm -rf dist && tsc -p tsconfig.prod.json",
     "package": "npm run build && npm publish",
-    "mini": "npm run build && pac dist/index.js mini.js && uglifyjs --compress --mangle --output mini.js -- mini.js"
+    "mini": "rm -rf dist && npm run build:css && node ./scripts/build-mini.mjs && uglifyjs --compress --mangle --output mini.js -- mini.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "@types/jest": "^29.0.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
+    "bunchee": "^5.1.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
