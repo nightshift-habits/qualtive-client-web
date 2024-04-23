@@ -69,7 +69,9 @@
   button {
     background: 0 0;
     border: none;
+    border-radius: 0;
     cursor: pointer !important;
+    display: inline;
   }
   button * {
     cursor: pointer !important;
