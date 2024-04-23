@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.14.2
+
+### Improved
+
+- Removed all uses of async/await.
+- Minified export now only exposes public properties.
+
+### Fix
+
+- Missing export of attachments when using package.
+- Fix button styles could sometimes be overwritten by parent website.
+
 ## 1.14.1
 
 ### Fix
