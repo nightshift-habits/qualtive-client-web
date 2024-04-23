@@ -33,7 +33,7 @@ export type PostOptions = _Options & {
  * @param options Optional options for posting.
  * @returns Promise<EntryReference>
  */
-export const post = async (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
+export const post = (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
   const collectionComponents = _parseCollection(collection)
   const containerId = collectionComponents[0]
   const questionId = collectionComponents[1]
@@ -112,7 +112,7 @@ export const post = async (collection: string, entry: Entry, options?: PostOptio
     source,
   }
 
-  return await _fetch({
+  return _fetch({
     ...(options || {}),
     method: "POST",
     path: "/feedback/entries/",

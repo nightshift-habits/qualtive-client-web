@@ -87,32 +87,31 @@ const handleXMLHttpRequest: RequestCaller = (method, url, headers, body) =>
     request.send(body ? JSON.stringify(body) : undefined)
   })
 
-const handleFetch: RequestCaller = async (method, url, headers, body) => {
-  const response = await fetch(url, {
+const handleFetch: RequestCaller = (method, url, headers, body) => {
+  return fetch(url, {
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined,
   })
+    .then((response) => {
+      switch (response.status) {
+        case 404:
+          throw new Error("NotFound")
+      }
 
-  switch (response.status) {
-    case 404:
-      throw new Error("NotFound")
-  }
-
-  let json: unknown
-  try {
-    json = await response.json()
-  } catch (error) {
-    if (response.status >= 400) {
-      throw new Error(_localized("ops.fallback-error"))
-    }
-    throw error
-  }
-
-  if (response.status >= 400) {
-    throw new Error((json as { reason?: string }).reason || _localized("ops.fallback-error"))
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return json as any
+      try {
+        return Promise.all([response, response.json()])
+      } catch (error) {
+        if (response.status >= 400) {
+          throw new Error(_localized("ops.fallback-error"))
+        }
+        throw error
+      }
+    })
+    .then(([response, json]) => {
+      if (response.status >= 400) {
+        throw new Error((json as { reason?: string }).reason || _localized("ops.fallback-error"))
+      }
+      return json
+    })
 }

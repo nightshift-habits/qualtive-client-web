@@ -13,12 +13,12 @@ export type GetQuestionOptions = _Options
  * @param options Optional options.
  * @returns Promise<Question>
  */
-export const getQuestion = async (collection: string, options?: GetQuestionOptions): Promise<Question> => {
+export const getQuestion = (collection: string, options?: GetQuestionOptions): Promise<Question> => {
   const collectionComponents = _parseCollection(collection)
   const containerId = collectionComponents[0]
   const questionId = collectionComponents[1]
 
-  return await _fetch({
+  return _fetch({
     ...(options || {}),
     method: "GET",
     path: `/feedback/questions/${questionId}/`,
