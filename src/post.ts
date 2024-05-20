@@ -98,6 +98,13 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
       break
   }
 
+  let timeZoneIdentifier: string | null
+  try {
+    timeZoneIdentifier = Intl.DateTimeFormat().resolvedOptions().timeZone
+  } catch {
+    timeZoneIdentifier = null
+  }
+
   const body = {
     questionId,
     content,
@@ -106,6 +113,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
       name: entry.user?.name,
       email: entry.user?.email,
       clientId: _clientId(options),
+      timeZoneIdentifier,
     },
     attributes: entry.customAttributes,
     attributeHints,
