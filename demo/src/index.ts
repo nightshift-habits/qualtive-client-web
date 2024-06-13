@@ -13,6 +13,13 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
       networking: (document.getElementById("networking") as HTMLSelectElement).value as "auto",
       metadataCollection: (document.getElementById("metadataCollection") as HTMLSelectElement).value as "nonPersonal",
       userTrackingConsent: (document.getElementById("userTrackingConsent") as HTMLSelectElement).value as "granted",
+      onDismiss: (result) => {
+        if (!result) {
+          console.info("Dismissed without a posting.")
+          return
+        }
+        console.info("Dismissed with posting: ", result)
+      },
     })
   }
 })
