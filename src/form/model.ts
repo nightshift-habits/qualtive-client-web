@@ -1,4 +1,4 @@
-import { EntryReference } from "../model"
+import { EntryContent, EntryReference } from "../model"
 import { type PostOptions } from "../post"
 
 /**
@@ -54,7 +54,7 @@ export type FormOptions = PostOptions & {
   /**
    * Optional function that is called when the form is dismissed. First parameter contains the reference sent entry or null if the form was cancelled.
    */
-  onDismiss?: (entry: EntryReference | null) => void
+  onDismiss?: (entry: (EntryReference & PostedEntry) | null) => void
 }
 
 /**
@@ -65,6 +65,23 @@ export type Form = {
    * Dismisses the form.
    */
   dismiss: () => void
+}
+
+/**
+ * Result of a posted entry.
+ */
+export type PostedEntry = {
+  /**
+   * Identifier for the posted entry.
+   *
+   * Posted entries can be viewed in admin following this pattern: https://qualtive.app/{container-id}/{entry-id}/
+   */
+  id: number
+
+  /**
+   * Entry content.
+   */
+  content: EntryContent[]
 }
 
 export type _InputRenderingContext = {

@@ -25,7 +25,7 @@ import { _renderPreviewText } from "./previewText"
 import { _renderPreviewSelect } from "./previewSelect"
 import { _renderPreviewMultiselect } from "./previewMultiselect"
 import { _renderPreviewAttachments } from "./previewAttachments"
-import { Form, FormOptions, _InputRenderingContext, _PreviewRenderingContext } from "./model"
+import { Form, FormOptions, PostedEntry, _InputRenderingContext, _PreviewRenderingContext } from "./model"
 
 declare global {
   interface Window {
@@ -66,7 +66,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
     }
   }
 
-  let entryReference: EntryReference | null
+  let postedEntry: (EntryReference & PostedEntry) | null
 
   let content: EntryContent[] = []
 
@@ -194,7 +194,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
       styleElement.parentElement?.removeChild(styleElement)
     }, 500)
 
-    options?.onDismiss?.(entryReference)
+    options?.onDismiss?.(postedEntry)
   }
   const send = (): void => {
     if (containerElement.className.indexOf("_q-sending") != -1) return
@@ -225,7 +225,10 @@ export const present = (collection: string, options?: FormOptions): Form => {
       options,
     )
       .then((newEntryReference) => {
-        entryReference = newEntryReference
+        postedEntry = {
+          id: newEntryReference.id,
+          content,
+        }
 
         containerElement.className = containerElement.className.replace("_q-sending", "_q-sent")
 
