@@ -3,6 +3,7 @@ coverage/
 demo/
 node_modules/
 src/
+scripts/
 .vscode/
 .babelrc
 .eslintignore
