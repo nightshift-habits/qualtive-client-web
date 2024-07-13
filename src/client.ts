@@ -1,6 +1,6 @@
 import { type PostOptions } from "./post"
 
-export const _clientId = (options: PostOptions | undefined): string => {
+export const _clientId = (options: PostOptions | undefined): string | undefined => {
   const rand = (length: number): string => {
     let result = ""
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -9,13 +9,6 @@ export const _clientId = (options: PostOptions | undefined): string => {
       result += characters.charAt(Math.floor(Math.random() * charactersLength))
     }
     return result
-  }
-
-  // Stored in memory?
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const globalClientId = (window as any)?._qualtiveCID
-  if (typeof globalClientId === "string") {
-    return globalClientId
   }
 
   // Consent?
@@ -48,17 +41,13 @@ export const _clientId = (options: PostOptions | undefined): string => {
       }
       return clientId
     }
-    case "denied": {
-      const clientId = rand(14)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      window && ((window as any)._qualtiveCID = clientId)
-      return clientId
-    }
+    case "denied":
+      return undefined
     default:
       console.warn(
         `Qualtive: \`userTrackingConsent\` has a unexpected value of "${options?.userTrackingConsent}". Fallbacking to "denied".`,
       )
-      return rand(16)
+      return undefined
   }
 }
 
