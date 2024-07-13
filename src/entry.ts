@@ -65,8 +65,14 @@ export const validateEntry = (entry: Entry): void => {
   }
 
   // User
-  if (typeof entry.user != "undefined" && entry.user != null) {
-    if (typeof entry.user.id != "string" && typeof entry.user.id != "number")
+  if (entry.user !== undefined && entry.user !== null) {
+    if (typeof entry.user !== "object") throw Error("User must be an object")
+    if (
+      entry.user.id !== undefined &&
+      entry.user.id !== null &&
+      typeof entry.user.id != "string" &&
+      typeof entry.user.id != "number"
+    )
       throw Error("User id must be string or number")
     if (entry.user.name && typeof entry.user.name != "string") throw Error("User name must be string")
     if (entry.user.email && typeof entry.user.email != "string") throw Error("User email must be string")
