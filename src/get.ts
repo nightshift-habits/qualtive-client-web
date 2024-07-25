@@ -30,7 +30,9 @@ export const getQuestion = (collection: string, options?: GetQuestionOptions): P
 /**
  * Optional options to use when fetching feedback question using custom UI.
  */
-export type GetEnquiryOptions = _Options
+export type GetEnquiryOptions = _Options & {
+  previewToken?: string | null
+}
 
 /**
  * Fetches a enquiry and it's structure.
@@ -41,10 +43,15 @@ export type GetEnquiryOptions = _Options
 export const getEnquiry = (collection: string, options?: GetEnquiryOptions): Promise<Enquiry> => {
   const [containerId, enquiryId] = _parseCollection(collection)
 
+  let path = `/feedback/enquiries/${enquiryId}/`
+  if (options?.previewToken) {
+    path += "?previewToken=" + options.previewToken
+  }
+
   return _fetch({
     ...(options || {}),
     method: "GET",
-    path: `/feedback/enquiries/${enquiryId}/`,
+    path,
     containerId,
   })
 }
