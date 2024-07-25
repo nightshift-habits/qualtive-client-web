@@ -13,6 +13,7 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
       networking: (document.getElementById("networking") as HTMLSelectElement).value as "auto",
       metadataCollection: (document.getElementById("metadataCollection") as HTMLSelectElement).value as "nonPersonal",
       userTrackingConsent: (document.getElementById("userTrackingConsent") as HTMLSelectElement).value as "granted",
+      previewToken: (document.getElementById("previewToken") as HTMLInputElement).value || null,
       onDismiss: (result) => {
         if (!result) {
           console.info("Dismissed without a posting.")
