@@ -28,7 +28,7 @@ export type PostOptions = _Options & {
 
 /**
  * Posts a user feedback entry.
- * @param collection Collection to post to. Formatted as `container-id/question-id`. Required.
+ * @param collection Collection to post to. Formatted as `container-id/enquiry-id-or-slug`. Required.
  * @param entry User entry to post. Required.
  * @param options Optional options for posting.
  * @returns Promise<EntryReference>
@@ -36,7 +36,7 @@ export type PostOptions = _Options & {
 export const post = (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
   const collectionComponents = _parseCollection(collection)
   const containerId = collectionComponents[0]
-  const questionId = collectionComponents[1]
+  const enquiryId = collectionComponents[1]
 
   validateEntry(entry)
 
@@ -106,7 +106,7 @@ export const post = (collection: string, entry: Entry, options?: PostOptions): P
   }
 
   const body = {
-    questionId,
+    questionId: enquiryId,
     content,
     user: {
       id: entry.user?.id?.toString(),
