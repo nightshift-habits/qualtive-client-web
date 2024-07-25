@@ -1,5 +1,5 @@
-import {
-  Question,
+import type {
+  Enquiry,
   EntryContent,
   EntryReference,
   EntryContentScore,
@@ -9,7 +9,7 @@ import {
   EntryContentAttachments,
 } from "../model"
 import { _parseCollection } from "../collection"
-import { getQuestion } from "../get"
+import { getEnquiry } from "../get"
 import { _localized } from "../localized"
 import { post } from "../post"
 import { _renderInputTitle } from "./inputTitle"
@@ -41,18 +41,18 @@ declare global {
 
 /**
  * Posts a user feedback entry.
- * @param collection Collection to post to. Formatted as `container-id/question-id`. Required.
+ * @param collection Collection to post to. Formatted as `container-id/enquiry-id-or-slug`. Required.
  * @param options Optional options.
  * @returns Form. The presented form.
  */
 export const present = (collection: string, options?: FormOptions): Form => {
-  const [containerId, questionId] = _parseCollection(collection)
+  const [containerId, enquiryId] = _parseCollection(collection)
 
   // Native app takeover?
   if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.qualtive) {
     window.webkit.messageHandlers.qualtive
       .postMessage({
-        collection: [containerId, questionId],
+        collection: [containerId, enquiryId],
       })
       .catch((error) => {
         if (!`${error}`.includes("CancellationError")) {
@@ -307,15 +307,15 @@ export const present = (collection: string, options?: FormOptions): Form => {
   sendButtonElement.onclick = send
   closeElement.onclick = dismiss
 
-  // Question content
+  // Enquiry content
 
-  let question: Question | null
-  let hasRenderedQuestion = false
+  let enquiry: Enquiry | null
+  let hasRenderedEnquiry = false
 
-  const renderQuestionContent = () => {
-    hasRenderedQuestion = true
+  const renderEnquiryContent = () => {
+    hasRenderedEnquiry = true
 
-    if (question) {
+    if (enquiry) {
       const renderingContext: _InputRenderingContext = {
         containerId,
         containerElement,
@@ -327,30 +327,40 @@ export const present = (collection: string, options?: FormOptions): Form => {
       }
 
       const mainTitleElement = document.createElement("p")
-      mainTitleElement.textContent = question.name
+      mainTitleElement.textContent = enquiry.name
       contentElement.appendChild(mainTitleElement)
 
-      question.content.forEach((questionContent, contentIndex) => {
-        switch (questionContent.type) {
-          case "title":
-            _renderInputTitle(renderingContext, questionContent)
-            break
-          case "score":
-            _renderInputScore(renderingContext, questionContent, content[contentIndex] as EntryContentScore)
-            break
-          case "text":
-            _renderInputText(renderingContext, questionContent, content[contentIndex] as EntryContentText)
-            break
-          case "select":
-            _renderInputSelect(renderingContext, questionContent, content[contentIndex] as EntryContentSelect)
-            break
-          case "multiselect":
-            _renderInputMultiselect(renderingContext, questionContent, content[contentIndex] as EntryContentMultiselect)
-            break
-          case "attachments":
-            _renderInputAttachments(renderingContext, questionContent, content[contentIndex] as EntryContentAttachments)
-        }
-      })
+      enquiry.pages
+        .flatMap((x) => x.content)
+        .forEach((enquiryContent, contentIndex) => {
+          switch (enquiryContent.type) {
+            case "title":
+              _renderInputTitle(renderingContext, enquiryContent)
+              break
+            case "score":
+              _renderInputScore(renderingContext, enquiryContent, content[contentIndex] as EntryContentScore)
+              break
+            case "text":
+              _renderInputText(renderingContext, enquiryContent, content[contentIndex] as EntryContentText)
+              break
+            case "select":
+              _renderInputSelect(renderingContext, enquiryContent, content[contentIndex] as EntryContentSelect)
+              break
+            case "multiselect":
+              _renderInputMultiselect(
+                renderingContext,
+                enquiryContent,
+                content[contentIndex] as EntryContentMultiselect,
+              )
+              break
+            case "attachments":
+              _renderInputAttachments(
+                renderingContext,
+                enquiryContent,
+                content[contentIndex] as EntryContentAttachments,
+              )
+          }
+        })
     }
 
     contentElement.appendChild(sendStatusElement)
@@ -375,25 +385,25 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
   // Animate in
 
-  let canRenderQuestionDirectly = true // If we fetch the question fast we could show the form directly.
+  let canRenderEnquiryDirectly = true // If we fetch the enquiry fast we could show the form directly.
   let hasAnimateIn = false
 
   const animateInIfNeeded = () => {
     if (hasAnimateIn) return
     hasAnimateIn = true
-    canRenderQuestionDirectly = false
+    canRenderEnquiryDirectly = false
 
     setTimeout(() => {
       containerElement.className = containerElement.className.replace("_q-out", "")
       closeElement.focus()
     }, 1)
 
-    if (!hasRenderedQuestion) {
+    if (!hasRenderedEnquiry) {
       setTimeout(() => {
-        if (question) {
-          renderQuestionContent()
+        if (enquiry) {
+          renderEnquiryContent()
         } else {
-          canRenderQuestionDirectly = true
+          canRenderEnquiryDirectly = true
         }
       }, 300)
     }
@@ -401,12 +411,13 @@ export const present = (collection: string, options?: FormOptions): Form => {
 
   const initialAnimateInTimeout = setTimeout(animateInIfNeeded, 150)
 
-  // Get question and display content
+  // Get enquiry and display content
 
-  getQuestion(collection, options)
-    .then((_question) => {
-      question = _question
-      content = _question.content
+  getEnquiry(collection, options)
+    .then((_enquiry) => {
+      enquiry = _enquiry
+      content = _enquiry.pages
+        .flatMap((x) => x.content)
         .map((x): EntryContent | undefined => {
           switch (x.type) {
             case "title":
@@ -431,7 +442,7 @@ export const present = (collection: string, options?: FormOptions): Form => {
         })
         .filter((x): x is EntryContent => !!x)
 
-      if (!_question.container.isWhiteLabel) {
+      if (!_enquiry.container.isWhiteLabel) {
         const qualtiveLink = document.createElement("a")
         qualtiveLink.setAttribute("class", "_q-qlogo")
         qualtiveLink.setAttribute("href", "https://qualtive.io/")
@@ -446,9 +457,9 @@ export const present = (collection: string, options?: FormOptions): Form => {
       sendStatusTextElement.textContent = _localized("form.error", options?.locale)
     })
     .finally(() => {
-      if (canRenderQuestionDirectly) {
+      if (canRenderEnquiryDirectly) {
         clearTimeout(initialAnimateInTimeout)
-        renderQuestionContent()
+        renderEnquiryContent()
         setTimeout(animateInIfNeeded, 1)
       }
     })

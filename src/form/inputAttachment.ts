@@ -1,11 +1,11 @@
 import { _InputRenderingContext } from "./model"
 import { uploadAttachment } from "../attachment"
-import { AttachmentContentType, EntryContentAttachments, QuestionContentAttachments } from "../model"
+import { AttachmentContentType, EntryContentAttachments, EnquiryContentAttachments } from "../model"
 import { _constants } from "./constants"
 
 export const _renderInputAttachments = (
   context: _InputRenderingContext,
-  questionContent: QuestionContentAttachments,
+  enquiryContent: EnquiryContentAttachments,
   entryContent: EntryContentAttachments,
 ): void => {
   // Container

@@ -1,18 +1,18 @@
 import { _InputRenderingContext } from "./model"
-import { EntryContentSelect, QuestionContentSelect } from "../model"
+import { EntryContentSelect, EnquiryContentSelect } from "../model"
 import { _constants } from "./constants"
 import { _localized } from "../localized"
 
 export const _renderInputSelect = (
   context: _InputRenderingContext,
-  questionContent: QuestionContentSelect,
+  enquiryContent: EnquiryContentSelect,
   entryContent: EntryContentSelect,
 ): void => {
   const selectContainerElement = document.createElement("div")
   selectContainerElement.className = "_q-options _q-select"
   context.contentElement.appendChild(selectContainerElement)
 
-  if (questionContent.options.length >= 5) {
+  if (enquiryContent.options.length >= 5) {
     // Select
     const selectElement = document.createElement("select")
     selectElement.setAttribute("tabindex", context.tabIndex.toString())
@@ -33,7 +33,7 @@ export const _renderInputSelect = (
     selectElement.appendChild(dividerOptionElement)
 
     // All options
-    questionContent.options.forEach((option) => {
+    enquiryContent.options.forEach((option) => {
       const optionElement = document.createElement("option")
       optionElement.innerHTML = option
       optionElement.value = option
@@ -46,7 +46,7 @@ export const _renderInputSelect = (
 
     let otherOptionElement: HTMLOptionElement | null
     let otherTextareaElement: HTMLTextAreaElement | null
-    if (questionContent.allowsCustomInput) {
+    if (enquiryContent.allowsCustomInput) {
       otherOptionElement = document.createElement("option")
       otherOptionElement.innerHTML = _localized("form.other", context.options?.locale)
       otherOptionElement.value = "_o"
@@ -87,7 +87,7 @@ export const _renderInputSelect = (
   } else {
     // Rows
     const rows: [HTMLButtonElement, HTMLSpanElement][] = []
-    questionContent.options.forEach((option) => {
+    enquiryContent.options.forEach((option) => {
       // Button
       const buttonElement = document.createElement("button")
       buttonElement.setAttribute("tabindex", context.tabIndex.toString())

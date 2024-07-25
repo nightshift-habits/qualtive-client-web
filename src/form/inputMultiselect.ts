@@ -1,10 +1,10 @@
 import { _InputRenderingContext } from "./model"
-import { EntryContentMultiselect, QuestionContentMultiselect } from "../model"
+import { EntryContentMultiselect, EnquiryContentMultiselect } from "../model"
 import { _constants } from "./constants"
 
 export const _renderInputMultiselect = (
   context: _InputRenderingContext,
-  questionContent: QuestionContentMultiselect,
+  enquiryContent: EnquiryContentMultiselect,
   entryContent: EntryContentMultiselect,
 ): void => {
   // Container
@@ -13,7 +13,7 @@ export const _renderInputMultiselect = (
   context.contentElement.appendChild(selectContainerElement)
 
   // Buttons
-  questionContent.options.forEach((option) => {
+  enquiryContent.options.forEach((option) => {
     // Button
     const buttonElement = document.createElement("button")
     buttonElement.setAttribute("tabindex", context.tabIndex.toString())

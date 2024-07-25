@@ -1,11 +1,11 @@
 import { _InputRenderingContext } from "./model"
 import { _localized } from "../localized"
-import { EntryContentScore, QuestionContentScore } from "../model"
+import { EntryContentScore, EnquiryContentScore } from "../model"
 import { _constants } from "./constants"
 
 export const _renderInputScore = (
   context: _InputRenderingContext,
-  questionContent: QuestionContentScore,
+  enquiryContent: EnquiryContentScore,
   entryContent: EntryContentScore,
 ): void => {
   const scoresElement = document.createElement("ul")
@@ -14,12 +14,12 @@ export const _renderInputScore = (
   let optionElements: HTMLLIElement[]
   let scores: number[]
 
-  switch (questionContent.scoreType) {
+  switch (enquiryContent.scoreType) {
     case "smilies5":
     case "smilies3":
       scoresElement.setAttribute("class", "_q-score _q-smilies")
 
-      scores = questionContent.scoreType == "smilies5" ? _constants.scoresSmilies5 : _constants.scoresSmilies3
+      scores = enquiryContent.scoreType == "smilies5" ? _constants.scoresSmilies5 : _constants.scoresSmilies3
       optionElements = scores.map((score) => {
         if (score != 0) {
           const spaceElement = document.createElement("li")
@@ -68,12 +68,12 @@ export const _renderInputScore = (
 
       const trailingTextElement = document.createElement("span")
       trailingTextElement.innerText =
-        questionContent.trailingText || _localized(`form.nps.trailing`, context.options?.locale)
+        enquiryContent.trailingText || _localized(`form.nps.trailing`, context.options?.locale)
       textContainerElement.appendChild(trailingTextElement)
 
       const leadingTextElement = document.createElement("span")
       leadingTextElement.innerText =
-        questionContent.leadingText || _localized(`form.nps.leading`, context.options?.locale)
+        enquiryContent.leadingText || _localized(`form.nps.leading`, context.options?.locale)
       textContainerElement.appendChild(leadingTextElement)
 
       scores = _constants.scoresNPS
