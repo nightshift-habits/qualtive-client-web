@@ -1,6 +1,6 @@
-import { _InputRenderingContext } from "./model"
+import { _InputRenderingContext } from "./types"
 import { uploadAttachment } from "../attachment"
-import { AttachmentContentType, EntryContentAttachments, EnquiryContentAttachments } from "../model"
+import { AttachmentContentType, EntryContentAttachments, EnquiryContentAttachments } from "../types"
 import { _constants } from "./constants"
 
 export const _renderInputAttachments = (

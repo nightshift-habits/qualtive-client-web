@@ -1,5 +1,5 @@
-import { _PreviewRenderingContext } from "./model"
-import { EntryContentSelect } from "../model"
+import { _PreviewRenderingContext } from "./types"
+import { EntryContentSelect } from "../types"
 import { _constants } from "./constants"
 
 export const _renderPreviewSelect = (context: _PreviewRenderingContext, content: EntryContentSelect): void => {

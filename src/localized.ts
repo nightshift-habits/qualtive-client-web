@@ -1,4 +1,4 @@
-import { _Options } from "./model"
+import { _Options } from "./types"
 import { strings } from "./strings"
 
 export const _localized = (key: string, locale?: string): string => {

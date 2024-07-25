@@ -1,5 +1,5 @@
 import { _locale, _localized } from "./localized"
-import { RequestCaller, _Options } from "./model"
+import { RequestCaller, _Options } from "./types"
 
 type Options = _Options & {
   method: "GET" | "POST" | "PUT" | "DELETE"

@@ -1,6 +1,6 @@
-import { _PreviewRenderingContext } from "./model"
+import { _PreviewRenderingContext } from "./types"
 import { _localized } from "../localized"
-import { EntryContentScore } from "../model"
+import { EntryContentScore } from "../types"
 import { _constants } from "./constants"
 
 export const _renderPreviewScore = (context: _PreviewRenderingContext, content: EntryContentScore): void => {

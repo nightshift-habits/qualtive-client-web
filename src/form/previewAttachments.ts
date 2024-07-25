@@ -1,6 +1,6 @@
-import { _PreviewRenderingContext } from "./model"
+import { _PreviewRenderingContext } from "./types"
 import { _localized } from "../localized"
-import { EntryContentAttachments } from "../model"
+import { EntryContentAttachments } from "../types"
 
 export const _renderPreviewAttachments = (
   context: _PreviewRenderingContext,

@@ -1,5 +1,5 @@
 import { post } from "./post"
-import { Entry } from "./model"
+import { Entry } from "./types"
 
 describe("post", () => {
   const validCollection = "ci-test/web"

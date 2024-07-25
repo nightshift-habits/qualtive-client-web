@@ -1,4 +1,4 @@
-import { Entry, EntryContent } from "./model"
+import { Entry, EntryContent } from "./types"
 
 export const validateEntry = (entry: Entry): void => {
   if (typeof entry != "object" || entry == null) throw Error("Entry must be an object")

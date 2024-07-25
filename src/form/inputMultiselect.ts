@@ -1,5 +1,5 @@
-import { _InputRenderingContext } from "./model"
-import { EntryContentMultiselect, EnquiryContentMultiselect } from "../model"
+import { _InputRenderingContext } from "./types"
+import { EntryContentMultiselect, EnquiryContentMultiselect } from "../types"
 import { _constants } from "./constants"
 
 export const _renderInputMultiselect = (

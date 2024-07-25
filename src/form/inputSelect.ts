@@ -1,5 +1,5 @@
-import { _InputRenderingContext } from "./model"
-import { EntryContentSelect, EnquiryContentSelect } from "../model"
+import { _InputRenderingContext } from "./types"
+import { EntryContentSelect, EnquiryContentSelect } from "../types"
 import { _constants } from "./constants"
 import { _localized } from "../localized"
 

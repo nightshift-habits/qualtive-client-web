@@ -1,5 +1,5 @@
-import { _PreviewRenderingContext } from "./model"
-import { EntryContentMultiselect } from "../model"
+import { _PreviewRenderingContext } from "./types"
+import { EntryContentMultiselect } from "../types"
 import { _constants } from "./constants"
 
 export const _renderPreviewMultiselect = (

@@ -1,5 +1,5 @@
-import { _InputRenderingContext } from "./model"
-import { EnquiryContentTitle } from "../model"
+import { _InputRenderingContext } from "./types"
+import { EnquiryContentTitle } from "../types"
 
 export const _renderInputTitle = (context: _InputRenderingContext, enquiryContent: EnquiryContentTitle): void => {
   const titleElement = document.createElement("p")

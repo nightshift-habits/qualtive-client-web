@@ -1,4 +1,4 @@
-import { Attachment, AttachmentContentType, _Options } from "./model"
+import { Attachment, AttachmentContentType, _Options } from "./types"
 import { _localized } from "./localized"
 
 /**

@@ -1,5 +1,5 @@
-import { _PreviewRenderingContext } from "./model"
-import { EntryContentText } from "../model"
+import { _PreviewRenderingContext } from "./types"
+import { EntryContentText } from "../types"
 
 export const _renderPreviewText = (context: _PreviewRenderingContext, content: EntryContentText): void => {
   const pElement = document.createElement("p")

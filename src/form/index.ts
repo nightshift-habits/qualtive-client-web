@@ -7,9 +7,9 @@ import type {
   EntryContentSelect,
   EntryContentMultiselect,
   EntryContentAttachments,
-} from "../model"
+} from "../types"
 import { _parseCollection } from "../collection"
-import { getEnquiry } from "../get"
+import { getEnquiry } from "../getEnquiry"
 import { _localized } from "../localized"
 import { post } from "../post"
 import { _renderInputTitle } from "./inputTitle"
@@ -25,7 +25,7 @@ import { _renderPreviewText } from "./previewText"
 import { _renderPreviewSelect } from "./previewSelect"
 import { _renderPreviewMultiselect } from "./previewMultiselect"
 import { _renderPreviewAttachments } from "./previewAttachments"
-import { Form, FormOptions, PostedEntry, _InputRenderingContext, _PreviewRenderingContext } from "./model"
+import { Form, FormOptions, PostedEntry, _InputRenderingContext, _PreviewRenderingContext } from "./types"
 
 declare global {
   interface Window {

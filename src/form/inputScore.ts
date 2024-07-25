@@ -1,6 +1,6 @@
-import { _InputRenderingContext } from "./model"
+import { _InputRenderingContext } from "./types"
 import { _localized } from "../localized"
-import { EntryContentScore, EnquiryContentScore } from "../model"
+import { EntryContentScore, EnquiryContentScore } from "../types"
 import { _constants } from "./constants"
 
 export const _renderInputScore = (

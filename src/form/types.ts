@@ -1,5 +1,5 @@
-import { EntryContent, EntryReference } from "../model"
-import { type GetEnquiryOptions } from "../get"
+import { EntryContent, EntryReference } from "../types"
+import { type GetEnquiryOptions } from "../getEnquiry"
 import { type PostOptions } from "../post"
 
 /**

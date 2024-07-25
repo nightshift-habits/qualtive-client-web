@@ -1,6 +1,6 @@
-import { _InputRenderingContext } from "./model"
+import { _InputRenderingContext } from "./types"
 import { _localized } from "../localized"
-import { EntryContentText, EnquiryContentText } from "../model"
+import { EntryContentText, EnquiryContentText } from "../types"
 
 export const _renderInputText = (
   context: _InputRenderingContext,

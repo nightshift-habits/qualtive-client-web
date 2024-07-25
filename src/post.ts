@@ -1,4 +1,4 @@
-import { Entry, _Options, EntryReference } from "./model"
+import { Entry, _Options, EntryReference } from "./types"
 import { validateEntry } from "./entry"
 import { _clientId, _hasTouch } from "./client"
 import { _parseCollection } from "./collection"
