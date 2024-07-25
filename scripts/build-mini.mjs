@@ -3,7 +3,7 @@ import fs from "fs/promises"
 import { bundle } from "bunchee"
 
 const outputPath = path.resolve("./mini.js")
-const publicProperties = ["uploadAttachment", "present", "post", "getQuestion"]
+const publicProperties = ["uploadAttachment", "present", "post", "getQuestion", "getEnquiry"]
 
 // Bundle everything into a single JS-file
 await bundle(path.resolve("./src/index.ts"), {
