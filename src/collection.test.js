@@ -7,7 +7,6 @@ describe("parse", () => {
     expect(() => _parseCollection(null)).toThrowError()
     expect(() => _parseCollection(1)).toThrowError()
     expect(() => _parseCollection(true)).toThrowError()
-    expect(() => _parseCollection(["abc", "123"])).toThrowError()
     expect(() => _parseCollection({ abc: "123" })).toThrowError()
 
     // Invalid format
@@ -21,5 +20,6 @@ describe("parse", () => {
   it("should parse collection successfully", () => {
     expect(_parseCollection("container/question")).toEqual(["container", "question"])
     expect(_parseCollection("container_-/question-")).toEqual(["container_-", "question-"])
+    expect(_parseCollection(["container_-", "question-"])).toEqual(["container_-", "question-"])
   })
 })

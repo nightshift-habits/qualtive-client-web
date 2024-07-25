@@ -1,4 +1,4 @@
-import { Entry, _Options, EntryReference } from "./types"
+import type { Entry, _Options, EntryReference, Collection } from "./types"
 import { validateEntry } from "./entry"
 import { _clientId, _hasTouch } from "./client"
 import { _parseCollection } from "./collection"
@@ -33,7 +33,7 @@ export type PostOptions = _Options & {
  * @param options Optional options for posting.
  * @returns Promise<EntryReference>
  */
-export const post = (collection: string, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
+export const post = (collection: Collection, entry: Entry, options?: PostOptions): Promise<EntryReference> => {
   const collectionComponents = _parseCollection(collection)
   const containerId = collectionComponents[0]
   const enquiryId = collectionComponents[1]

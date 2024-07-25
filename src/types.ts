@@ -1,4 +1,9 @@
 /**
+ * Reference to a enquiry in a container.
+ */
+export type Collection = string | [string, string | number]
+
+/**
  * Kind/type of score to display for a user.
  */
 export type ScoreType = "smilies5" | "smilies3" | "thumbs" | "nps"

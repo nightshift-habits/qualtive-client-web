@@ -1,4 +1,4 @@
-import type { Question, _Options } from "./types"
+import type { Collection, Question, _Options } from "./types"
 import { _parseCollection } from "./collection"
 import { _fetch } from "./networking"
 
@@ -14,10 +14,8 @@ export type GetQuestionOptions = _Options
  * @returns Promise<Question>
  * @deprecated Use getEnquiry instead.
  */
-export const getQuestion = (collection: string, options?: GetQuestionOptions): Promise<Question> => {
-  const collectionComponents = _parseCollection(collection)
-  const containerId = collectionComponents[0]
-  const questionId = collectionComponents[1]
+export const getQuestion = (collection: Collection, options?: GetQuestionOptions): Promise<Question> => {
+  const [containerId, questionId] = _parseCollection(collection)
 
   return _fetch({
     ...(options || {}),

@@ -1,4 +1,4 @@
-import type { Enquiry, _Options } from "./types"
+import type { Collection, Enquiry, _Options } from "./types"
 import { _parseCollection } from "./collection"
 import { _fetch } from "./networking"
 
@@ -15,7 +15,7 @@ export type GetEnquiryOptions = _Options & {
  * @param options Optional options.
  * @returns Promise<Enquiry>
  */
-export const getEnquiry = (collection: string, options?: GetEnquiryOptions): Promise<Enquiry> => {
+export const getEnquiry = (collection: Collection, options?: GetEnquiryOptions): Promise<Enquiry> => {
   const [containerId, enquiryId] = _parseCollection(collection)
 
   let path = `/feedback/enquiries/${enquiryId}/`
