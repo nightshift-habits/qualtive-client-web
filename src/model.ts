@@ -5,6 +5,7 @@ export type ScoreType = "smilies5" | "smilies3" | "thumbs" | "nps"
 
 /**
  * Feedback question representing a form or a question to present to the user.
+ * @deprecated Use Enquiry instead.
  */
 export type Question = {
   /**
@@ -28,28 +29,112 @@ export type Question = {
   container: QuestionContainer
 }
 
-export type QuestionContainer = {
+/**
+ * @deprecated Use EnquiryContent instead.
+ */
+export type QuestionContent = EnquiryContent
+
+/**
+ * @deprecated Use EnquiryContainer instead.
+ */
+export type QuestionContainer = EnquiryContainer
+
+/**
+ * @deprecated Use EnquiryContentTitle instead.
+ */
+export type QuestionContentTitle = EnquiryContentTitle
+/**
+ * @deprecated Use EnquiryContentScore instead.
+ */
+export type QuestionContentScore = EnquiryContentScore
+/**
+ * @deprecated Use EnquiryContentText instead.
+ */
+export type QuestionContentText = EnquiryContentText
+/**
+ * @deprecated Use EnquiryContentSelect instead.
+ */
+export type QuestionContentSelect = EnquiryContentSelect
+/**
+ * @deprecated Use EnquiryContentMultiselect instead.
+ */
+export type QuestionContentMultiselect = EnquiryContentMultiselect
+/**
+ * @deprecated Use EnquiryContentAttachments instead.
+ */
+export type QuestionContentAttachments = EnquiryContentAttachments
+
+/**
+ * Feedback enquiry representing a form or a question to present to the user.
+ */
+export type Enquiry = {
+  /**
+   * Enquiry identifier.
+   */
+  id: number
+
+  /**
+   * Enquiry slug. Same as shown on qualtive.io.
+   */
+  slug: string
+
+  /**
+   * Enquiry name. Same as main title shown on qualtive.io.
+   */
+  name: string
+
+  /**
+   * Enquiry pages. The content and structure of the enquiry to present to the user.
+   */
+  pages: EnquiryPage[]
+
+  /**
+   * Enquiry submitted page. The content and structure of the enquiry to present to the user once submitted.
+   */
+  submittedPage: EnquirySubmittedPage
+
+  /**
+   * Details about the container the enquiry belongs to.
+   */
+  container: EnquiryContainer
+}
+
+export type EnquiryContainer = {
   /**
    * `true` if the container is allowed to hide the Qualtive-branding, else, `false` meaning Qualtive branding must be shown.
    */
   isWhiteLabel: boolean
 }
 
-/**
- * Question content types. Support question content types. Note that more types can be added in the future.
- */
-export type QuestionContent =
-  | QuestionContentTitle
-  | QuestionContentScore
-  | QuestionContentText
-  | QuestionContentSelect
-  | QuestionContentMultiselect
-  | QuestionContentAttachments
+export type EnquiryPage = {
+  /**
+   * Page content. The content and structure of the enquiry to present to the user.
+   */
+  content: EnquiryContent[]
+}
+
+export type EnquirySubmittedPage = {
+  /**
+   * Page content. The content and structure of the enquiry to present to the user once submitted.
+   */
+  content: EnquirySubmittedContent[]
+}
 
 /**
- * Title static type. This type does not require any user input and is only used as visual guide in the question.
+ * Enquiry content types. Note that more types can be added in the future.
  */
-export type QuestionContentTitle = {
+export type EnquiryContent =
+  | EnquiryContentTitle
+  | EnquiryContentScore
+  | EnquiryContentText
+  | EnquiryContentSelect
+  | EnquiryContentMultiselect
+  | EnquiryContentAttachments
+
+/**
+ * Title static type. This type does not require any user input and is only used as visual guide in the enquiry.
+ */
+export type EnquiryContentTitle = {
   type: "title"
 
   /**
@@ -61,7 +146,7 @@ export type QuestionContentTitle = {
 /**
  * Score input type. This type allows the user to enter a score (rating) between 0 and 100.
  */
-export type QuestionContentScore = {
+export type EnquiryContentScore = {
   type: "score"
   scoreType: ScoreType
   leadingText: string | null
@@ -71,7 +156,7 @@ export type QuestionContentScore = {
 /**
  * Text input type. This type allows the user to enter a free-form text.
  */
-export type QuestionContentText = {
+export type EnquiryContentText = {
   type: "text"
   placeholder: string | null
 }
@@ -79,7 +164,7 @@ export type QuestionContentText = {
 /**
  * Single select/radio input type. This type allows the user to enter one of predefined options.
  */
-export type QuestionContentSelect = {
+export type EnquiryContentSelect = {
   type: "select"
   options: string[]
   allowsCustomInput: boolean
@@ -88,7 +173,7 @@ export type QuestionContentSelect = {
 /**
  * Multi select/checkbox input type. This type allows the user to enter zero or more of predefined options.
  */
-export type QuestionContentMultiselect = {
+export type EnquiryContentMultiselect = {
   type: "multiselect"
   options: string[]
 }
@@ -96,7 +181,7 @@ export type QuestionContentMultiselect = {
 /**
  * Attachments input type. This type allows the user to add attachments like images.
  */
-export type QuestionContentAttachments = {
+export type EnquiryContentAttachments = {
   type: "attachments"
 }
 
@@ -148,9 +233,87 @@ export type Entry = {
 }
 
 /**
- * Section of content for an entry. Determined by the content of a Question.
+ * Enquiry content types. Note that more types can be added in the future.
+ */
+export type EnquirySubmittedContent =
+  | EnquirySubmittedContentName
+  | EnquirySubmittedContentConfirmationText
+  | EnquirySubmittedContentUserInput
+  | EnquirySubmittedContentTitle
+  | EnquirySubmittedContentBody
+  | EnquirySubmittedContentImage
+
+/**
+ * Section showing the name of the enquiry.
+ */
+export type EnquirySubmittedContentName = {
+  type: "name"
+}
+
+/**
+ * Static confirmation text section with text.
+ */
+export type EnquirySubmittedContentConfirmationText = {
+  type: "confirmationText"
+
+  /**
+   * Text to show in the component.
+   */
+  text: string
+}
+
+/**
+ * Section showing the name of the enquiry.
+ */
+export type EnquirySubmittedContentUserInput = {
+  type: "userInput"
+}
+
+/**
+ * Static title section.
+ */
+export type EnquirySubmittedContentTitle = {
+  type: "title"
+
+  /**
+   * Text to show in the component.
+   */
+  text: string
+}
+
+/**
+ * Static body section with text.
+ */
+export type EnquirySubmittedContentBody = {
+  type: "body"
+
+  /**
+   * Text to show in the component.
+   */
+  text: string
+}
+
+/**
+ * Static image section with an attachment.
+ */
+export type EnquirySubmittedContentImage = {
+  type: "image"
+
+  /**
+   * Attachment to show in the component.
+   */
+  attachment: {
+    /**
+     * Remote URL to the attachment show in the component.
+     */
+    url: string
+  }
+}
+
+/**
+ * Section of content for an entry. Determined by the content of a Enquiry.
  *
- * Only difference between the content of an Entry and a Question is that EntryContent accepts input while QuestionContent is only for display.
+ * Only difference between the content of an Entry and a Enquiry is that EntryContent accepts input while EnquiryContent is only for display.
  */
 export type EntryContent =
   | EntryContentTitle
@@ -161,9 +324,9 @@ export type EntryContent =
   | EntryContentAttachments
 
 /**
- * Title static type. This type does not require any user input and is only used as visual guide in the question. Does not have any input.
+ * Title static type. This type does not require any user input and is only used as visual guide in the enquiry. Does not have any input.
  *
- * QuestionContentTitle is co-responding question content.
+ * EnquiryContentTitle is co-responding enquiry content.
  */
 export type EntryContentTitle = {
   type: "title"
@@ -177,7 +340,7 @@ export type EntryContentTitle = {
 /**
  * Score input type. This type allows the user to enter a score (rating) between 0 and 100.
  *
- * QuestionContentScore is co-responding question content.
+ * EnquiryContentScore is co-responding enquiry content.
  */
 export type EntryContentScore = {
   type: "score"
@@ -194,7 +357,7 @@ export type EntryContentScore = {
 /**
  * Text input type. This type allows the user to enter a free-form text.
  *
- * QuestionContentText is co-responding question content.
+ * EnquiryContentText is co-responding enquiry content.
  */
 export type EntryContentText = {
   type: "text"
@@ -208,7 +371,7 @@ export type EntryContentText = {
 /**
  * Single select/radio input type. This type allows the user to enter one of predefined options.
  *
- * QuestionContentSelect is co-responding question content.
+ * EnquiryContentSelect is co-responding enquiry content.
  */
 export type EntryContentSelect = {
   type: "select"
@@ -222,7 +385,7 @@ export type EntryContentSelect = {
 /**
  * Multi select/checkbox input type. This type allows the user to enter zero or more of predefined options.
  *
- * QuestionContentMultiselect is co-responding question content.
+ * EnquiryContentMultiselect is co-responding enquiry content.
  */
 export type EntryContentMultiselect = {
   type: "multiselect"
@@ -236,7 +399,7 @@ export type EntryContentMultiselect = {
 /**
  * Attachments input type. This type allows the user to add attachments like images.
  *
- * QuestionContentAttachments is co-responding question content.
+ * EnquiryContentAttachments is co-responding enquiry content.
  */
 export type EntryContentAttachments = {
   type: "attachments"
