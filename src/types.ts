@@ -106,9 +106,22 @@ export type Enquiry = {
 
 export type EnquiryContainer = {
   /**
+   * Identifier of the container.
+   */
+  id: string
+
+  /**
    * `true` if the container is allowed to hide the Qualtive-branding, else, `false` meaning Qualtive branding must be shown.
    */
   isWhiteLabel: boolean
+
+  /**
+   * Logo of the container. Null if no logo has been set.
+   */
+  logo: {
+    urlVector: string
+    urlVectorDark: string
+  } | null
 }
 
 export type EnquiryPage = {
