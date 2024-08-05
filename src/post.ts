@@ -106,7 +106,7 @@ export const post = (collection: Collection, entry: Entry, options?: PostOptions
   }
 
   const body = {
-    questionId: enquiryId,
+    questionId: /^-?\d+$/.test(enquiryId) ? parseInt(enquiryId) : enquiryId,
     content,
     user: {
       id: entry.user?.id?.toString(),
