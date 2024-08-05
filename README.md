@@ -2,16 +2,8 @@
 
 ## Installation
 
-### Using `npm`
-
 ```
 npm install qualtive-web
-```
-
-### Using `yarn`
-
-```
-yarn add qualtive-web
 ```
 
 TypeScript types are included in this package.
