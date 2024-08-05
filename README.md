@@ -28,7 +28,6 @@ There is a few options to customize the UI. For example:
 import * as qualtive from "qualtive-web"
 
 qualtive.present("my-company/my-question", {
-  title: "Leave feedback",
   supportURL: "https://link-to-your-customer-service/", // If present, this will show a link to your customer support.
   locale: "en-US", // Optional. The language and formatting to use. Defaults to the device default.
 })
