@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.15.0
+
+### Added
+
+- Support for multiple pages.
+- Support for custom submitted page.
+- Support for new contact details component.
+
+### Improved
+
+- Look n' feel of the user interface.
+
 ## 1.14.2
 
 ### Improved
