@@ -3,7 +3,7 @@ import fs from "fs/promises"
 import { bundle } from "bunchee"
 
 const outputPath = path.resolve("./mini.js")
-const publicProperties = ["uploadAttachment", "present", "post", "getQuestion", "getEnquiry"]
+const publicProperties = ["uploadAttachment", "present", "post", "getQuestion", "getEnquiry", "renderEnquiry"]
 
 // Bundle everything into a single JS-file
 await bundle(path.resolve("./src/index.ts"), {
@@ -19,16 +19,26 @@ await bundle(path.resolve("./src/index.ts"), {
   clean: true,
 })
 
+const jsxRuntime =
+  (await fs.readFile(path.resolve("./qualtive-client-web-jsx/jsx-runtime.js"), "utf8")).replace(
+    /export\s+const\s+([a-zA-Z_$][\w$]*)\s*=\s*(.*)?/g,
+    "",
+  ) + `const jsx = renderJSX; const jsxs = jsx;`
+
 // Modify output
 // - Remove unnecessary additions
 // - Wrap everything in a qualtive-object
+// - Embedd JSX runtime
 let output = await fs.readFile(path.resolve("./dist/index.js"), "utf8")
 
 output = output
   .replace(`Object.defineProperty(exports, '__esModule', { value: true });`, "")
   .replace(/exports\.(\w+)\s*=\s*\1;/g, "")
+  .replace(`var jsxRuntime = require('qualtive-client-web-jsx/jsx-runtime')`, ``)
+  .replace(/jsxRuntime\./g, "")
 
 output = `window.qualtive = (() => {
+    ${jsxRuntime}
     ${output}
     return {
         ${publicProperties.join(",")}
