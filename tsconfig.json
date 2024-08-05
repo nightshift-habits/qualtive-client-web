@@ -8,7 +8,9 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "qualtive-client-web-jsx"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
