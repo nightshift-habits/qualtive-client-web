@@ -1,0 +1,16 @@
+._q-smiley {
+  ._q-background {
+    fill: #979797;
+    stroke: none;
+  }
+}
+._q-scores {
+  label {
+    &:hover {
+      ._q-hover {
+        stroke: #fff;
+        stroke-opacity: 0.75;
+      }
+    }
+  }
+}

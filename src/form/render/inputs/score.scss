@@ -1,0 +1,109 @@
+._q-texts {
+  margin: 0 0 5px !important;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  span {
+    font-size: 13px;
+    color: #4f4f4f;
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+._q-scores {
+  display: flex;
+  gap: 10px;
+  input {
+    position: absolute;
+    top: -1000px;
+  }
+
+  &._q-nps {
+    gap: 0;
+    justify-content: space-between;
+    label {
+      flex: 1 0 auto;
+      input:checked + span {
+        color: #000;
+        &._q-s0,
+        &._q-s10 {
+          background: #ff9c9c;
+          outline-color: #ff9c9c;
+        }
+        &._q-s20,
+        &._q-s30 {
+          background: #f6bd60;
+          outline-color: #f6bd60;
+        }
+        &._q-s40,
+        &._q-s50,
+        &._q-s60 {
+          background: #c8cee4;
+          outline-color: #c8cee4;
+        }
+        &._q-s70,
+        &._q-s80 {
+          background: #6ce5e5;
+          outline-color: #6ce5e5;
+        }
+        &._q-s90,
+        &._q-s100 {
+          background: #48bf84;
+          outline-color: #48bf84;
+        }
+      }
+      span {
+        line-height: 36px;
+        font-weight: 600 !important;
+        text-align: center;
+        font-size: 13px;
+        color: #000;
+        background: #f6f6f6;
+        outline: 1px solid #c7cacd;
+        display: block;
+        width: 100%;
+      }
+      &:hover {
+        span {
+          z-index: 1001;
+          position: relative;
+          outline-color: #000;
+        }
+      }
+      &:focus-within {
+        span {
+          z-index: 1001;
+          position: relative;
+          outline-color: #0084ce !important;
+          outline-width: 2px;
+        }
+      }
+      &:not(:last-child) {
+        span {
+          border-right: none;
+        }
+      }
+      &:first-child {
+        span {
+          border-top-left-radius: 6px;
+          border-bottom-left-radius: 6px;
+        }
+      }
+      &:last-child {
+        span {
+          border-top-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+      }
+    }
+  }
+}
+._q-scores {
+  margin: 0 0 20px !important;
+}
+._q-texts + ._q-scores {
+  margin: 1px 0 20px !important;
+}

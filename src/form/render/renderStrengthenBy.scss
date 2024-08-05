@@ -1,0 +1,21 @@
+._q-qlogo {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 0 !important;
+  font-size: 12px;
+  outline: none;
+  &,
+  * {
+    cursor: pointer !important;
+  }
+  &:link,
+  &:visited {
+    color: #000000 !important;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: underline !important;
+  }
+}

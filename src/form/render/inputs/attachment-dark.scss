@@ -1,0 +1,25 @@
+._q-attachments {
+  label {
+    svg {
+      rect {
+        stroke: #bdbdbd;
+      }
+      path {
+        fill: #bdbdbd;
+      }
+    }
+    rect {
+      stroke: #333;
+    }
+    path {
+      fill: #333;
+    }
+  }
+  button {
+    border-color: #bdbdbd !important;
+  }
+}
+
+#_q-drop-indication {
+  border-color: #bdbdbd;
+}

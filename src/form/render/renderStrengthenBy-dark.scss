@@ -1,0 +1,11 @@
+._q-qlogo {
+  &:link,
+  &:visited {
+    color: #fff !important;
+  }
+  svg {
+    path[fill] {
+      fill: #fff;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+._q-options {
+  margin: 0 0 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  > div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    svg {
+      flex: 0 0 auto;
+      path:first-child {
+        visibility: hidden;
+      }
+    }
+    span {
+      font-size: 13px;
+      color: #333;
+      padding: 6px 0 !important;
+    }
+  }
+}

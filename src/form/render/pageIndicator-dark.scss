@@ -1,0 +1,23 @@
+._q-page-indicator {
+  > button {
+    color: #bdbdbd;
+    &:disabled {
+      color: #666;
+    }
+  }
+  > span {
+    color: #bdbdbd;
+  }
+  ul {
+    span {
+      background: #979797;
+    }
+    button {
+      &:disabled {
+        span {
+          background: #fff;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+._q-texts {
+  span {
+    color: #bdbdbd;
+  }
+}
+._q-scores {
+  &._q-nps {
+    label {
+      span {
+        color: #bdbdbd;
+        background: #494949;
+        outline-color: #6d6d6d;
+      }
+      &:hover {
+        span {
+          outline-color: #fff;
+        }
+      }
+    }
+  }
+}

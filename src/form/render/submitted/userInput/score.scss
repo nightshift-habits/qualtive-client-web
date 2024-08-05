@@ -1,0 +1,34 @@
+._q-scores._q-checked {
+  margin: 0 0 10px !important;
+}
+._q-npsc {
+  display: block;
+  color: #000;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  text-align: center;
+  font-size: 13px;
+  line-height: 36px;
+  width: 30px;
+  &._q-s0,
+  &._q-s10 {
+    background: #ff9c9c;
+  }
+  &._q-s20,
+  &._q-s30 {
+    background: #f6bd60;
+  }
+  &._q-s40,
+  &._q-s50,
+  &._q-s60 {
+    background: #c8cee4;
+  }
+  &._q-s70,
+  &._q-s80 {
+    background: #6ce5e5;
+  }
+  &._q-s90,
+  &._q-s100 {
+    background: #48bf84;
+  }
+}

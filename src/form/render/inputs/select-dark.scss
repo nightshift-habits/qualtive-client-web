@@ -1,0 +1,21 @@
+._q-options {
+  label {
+    > span {
+      > span {
+        color: #bdbdbd;
+      }
+      > input {
+        border-color: #4f4f4f;
+        color: #bdbdbd;
+        &::placeholder {
+          color: #bdbdbd;
+        }
+      }
+    }
+    svg {
+      path {
+        fill: #4f4f4f;
+      }
+    }
+  }
+}

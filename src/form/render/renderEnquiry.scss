@@ -1,0 +1,29 @@
+._q-pager {
+  position: relative;
+  overflow: visible;
+  transition: 0.3s height;
+  will-change: height;
+}
+._q-page {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s left;
+  will-change: left;
+  &:not(._q-current) {
+    pointer-events: none;
+  }
+  &._q-current {
+    left: 0;
+  }
+  &._q-prev {
+    left: calc(-100% - 50px);
+  }
+  &._q-next {
+    left: calc(100% + 50px);
+  }
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+}

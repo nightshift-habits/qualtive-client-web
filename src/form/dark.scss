@@ -1,173 +1,131 @@
-#_q-container {
-  background: #111;
+@import "./render/pageIndicator-dark.scss";
+@import "./render/inputs/score-dark.scss";
+@import "./render/inputs/scoreSmiley-dark.scss";
+@import "./render/inputs/select-dark.scss";
+@import "./render/inputs/attachment-dark.scss";
+@import "./render/submitted/userInput/select-dark.scss";
+@import "./render/renderStrengthenBy-dark.scss";
 
-  ._q-cancel [stroke="#000"] {
-    stroke: #fff;
+#_q-container,
+._q-content {
+  button {
+    &._q-contained {
+      border-color: #fff;
+      &[type="button"] {
+        span {
+          color: #fff;
+        }
+        path[stroke] {
+          stroke: #fff;
+        }
+        &:not(:disabled):not(:active):not(:focus) {
+          &:hover {
+            border-color: #fff;
+            outline: 1px solid #fff;
+            background: transparent;
+            span {
+              color: #fff;
+            }
+          }
+        }
+        &:active {
+          border-color: #979797;
+          background: #979797;
+          span {
+            color: #fff;
+          }
+        }
+        &:focus {
+          border-color: #0084ce;
+          outline: 1px solid #0084ce;
+          background: #111;
+        }
+        &:disabled {
+          border-color: #808080;
+          background: #111;
+          span {
+            color: #808080;
+          }
+          path[stroke] {
+            stroke: #808080;
+          }
+        }
+      }
+      &[type="submit"] {
+        background: #fff;
+        border-color: #fff;
+        span {
+          color: #000;
+        }
+        path[stroke] {
+          stroke: #000;
+        }
+        &:not(:disabled):not(:active):not(:focus) {
+          &:hover {
+            border-color: #e5e5e5;
+            background: #e5e5e5;
+          }
+        }
+        &:active {
+          border-color: #979797;
+          background: #979797;
+          span {
+            color: #fff;
+          }
+          path[stroke] {
+            stroke: #fff;
+          }
+        }
+        &:focus {
+          background: #e5e5e5;
+        }
+        &:disabled {
+          border-color: #979797;
+          background: #979797;
+          span {
+            color: #737373;
+          }
+          path[stroke] {
+            stroke: #737373;
+          }
+        }
+      }
+    }
   }
   h2,
   h3,
   p {
-    color: #fff;
+    color: #bdbdbd;
   }
-  ._q-score svg:first-child [fill="#4F4F4F"] {
-    fill: #aaa;
-  }
-  ._q-score svg:first-child [stroke="#4F4F4F"] {
-    stroke: #aaa;
-  }
-  ._q-score li._q-50 button:focus [fill="#4F4F4F"],
-  ._q-score li._q-50 svg:first-child:hover [fill="#4F4F4F"] {
-    fill: #eee;
-  }
-  ._q-score li._q-50 button:focus [stroke="#4F4F4F"],
-  ._q-score li._q-50 svg:first-child:hover [stroke="#4F4F4F"] {
-    stroke: #eee;
-  }
-  ._q-score li._q-50 svg:last-child:hover [fill="#4F4F4F"] {
-    fill: #eee;
-  }
-  ._q-score li._q-50 svg:last-child:hover [stroke="#4F4F4F"] {
-    stroke: #eee;
-  }
-  ._q-score._q-nps li button,
-  ._q-score._q-nps li span {
-    border-color: 1px solid #eee;
-    color: #fff;
-  }
-  ._q-score._q-nps li button:hover {
-    border-color: #fff;
-    box-shadow: inset 0 0 0 1px #fff;
-  }
-  ._q-score._q-nps li._q-selected._q-l1 button,
-  ._q-score._q-nps li._q-selected._q-l1 span {
-    background: #ccc;
-  }
-  ._q-leading-trailing > span {
-    color: #fff;
+  p {
+    &._q-error {
+      color: #de5e35;
+    }
   }
   textarea {
-    background: #000;
-    border-color: #aaa;
-    color: #fff;
-  }
-  textarea:active:not(:disabled),
-  textarea:focus:not(:disabled) {
-    border: 2px solid #1ac8ff;
-    padding: 11px 11px;
-  }
-  textarea::-webkit-input-placeholder {
-    color: #ddd;
-  }
-  textarea:-moz-placeholder {
-    color: #ddd;
-  }
-  textarea::-moz-placeholder {
-    color: #ddd;
-  }
-  textarea:-ms-input-placeholder {
-    color: #ddd;
-  }
-  textarea::placeholder {
-    color: #ddd;
-  }
-  ._q-options {
-    margin: 0 0 20px;
-  }
-  ._q-options button span:first-child svg path {
-    fill: #ddd;
-  }
-  ._q-options button._q-selected span:first-child svg path,
-  ._q-options button:active span:first-child svg path {
-    fill: #fff;
-  }
-  ._q-options button:focus span:first-child svg path {
-    fill: #1ac8ff;
-  }
-  ._q-options button span:last-child {
-    border-color: #ddd;
-    color: #fff;
-  }
-  ._q-options button._q-selected span:last-child,
-  ._q-options button:active span:last-child {
-    color: #fff;
-    border-color: #fff;
-  }
-  ._q-options button._q-selected span:last-child {
-    box-shadow: inset 0 0 0 1px #fff;
-  }
-  ._q-options button:focus span:last-child {
-    color: #1ac8ff;
-    border-color: #1ac8ff;
-  }
-  ._q-options button._q-selected:focus span:last-child {
-    box-shadow: inset 0 0 0 1px #1ac8ff;
-  }
-  select {
-    color: #fff;
-    border-color: #fff;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNyIgdmlld0JveD0iMCAwIDEwIDciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01Ljc5MjQxIDUuOTcwNjNDNS4zOTIxIDYuNDkwNjQgNC42MDc5IDYuNDkwNjQgNC4yMDc1OSA1Ljk3MDYzTDEuMDQzMjIgMS44NTk5OUMwLjUzNzAyNSAxLjIwMjQzIDEuMDA1NzkgMC4yNSAxLjgzNTYzIDAuMjVMOC4xNjQzNyAwLjI1MDAwMUM4Ljk5NDIxIDAuMjUwMDAxIDkuNDYyOTggMS4yMDI0MyA4Ljk1Njc4IDEuODZMNS43OTI0MSA1Ljk3MDYzWiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K);
-  }
-  select:focus {
-    border: 2px solid #1ac8ff;
-  }
-  ._q-attachments label rect {
-    stroke: #ddd;
-  }
-  ._q-attachments label path {
-    fill: #ddd;
-  }
-  ._q-buttons li:last-child button {
-    color: #ddd;
-    border-color: #ddd;
-  }
-  ._q-buttons li:last-child button [stroke="#333"] {
-    stroke: #ddd;
-  }
-  ._q-buttons li button:disabled {
-    color: #ddd;
-  }
-  ._q-support-link {
-    background: #2e2d2a;
-  }
-  ._q-result {
-    border-left-color: #ddd;
-  }
-  ._q-result ._q-option {
-    color: #fff;
-  }
-  ._q-result ._q-option svg path {
-    fill: #fff;
-  }
-
-  ._q-status {
-    li {
-      &:first-child {
-        color: #ddd;
-      }
-    }
-    button {
-      color: #ddd;
-      border-color: #ddd;
-
-      [stroke="#000"] {
-        stroke: #ddd;
-      }
-    }
-  }
-
-  ._q-qlogo {
-    &:link,
-    &:visited {
-      color: #fff;
-    }
-    svg {
-      path[fill] {
-        fill: #fff;
-      }
+    border: 1px solid #4f4f4f;
+    color: #bdbdbd;
+    &::placeholder {
+      color: #4f4f4f;
+      opacity: 1;
     }
   }
 }
 
-#_q-drop-indication {
-  border-color: #aaa;
+#_q-container {
+  background: #1b1b1b;
+  ._q-cancel {
+    path[stroke] {
+      stroke: #fff;
+    }
+  }
+  ._q-support-link {
+    background: #6d6d6d;
+    a {
+      &:link,
+      &:visited {
+        color: #fff;
+      }
+    }
+  }
 }

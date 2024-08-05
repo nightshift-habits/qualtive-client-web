@@ -1,0 +1,66 @@
+._q-options {
+  margin: 0 0 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  input[type="radio"],
+  input[type="checkbox"] {
+    position: absolute;
+    top: -1000px;
+  }
+  label {
+    &,
+    * {
+      cursor: pointer !important;
+    }
+    > span {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      > span {
+        font-size: 13px;
+        color: #333;
+        padding: 6px 0 !important;
+      }
+      > input {
+        border: 1px solid #c7cacd;
+        color: #333;
+        border-radius: 6px;
+        font-size: 13px;
+        width: 100%;
+        padding: 6px 12px !important;
+        cursor: text !important;
+        background: transparent;
+        &:focus {
+          border-color: #0084ce;
+          outline: 1px solid #0084ce;
+        }
+        &::placeholder {
+          color: #333;
+        }
+      }
+    }
+    svg {
+      flex: 0 0 auto;
+      path:last-child {
+        visibility: hidden;
+      }
+    }
+    input:checked + span {
+      svg {
+        path:first-child {
+          visibility: hidden;
+        }
+        path:last-child {
+          visibility: visible;
+        }
+      }
+    }
+    input:focus + span {
+      color: #0084ce;
+      path {
+        fill: #0084ce;
+      }
+    }
+  }
+}

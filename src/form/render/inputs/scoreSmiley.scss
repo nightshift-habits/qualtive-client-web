@@ -1,0 +1,58 @@
+._q-smiley {
+  display: block;
+
+  ._q-background {
+    fill: #f6f6f6;
+    stroke: #c7cacd;
+  }
+  ._q-hover {
+    visibility: hidden;
+  }
+}
+._q-scores {
+  label {
+    &,
+    * {
+      cursor: pointer !important;
+    }
+
+    &:hover,
+    &:focus-within {
+      ._q-hover {
+        visibility: visible;
+      }
+    }
+    &:hover {
+      ._q-hover {
+        stroke: #000;
+        stroke-opacity: 0.75;
+      }
+    }
+    &:focus-within {
+      ._q-hover {
+        stroke: #0084ce;
+      }
+    }
+  }
+}
+._q-scores label input:checked + ._q-smiley,
+._q-checked ._q-smiley {
+  ._q-background {
+    stroke-width: 0;
+    &._q-s0 {
+      fill: #ff9c9c;
+    }
+    &._q-s25 {
+      fill: #f6bd60;
+    }
+    &._q-s50 {
+      fill: #c8cee4;
+    }
+    &._q-s75 {
+      fill: #6ce6e6;
+    }
+    &._q-s100 {
+      fill: #48bf84;
+    }
+  }
+}
