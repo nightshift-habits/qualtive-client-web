@@ -148,6 +148,7 @@ export type EnquiryContent =
   | EnquiryContentSelect
   | EnquiryContentMultiselect
   | EnquiryContentAttachments
+  | EnquiryContentContactDetails
 
 /**
  * Title static type. This type does not require any user input and is only used as visual guide in the enquiry.
@@ -201,6 +202,15 @@ export type EnquiryContentMultiselect = {
  */
 export type EnquiryContentAttachments = {
   type: "attachments"
+}
+
+/**
+ * Component for allowing entering their contact details if not given automatically.
+ */
+export type EnquiryContentContactDetails = {
+  type: "contactDetails"
+  title: string
+  placeholder: string
 }
 
 /**

@@ -1,5 +1,5 @@
 import type { Enquiry } from "../../types"
-import type { FormOptions } from "../types"
+import type { FormOptions, RenderEnquiryOptions } from "../types"
 
 export type _RenderingContext = {
   containerId: string
@@ -14,4 +14,5 @@ export type _RenderingContext = {
   nextPage: () => void
   setPage: (newPage: number) => void
   invalidateCanSend: () => void
+  user: RenderEnquiryOptions["user"]
 }

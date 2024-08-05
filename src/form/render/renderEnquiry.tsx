@@ -58,6 +58,7 @@ export function renderEnquiry(
     previousPage: () => setPage(currentPage - 1),
     nextPage: () => setPage(currentPage + 1),
     setPage,
+    user: options?.user,
     invalidateCanSend: () => {
       renderingContext.submitButton!.disabled = !content
         .flatMap((x) => x)
@@ -121,7 +122,7 @@ export function renderEnquiry(
                 return x
             }
           }),
-        user: options?.user,
+        user: renderingContext.user,
         customAttributes: options?.customAttributes,
       },
       options,

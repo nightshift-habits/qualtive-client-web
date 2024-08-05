@@ -1,0 +1,14 @@
+._q-contact-details {
+  svg {
+    path {
+      fill: #4f4f4f;
+    }
+  }
+  input {
+    border-color: #4f4f4f;
+    color: #bdbdbd;
+    &::placeholder {
+      color: #bdbdbd;
+    }
+  }
+}

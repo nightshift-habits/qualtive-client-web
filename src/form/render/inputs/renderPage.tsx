@@ -11,6 +11,7 @@ import type {
 } from "../../../types"
 import type { _RenderingContext } from "../types"
 import { _renderInputAttachments } from "./attachment"
+import { _renderInputContactDetails } from "./contactDetails"
 import { _renderInputMultiselect } from "./multiselect"
 import { _renderInputScore } from "./score"
 import { _renderInputSelect } from "./select"
@@ -68,6 +69,8 @@ export function renderPage(
             return _renderInputMultiselect(context, content, entryContent[index] as EntryContentMultiselect)
           case "attachments":
             return _renderInputAttachments(context, content, entryContent[index] as EntryContentAttachments)
+          case "contactDetails":
+            return _renderInputContactDetails(context, content)
         }
       })}
       {button}
