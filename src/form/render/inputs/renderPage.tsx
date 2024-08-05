@@ -70,7 +70,7 @@ export function renderPage(
             return _renderInputAttachments(context, content, entryContent[index] as EntryContentAttachments)
         }
       })}
-       {button}
+      {button}
     </div>
   ) as HTMLDivElement
 }

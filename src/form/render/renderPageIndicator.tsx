@@ -16,7 +16,7 @@ export function renderPageIndicator(context: _RenderingContext): {
   previousPageButton.onclick = context.previousPage
 
   let maxPage = 0
-  let rows = [renderPageRow(context, 0), renderPageRow(context, 1)]
+  const rows = [renderPageRow(context, 0), renderPageRow(context, 1)]
   rows[0].button.disabled = true
 
   const listElement = (<ul>{rows.map((x) => x.element)}</ul>) as HTMLUListElement

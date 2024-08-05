@@ -1,4 +1,3 @@
-import { _localized } from "../../localized"
 import { _styles } from "../styles"
 import type { RenderEnquiryOptions } from "../types"
 

@@ -1,4 +1,3 @@
-import { _localized } from "../../../localized"
 import type { EnquirySubmittedContent } from "../../../types"
 import type { _RenderingContext } from "../types"
 import { _renderTitle } from "./title"

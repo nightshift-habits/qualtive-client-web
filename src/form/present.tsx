@@ -2,7 +2,6 @@ import type { Enquiry, EntryReference, Collection } from "../types"
 import { _parseCollection } from "../collection"
 import { getEnquiry } from "../getEnquiry"
 import { _localized } from "../localized"
-import { _styles } from "./styles"
 import { Form, FormOptions, PostedEntry } from "./types"
 import { renderEnquiry } from "./render/renderEnquiry"
 import { renderStyles } from "./render/renderStyles"
@@ -154,7 +153,12 @@ export const present = (collectionOrEnquiry: Collection | Enquiry, options?: For
     }
 
     setTimeout(() => {
-      const anyFocusable = containerElement.querySelector("input,textarea,select,button:not(._q-cancel)") as any
+      const anyFocusable = containerElement.querySelector("input,textarea,select,button:not(._q-cancel)") as
+        | HTMLInputElement
+        | HTMLTextAreaElement
+        | HTMLSelectElement
+        | HTMLButtonElement
+        | undefined
       if (anyFocusable && !anyFocusable.disabled) {
         anyFocusable.focus?.()
       }

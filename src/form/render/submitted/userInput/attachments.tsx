@@ -7,6 +7,7 @@ export function _renderAttachments(_: _RenderingContext, entryContent: EntryCont
   return (
     <div class="_q-attachments">
       {entryContent.values.map((value) => (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         <img src={(value as any).localUrl} />
       ))}
     </div>

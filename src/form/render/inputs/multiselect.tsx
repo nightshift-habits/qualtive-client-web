@@ -1,4 +1,3 @@
-import { _localized } from "../../../localized"
 import type { EnquiryContentMultiselect, EntryContentMultiselect } from "../../../types"
 import type { _RenderingContext } from "../types"
 

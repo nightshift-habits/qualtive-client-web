@@ -1,6 +1,3 @@
-import type { _RenderingContext } from "../types"
-import { _localized } from "../../../localized"
-
 export type Score = 0 | 25 | 50 | 75 | 100
 
 export function renderSmiley(score: Score) {

@@ -1,6 +1,5 @@
 import type { _RenderingContext } from "../types"
 import type { EnquiryContentScore, EntryContentScore } from "../../../types"
-import { _localized } from "../../../localized"
 import { renderSmiley, type Score as SmileyScore } from "./scoreSmiley"
 
 export function _renderInputScore(

@@ -1,7 +1,5 @@
 import { _localized } from "../../localized"
 import type { Enquiry, EntryContent } from "../../types"
-import { _constants } from "../constants"
-import { _styles } from "../styles"
 import type { RenderEnquiryOptions } from "../types"
 import { post } from "../../post"
 import { renderPage } from "./inputs/renderPage"
@@ -19,7 +17,7 @@ export function renderEnquiry(
 ): { unmount: () => void } {
   let currentPage = 0
 
-  let content: EntryContent[][] = enquiry.pages.map((page) =>
+  const content: EntryContent[][] = enquiry.pages.map((page) =>
     page.content
       .map((x): EntryContent | undefined => {
         switch (x.type) {
@@ -223,11 +221,15 @@ export function renderEnquiry(
       setTimeout(() => {
         pagerElement.removeChild(oldPageElement)
 
-        const anyFocusables = pages[currentPage].querySelectorAll("input,textarea,select,button")
-        const anyFocusable: any = newPage > oldPage ? anyFocusables[0] : anyFocusables[anyFocusables.length - 1]
+        const anyFocusables = pages[currentPage].querySelectorAll("input,textarea,select,button") as NodeListOf<
+          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement
+        >
+
+        const anyFocusable = newPage > oldPage ? anyFocusables[0] : anyFocusables[anyFocusables.length - 1]
         if (anyFocusable && !anyFocusable.disabled) {
           anyFocusable.focus?.()
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(document.activeElement as any)?.blur?.()
         }
       }, 305)
