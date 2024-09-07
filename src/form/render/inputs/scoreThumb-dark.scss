@@ -1,0 +1,23 @@
+._q-thumb {
+  ._q-background {
+    fill: #707070;
+  }
+  path {
+    stroke: #000;
+  }
+}
+._q-scores {
+  label {
+    &:hover {
+      path {
+        stroke: #fff !important;
+      }
+    }
+  }
+}
+._q-scores label input:checked + ._q-thumb,
+._q-checked ._q-thumb {
+  path {
+    stroke: #1b1b1b;
+  }
+}

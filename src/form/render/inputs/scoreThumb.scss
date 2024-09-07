@@ -1,0 +1,49 @@
+._q-thumb {
+  &._q-down {
+    transform: scaleY(-1);
+  }
+  ._q-background {
+    fill: #f6f6f6;
+  }
+  path {
+    stroke: #c7cacd;
+    stroke-width: 1;
+  }
+}
+._q-scores {
+  label {
+    &:hover {
+      path {
+        stroke: #404040 !important;
+        stroke-width: 2;
+      }
+    }
+    &:focus-within {
+      ._q-thumb {
+        path {
+          stroke: #0084ce !important;
+          stroke-width: 2;
+        }
+      }
+    }
+  }
+}
+._q-scores label input:checked + ._q-thumb,
+._q-checked ._q-thumb {
+  path {
+    stroke: #fff;
+    stroke-width: 2;
+  }
+}
+._q-scores label input:checked + ._q-down,
+._q-checked ._q-down {
+  ._q-background {
+    fill: #ff9c9c;
+  }
+}
+._q-scores label input:checked + ._q-up,
+._q-checked ._q-up {
+  ._q-background {
+    fill: #48bf84;
+  }
+}

@@ -1,6 +1,7 @@
 import type { _RenderingContext } from "../../types"
 import type { EntryContentScore } from "../../../../types"
 import { type Score, renderSmiley } from "../../inputs/scoreSmiley"
+import { renderThumbDown, renderThumbUp } from "../../inputs/scoreThumbs"
 
 export function _renderScore(_: _RenderingContext, entryContent: EntryContentScore) {
   if (typeof entryContent.value !== "number") return null
@@ -15,6 +16,8 @@ export function _renderScore(_: _RenderingContext, entryContent: EntryContentSco
           {(entryContent.value / 10).toString()}
         </div>
       )
+    case "thumbs":
+      return <div class="_q-scores _q-checked">{entryContent.value == 100 ? renderThumbUp() : renderThumbDown()}</div>
     default:
       return null
   }

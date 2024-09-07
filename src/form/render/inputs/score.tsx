@@ -1,6 +1,7 @@
 import type { _RenderingContext } from "../types"
 import type { EnquiryContentScore, EntryContentScore } from "../../../types"
 import { renderSmiley, type Score as SmileyScore } from "./scoreSmiley"
+import { renderThumbDown, renderThumbUp } from "./scoreThumbs"
 
 export function _renderInputScore(
   context: _RenderingContext,
@@ -91,6 +92,21 @@ function renderLabels(
             <label>
               {radioElement}
               <span class={`_q-s${score}`}>{(score / 10).toString()}</span>
+            </label>
+          ) as HTMLLabelElement,
+          radioElement,
+        }
+      })
+    }
+    case "thumbs": {
+      const scores: (0 | 100)[] = [0, 100]
+      return scores.map((score) => {
+        const radioElement = (<input type="radio" name={fieldName} value={score} />) as HTMLInputElement
+        return {
+          labelElement: (
+            <label>
+              {radioElement}
+              {score == 100 ? renderThumbUp() : renderThumbDown()}
             </label>
           ) as HTMLLabelElement,
           radioElement,
