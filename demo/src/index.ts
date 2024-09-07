@@ -1,7 +1,9 @@
 import * as qualtive from "qualtive-web"
 
-function present(collectionOrEnquiry: qualtive.Collection | qualtive.Enquiry) {
-  qualtive.present(collectionOrEnquiry, {
+let inlineRender: ReturnType<typeof qualtive.renderEnquiry> | null
+
+async function present(collectionOrEnquiry: qualtive.Collection | qualtive.Enquiry) {
+  const options = {
     darkMode: (document.getElementById("darkmode") as HTMLSelectElement).value as "auto",
     supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
     locale: (document.getElementById("locale") as HTMLInputElement).value,
@@ -9,14 +11,34 @@ function present(collectionOrEnquiry: qualtive.Collection | qualtive.Enquiry) {
     metadataCollection: (document.getElementById("metadataCollection") as HTMLSelectElement).value as "nonPersonal",
     userTrackingConsent: (document.getElementById("userTrackingConsent") as HTMLSelectElement).value as "granted",
     previewToken: (document.getElementById("previewToken") as HTMLInputElement).value || null,
-    onDismiss: (result) => {
-      if (!result) {
-        console.info("Dismissed without a posting.")
-        return
-      }
-      console.info("Dismissed with posting: ", result)
-    },
-  })
+  }
+
+  const presentInline = (document.getElementById("presentInline") as HTMLInputElement).checked
+  if (presentInline) {
+    let enquiry: qualtive.Enquiry
+    if (typeof collectionOrEnquiry === "string" || Array.isArray(collectionOrEnquiry)) {
+      enquiry = await qualtive.getEnquiry(collectionOrEnquiry, options)
+    } else {
+      enquiry = collectionOrEnquiry
+    }
+    inlineRender?.unmount()
+    inlineRender = qualtive.renderEnquiry(
+      enquiry,
+      document.getElementById("qualtive-inline") as HTMLDivElement,
+      options,
+    )
+  } else {
+    qualtive.present(collectionOrEnquiry, {
+      ...options,
+      onDismiss: (result) => {
+        if (!result) {
+          console.info("Dismissed without a posting.")
+          return
+        }
+        console.info("Dismissed with posting: ", result)
+      },
+    })
+  }
 }
 
 document.querySelectorAll("*[data-collection]").forEach((button) => {
