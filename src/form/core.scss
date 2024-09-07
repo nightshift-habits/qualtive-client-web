@@ -292,6 +292,12 @@
   display: flex;
   flex-direction: column;
   padding: 10px 0 !important;
+  overflow: hidden;
+}
+#_q-container {
+  ._q-content {
+    overflow: visible;
+  }
 }
 
 @media only screen and (max-width: 550px), (max-height: 550px) {
