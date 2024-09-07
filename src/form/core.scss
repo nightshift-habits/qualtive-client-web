@@ -194,6 +194,10 @@
     line-height: 24px;
     color: #333;
     margin: 0 0 10px;
+    cursor: text !important;
+    user-select: text !important;
+    -moz-user-select: text !important;
+    -webkit-user-select: text !important;
     &._q-error {
       color: #e33737;
     }
