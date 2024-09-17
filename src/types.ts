@@ -143,6 +143,8 @@ export type EnquirySubmittedPage = {
  */
 export type EnquiryContent =
   | EnquiryContentTitle
+  | EnquiryContentBody
+  | EnquiryContentImage
   | EnquiryContentScore
   | EnquiryContentText
   | EnquiryContentSelect
@@ -160,6 +162,35 @@ export type EnquiryContentTitle = {
    * Text to show in the title.
    */
   text: string
+}
+
+/**
+ * Body static type. This type does not require any user input and is only used as visual guide in the enquiry.
+ */
+export type EnquiryContentBody = {
+  type: "body"
+
+  /**
+   * Text to show in the body.
+   */
+  text: string
+}
+
+/**
+ * Static image section with an attachment.
+ */
+export type EnquiryContentImage = {
+  type: "image"
+
+  /**
+   * Attachment to show in the component.
+   */
+  attachment: {
+    /**
+     * Remote URL to the attachment show in the component.
+     */
+    url: string
+  }
 }
 
 /**

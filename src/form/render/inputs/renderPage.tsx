@@ -11,7 +11,9 @@ import type {
 } from "../../../types"
 import type { _RenderingContext } from "../types"
 import { _renderInputAttachments } from "./attachment"
+import { _renderInputBody } from "./body"
 import { _renderInputContactDetails } from "./contactDetails"
+import { _renderInputImage } from "./image"
 import { _renderInputMultiselect } from "./multiselect"
 import { _renderInputScore } from "./score"
 import { _renderInputSelect } from "./select"
@@ -59,6 +61,10 @@ export function renderPage(
         switch (content.type) {
           case "title":
             return _renderInputTitle(context, content, entryContent[index] as EntryContentTitle)
+          case "body":
+            return _renderInputBody(context, content)
+          case "image":
+            return _renderInputImage(context, content)
           case "score":
             return _renderInputScore(context, content, entryContent[index] as EntryContentScore)
           case "text":
