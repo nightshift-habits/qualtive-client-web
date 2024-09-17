@@ -24,7 +24,7 @@ export function renderPage(
   context: _RenderingContext,
   page: EnquiryPage,
   pageIndex: number,
-  entryContent: EntryContent[],
+  entryContent: (EntryContent | null)[],
 ) {
   let button: HTMLButtonElement
   const isLastPage = pageIndex == context.enquiry.pages.length - 1

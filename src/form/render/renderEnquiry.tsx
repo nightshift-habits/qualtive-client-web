@@ -17,9 +17,9 @@ export function renderEnquiry(
 ): { unmount: () => void } {
   let currentPage = 0
 
-  const content: EntryContent[][] = enquiry.pages.map((page) =>
+  const content: (EntryContent | null)[][] = enquiry.pages.map((page) =>
     page.content
-      .map((x): EntryContent | undefined => {
+      .map((x): EntryContent | null | undefined => {
         switch (x.type) {
           case "title":
             return { type: "title", text: x.text }
@@ -39,9 +39,15 @@ export function renderEnquiry(
             return { type: "multiselect", values: [] }
           case "attachments":
             return { type: "attachments", values: [] }
+          case "body":
+          case "contactDetails":
+          case "image":
+            return null
+          default:
+            return undefined
         }
       })
-      .filter((x): x is EntryContent => !!x),
+      .filter((x): x is EntryContent | null => x !== undefined),
   )
 
   const styleElement = options?._skipStyles ? null : renderStyles(options)
@@ -63,7 +69,7 @@ export function renderEnquiry(
       renderingContext.submitButton!.disabled = !content
         .flatMap((x) => x)
         .some((x) => {
-          switch (x.type) {
+          switch (x?.type) {
             case "title":
               return false
             case "score":
@@ -109,6 +115,7 @@ export function renderEnquiry(
       {
         content: content
           .flatMap((x) => x)
+          .filter((x): x is EntryContent => !!x)
           .map((x) => {
             switch (x.type) {
               case "attachments":
@@ -130,7 +137,7 @@ export function renderEnquiry(
       .then((newEntryReference) => {
         options?.onSubmitted?.({
           id: newEntryReference.id,
-          content: content.flatMap((x) => x),
+          content: content.flatMap((x) => x).filter((x): x is EntryContent => !!x),
         })
         contentElement.className = contentElement.className.replace("_q-sending", "_q-sent")
         let basedElement: Element | undefined

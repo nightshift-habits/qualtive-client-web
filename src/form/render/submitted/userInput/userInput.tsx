@@ -7,14 +7,18 @@ import { _renderAttachments } from "./attachments"
 import { _renderSelect } from "./select"
 import { _renderMultiselect } from "./multiselect"
 
-export function renderSubmittedPageUserInput(context: _RenderingContext, content: EntryContent[], pageIndex: number) {
+export function renderSubmittedPageUserInput(
+  context: _RenderingContext,
+  content: (EntryContent | null)[],
+  pageIndex: number,
+) {
   return (
     <div class={`_q-page ${pageIndex == context.enquiry.pages.length - 1 ? "_q-current" : "_q-prev"}`}>
       <div class="_q-user-input">
         <div class={userInputClass(content)} />
         <div>
           {content.map((content) => {
-            switch (content.type) {
+            switch (content?.type) {
               case "title":
                 return _renderTitle(context, content)
               case "text":
@@ -35,8 +39,8 @@ export function renderSubmittedPageUserInput(context: _RenderingContext, content
   ) as HTMLDivElement
 }
 
-function userInputClass(content: EntryContent[]): string | undefined {
-  const scores = content.map((x) => x.type == "score" && x.value).filter((x): x is number => typeof x === "number")
+function userInputClass(content: (EntryContent | null)[]): string | undefined {
+  const scores = content.map((x) => x && x.type == "score" && x.value).filter((x): x is number => typeof x === "number")
   if (scores.length === 0) return undefined
   const score = scores.reduce((a, b) => a + b, 0) / scores.length
   if (score >= 83) {
