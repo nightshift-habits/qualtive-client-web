@@ -1,6 +1,4 @@
-export type Score = 0 | 25 | 50 | 75 | 100
-
-export function renderSmiley(score: Score) {
+export function renderSmiley(score: number) {
   const { className, children } = getProps(score)
   return (
     <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="_q-smiley">
@@ -18,7 +16,7 @@ export function renderSmiley(score: Score) {
   )
 }
 
-function getProps(score: Score): { className: string; children: Element[] } {
+function getProps(score: number): { className: string; children: Element[] } {
   switch (score) {
     case 0:
       return {
@@ -101,6 +99,7 @@ function getProps(score: Score): { className: string; children: Element[] } {
         ],
       }
     case 100:
+    default:
       return {
         className: "_q-s100",
         children: [

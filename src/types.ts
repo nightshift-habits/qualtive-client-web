@@ -6,7 +6,7 @@ export type Collection = string | [string, string | number]
 /**
  * Kind/type of score to display for a user.
  */
-export type ScoreType = "smilies5" | "smilies3" | "thumbs" | "nps"
+export type ScoreType = "smilies5" | "smilies3" | "thumbs" | "nps" | "stars5"
 
 /**
  * Feedback question representing a form or a question to present to the user.

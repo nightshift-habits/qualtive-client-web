@@ -1,0 +1,27 @@
+._q-star {
+  ._q-background {
+    fill: #f6f6f6;
+    stroke: #c7cacd;
+  }
+}
+._q-scores label:focus-within ._q-star {
+  ._q-outline {
+    stroke: #0084ce;
+    stroke-width: 2px;
+  }
+}
+._q-scores ._q-selected ._q-star {
+  ._q-background {
+    fill: #f6bd60;
+    stroke: #f6bd60;
+  }
+  ._q-outline {
+    stroke-width: 0;
+  }
+}
+._q-scores ._q-hover ._q-star {
+  ._q-outline {
+    stroke: #000;
+    stroke-width: 2px;
+  }
+}
