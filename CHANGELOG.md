@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.16.0
+
+### Added
+
+- Support for thumb score type.
+- Support for 5 stars score type.
+- Support for read only body text component.
+- Support for read only image component.
+
+### Improved
+
+- Allow user to select text in paragraphs.
+
+### Fixed
+
+- User inputted text not wrapping after submitted.
+- Padding when rendering inline.
+- Elements may overflow when switching page and rendering inline.
+- Exception when placing read-only components in user input which are not ordered last.
+
 ## 1.15.0
 
 ### Added
@@ -21,14 +41,14 @@ All notable changes to this project will be documented in this file.
 - Removed all uses of async/await.
 - Minified export now only exposes public properties.
 
-### Fix
+### Fixed
 
 - Missing export of attachments when using package.
 - Fix button styles could sometimes be overwritten by parent website.
 
 ## 1.14.1
 
-### Fix
+### Fixed
 
 - Previewing user submitted text not sanitized
 
