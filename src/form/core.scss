@@ -1,19 +1,19 @@
-@import "./render/pageIndicator.scss";
-@import "./render/inputs/score.scss";
-@import "./render/inputs/scoreSmiley.scss";
-@import "./render/inputs/scoreThumb.scss";
-@import "./render/inputs/select.scss";
-@import "./render/inputs/attachment.scss";
-@import "./render/inputs/contactDetails.scss";
-@import "./render/submitted/userInput/userInput.scss";
-@import "./render/submitted/userInput/score.scss";
-@import "./render/submitted/userInput/attachments.scss";
-@import "./render/submitted/userInput/select.scss";
-@import "./render/submitted/image.scss";
-@import "./render/submitted/confirmationText.scss";
-@import "./render/renderEnquiry.scss";
-@import "./render/renderStrengthenBy.scss";
-@import "./render/inputs/scoreStars.scss";
+@use "./render/pageIndicator";
+@use "./render/inputs/score";
+@use "./render/inputs/scoreSmiley";
+@use "./render/inputs/scoreThumb";
+@use "./render/inputs/select";
+@use "./render/inputs/attachment";
+@use "./render/inputs/contactDetails";
+@use "./render/submitted/userInput/userInput";
+@use "./render/submitted/userInput/score" as submittedScore;
+@use "./render/submitted/userInput/attachments";
+@use "./render/submitted/userInput/select" as submittedSelect;
+@use "./render/submitted/image";
+@use "./render/submitted/confirmationText";
+@use "./render/renderEnquiry";
+@use "./render/renderStrengthenBy";
+@use "./render/inputs/scoreStars";
 
 @font-face {
   font-family: QF;

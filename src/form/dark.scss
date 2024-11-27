@@ -1,13 +1,13 @@
-@import "./render/pageIndicator-dark.scss";
-@import "./render/inputs/score-dark.scss";
-@import "./render/inputs/scoreSmiley-dark.scss";
-@import "./render/inputs/scoreThumb-dark.scss";
-@import "./render/inputs/select-dark.scss";
-@import "./render/inputs/attachment-dark.scss";
-@import "./render/inputs/contactDetails-dark.scss";
-@import "./render/submitted/userInput/select-dark.scss";
-@import "./render/renderStrengthenBy-dark.scss";
-@import "./render/inputs/scoreStars-dark.scss";
+@use "./render/pageIndicator-dark";
+@use "./render/inputs/score-dark";
+@use "./render/inputs/scoreSmiley-dark";
+@use "./render/inputs/scoreThumb-dark";
+@use "./render/inputs/select-dark";
+@use "./render/inputs/attachment-dark";
+@use "./render/inputs/contactDetails-dark";
+@use "./render/submitted/userInput/select-dark" as submittedSelectDark;
+@use "./render/renderStrengthenBy-dark";
+@use "./render/inputs/scoreStars-dark";
 
 #_q-container,
 ._q-content {
