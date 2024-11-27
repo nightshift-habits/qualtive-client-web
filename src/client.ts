@@ -55,7 +55,7 @@ export const _hasTouch = (): boolean => {
   try {
     document.createEvent("TouchEvent")
     return true
-  } catch (e) {
+  } catch {
     return false
   }
 }

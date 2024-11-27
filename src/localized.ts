@@ -16,7 +16,6 @@ export const _localized = (key: string, locale?: string): string => {
 
   const reversedLanguageFindKey = Object.keys(strings).find((x) => x.split("-")[0] == locale)
   if (reversedLanguageFindKey) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return strings[reversedLanguageFindKey]![key] || key
   }
 

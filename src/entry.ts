@@ -53,7 +53,6 @@ export const validateEntry = (entry: Entry): void => {
   } else {
     // Score
     const hasScore = !!entry.score || entry.score == 0
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     if (hasScore && (typeof entry.score != "number" || entry.score! < 0 || entry.score! > 100))
       throw Error("Score must be a number between 0 and 100")
 

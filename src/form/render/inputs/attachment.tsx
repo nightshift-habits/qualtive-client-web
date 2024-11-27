@@ -56,7 +56,7 @@ export function _renderInputAttachments(
 
       uploadAttachment(context.containerId, file.type as AttachmentContentType, file, context.options)
         .then((attachment) => {
-          // eslint-disable-next-line @typescript-eslint/no-extra-semi, @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(attachment as any).localUrl = localUrl
           entryContent.values.push(attachment)
           context.invalidateCanSend()

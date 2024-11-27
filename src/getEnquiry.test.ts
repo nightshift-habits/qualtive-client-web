@@ -26,7 +26,7 @@ describe("getEnquiry", () => {
   it("should handle connection failure", async () => {
     try {
       await getEnquiry(validCollection, { _remoteUrl: "https://does-not-exists.qualtive.io" })
-    } catch (error) {
+    } catch {
       // expected
       return
     }

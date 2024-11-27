@@ -23,7 +23,7 @@ describe("getQuestion", () => {
   it("should handle connection failure", async () => {
     try {
       await getQuestion(validCollection, { _remoteUrl: "https://does-not-exists.qualtive.io" })
-    } catch (error) {
+    } catch {
       // expected
       return
     }
