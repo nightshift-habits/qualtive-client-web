@@ -1,6 +1,8 @@
-import { Entry, EntryContent } from "./types"
+import { CustomAttributes, Entry, EntryContent, User } from "./types"
 
-export const validateEntry = (entry: Entry): void => {
+export const validateEntry = (
+  entry: Entry & { user?: User | null | undefined; customAttributes?: CustomAttributes | null | undefined },
+): void => {
   if (typeof entry != "object" || entry == null) throw Error("Entry must be an object")
 
   if (Array.isArray(entry.content)) {

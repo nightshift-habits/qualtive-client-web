@@ -1,4 +1,4 @@
-import type { EntryContent, EntryReference } from "../types"
+import type { Entry, EntryContent, EntryReference, User } from "../types"
 import { type GetEnquiryOptions } from "../getEnquiry"
 import { type PostOptions } from "../post"
 
@@ -7,16 +7,12 @@ export type RenderEnquiryOptions = GetEnquiryOptions &
     /**
      * User who entered feedback. For example the logged in user on the site. Optional.
      */
-    user?: {
-      id?: string | number | null
-      name?: string
-      email?: string
-    } | null
+    user?: User | null
 
     /**
      * Custom attributes
      */
-    customAttributes?: { [key: string]: string | number | boolean | null } | null
+    customAttributes?: Entry["customAttributes"]
 
     /**
      * Option to override if dark appearance should be used or not. Default is auto.

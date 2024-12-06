@@ -1,4 +1,9 @@
 /**
+ * Helper type for taking a value which can be reolved by a function and/or a promise.
+ */
+export type Resolvable<T> = T | Promise<T> | (() => T) | (() => Promise<T>)
+
+/**
  * Reference to a enquiry in a container.
  */
 export type Collection = string | [string, string | number]
@@ -272,16 +277,12 @@ export type Entry = {
   /**
    * User who entered feedback. For example the logged in user on the site. Optional.
    */
-  user?: {
-    id?: string | number | null
-    name?: string
-    email?: string
-  } | null
+  user?: Resolvable<User | null | undefined>
 
   /**
-   * Custom attributes
+   * Custom attributes for an entry. Optional.
    */
-  customAttributes?: { [key: string]: string | number | boolean | null } | null
+  customAttributes?: Resolvable<CustomAttributes | null | undefined>
 
   /**
    * Source of where the entry was created from. Optional.
@@ -290,6 +291,20 @@ export type Entry = {
     webpageUrl?: string | null
   }
 }
+
+/**
+ * User who entered feedback. For example the logged in user on the site.
+ */
+export type User = {
+  id?: string | number | null
+  name?: string
+  email?: string
+}
+
+/**
+ * Custom attributes for an entry.
+ */
+export type CustomAttributes = { [key: string]: string | number | boolean | null | undefined }
 
 /**
  * Enquiry content types. Note that more types can be added in the future.
