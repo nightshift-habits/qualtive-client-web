@@ -14,7 +14,7 @@ const estimatedHeight = 450
  * @param options Optional options.
  * @returns Form. The presented form.
  */
-export const present = (collectionOrEnquiry: Collection | Enquiry, options?: FormOptions): Form => {
+export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, options?: FormOptions): Form => {
   const nativeTakeover = checkNativeTakeover(collectionOrEnquiry)
   if (nativeTakeover) return nativeTakeover
 
@@ -235,7 +235,7 @@ declare global {
   }
 }
 
-function checkNativeTakeover(collectionOrEnquiry: Collection | Enquiry): ReturnType<typeof present> | null {
+function checkNativeTakeover(collectionOrEnquiry: Collection | Enquiry): ReturnType<typeof presentEnquiry> | null {
   if (!window.webkit?.messageHandlers?.qualtive) {
     return null
   }
@@ -265,3 +265,12 @@ function checkNativeTakeover(collectionOrEnquiry: Collection | Enquiry): ReturnT
     },
   }
 }
+
+/**
+ * Posts a user feedback entry.
+ * @param collection Collection to post to. Formatted as `container-id/enquiry-id-or-slug`. Required.
+ * @param options Optional options.
+ * @returns Form. The presented form.
+ * @deprecated Use presentEnquiry() instead
+ */
+export const present = presentEnquiry

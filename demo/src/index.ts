@@ -28,7 +28,7 @@ async function present(collectionOrEnquiry: qualtive.Collection | qualtive.Enqui
       options,
     )
   } else {
-    qualtive.present(collectionOrEnquiry, {
+    qualtive.presentEnquiry(collectionOrEnquiry, {
       ...options,
       onDismiss: (result) => {
         if (!result) {

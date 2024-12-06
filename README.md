@@ -14,12 +14,12 @@ First of all, make sure you have created a question on [qualtive.io](https://qua
 
 ### Using Built-in UI
 
-To present a feedback form, use the `present`-function. For example:
+To present a feedback form, use the `presentEnquiry`-function. For example:
 
 ```typescript
 import * as qualtive from "qualtive-web"
 
-qualtive.present("my-company/my-question")
+qualtive.presentEnquiry("my-company/my-question")
 ```
 
 There is a few options to customize the UI. For example:
@@ -27,7 +27,7 @@ There is a few options to customize the UI. For example:
 ```typescript
 import * as qualtive from "qualtive-web"
 
-qualtive.present("my-company/my-question", {
+qualtive.presentEnquiry("my-company/my-question", {
   supportURL: "https://link-to-your-customer-service/", // If present, this will show a link to your customer support.
   locale: "en-US", // Optional. The language and formatting to use. Defaults to the device default.
 })
@@ -38,7 +38,7 @@ If users can login on your site, you can include a user property describing the 
 ```typescript
 import * as qualtive from "qualtive-web"
 
-qualtive.present("my-company/my-question", {
+qualtive.presentEnquiry("my-company/my-question", {
   user: {
     id: "user-123", // Authorized user id. Used to list feedback from the same user. Optional.
     name: "Steve", // User friendly name. Can be the users full name or alias. Optional.
@@ -52,7 +52,7 @@ You can even include custom attributes that will be shown on [qualtive.io](https
 ```typescript
 import * as qualtive from "qualtive-web"
 
-qualtive.present("my-company/my-question", {
+qualtive.presentEnquiry("my-company/my-question", {
   customAttributes: {
     age: 22,
   },
