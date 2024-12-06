@@ -135,10 +135,17 @@ export function renderEnquiry(
       options,
     )
       .then((newEntryReference) => {
-        options?.onSubmitted?.({
-          id: newEntryReference.id,
-          content: content.flatMap((x) => x).filter((x): x is EntryContent => !!x),
-        })
+        if (options?.onSubmitted) {
+          const result = options.onSubmitted({
+            id: newEntryReference.id,
+            content: content.flatMap((x) => x).filter((x): x is EntryContent => !!x),
+          })
+          if (result instanceof Promise) {
+            return result.catch((error) => console.error("Caught error in onSubmitted callback", error))
+          }
+        }
+      })
+      .then(() => {
         contentElement.className = contentElement.className.replace("_q-sending", "_q-sent")
         let basedElement: Element | undefined
         enquiry.submittedPage.content.forEach((submittedContent) => {

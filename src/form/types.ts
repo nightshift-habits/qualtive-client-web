@@ -25,8 +25,12 @@ export type RenderEnquiryOptions = GetEnquiryOptions &
 
     /**
      * Optional function that is called when the form was submitted. First parameter contains the reference sent entry.
+     *
+     * This function can return a promise to indicate that the form is still processing.
+     *
+     * Note: Throwing in this function will be logged to console and not shown to the end user.
      */
-    onSubmitted?: (entry: EntryReference & PostedEntry) => void
+    onSubmitted?: (entry: EntryReference & PostedEntry) => Promise<void> | void
 
     _containerElement?: HTMLElement
     _noClickElement?: HTMLElement
