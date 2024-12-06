@@ -34,8 +34,8 @@ let output = await fs.readFile(path.resolve("./dist/index.js"), "utf8")
 output = output
   .replace(`Object.defineProperty(exports, '__esModule', { value: true });`, "")
   .replace(/exports\.(\w+)\s*=\s*\1;/g, "")
-  .replace(`var jsxRuntime = require('qualtive-client-web-jsx/jsx-runtime')`, ``)
-  .replace(/jsxRuntime\./g, "")
+  .replace(/var jsxRuntimeJsx = require\('\.\/jsx-runtime-jsx-[A-Za-z0-9]+\.js'\)/, ``)
+  .replace(/jsxRuntimeJsx\./g, "")
 
 output = `window.qualtive = (() => {
     ${jsxRuntime}
