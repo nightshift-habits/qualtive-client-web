@@ -4,10 +4,11 @@ demo/
 node_modules/
 src/
 scripts/
+qualtive-client-web-jsx/
 .vscode/
-.babelrc
-.eslintignore
-.eslintrc
+.nova
+.nvmrc
+eslint.config.mjs
 .gitignore
 .npmignore
 .prettierrc
@@ -15,3 +16,4 @@ jest.config.js
 tsconfig.json
 mini.js
 tsconfig.prod.json
+webpack.config.js

@@ -11,7 +11,7 @@
     "lint": "eslint src/",
     "test": "jest --coverage",
     "build:css": "sh ./scripts/build-css.sh",
-    "build:ts": "tsc -p tsconfig.prod.json",
+    "build:ts": "webpack && tsc --emitDeclarationOnly --declaration --project tsconfig.json",
     "build": "npm run build:css && rm -rf dist && npm run build:ts",
     "package": "npm run build && npm publish",
     "mini": "rm -rf dist && npm run build:css && node ./scripts/build-mini.mjs && uglifyjs --compress --mangle --output mini.js -- mini.js"
@@ -24,9 +24,6 @@
     "url": "https://github.com/nightshift-habits/qualtive-client-web/issues"
   },
   "homepage": "https://github.com/nightshift-habits/qualtive-client-web#readme",
-  "dependencies": {
-    "qualtive-client-web-jsx": "file:/./qualtive-client-web-jsx/"
-  },
   "devDependencies": {
     "@babel/core": "^7.13.14",
     "@babel/plugin-transform-react-jsx": "^7.25.2",
@@ -37,6 +34,7 @@
     "@types/jest": "^29.0.0",
     "@typescript-eslint/eslint-plugin": "^8.16.0",
     "@typescript-eslint/parser": "^8.16.0",
+    "babel-loader": "^9.2.1",
     "bunchee": "^5.1.2",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.0.0",
@@ -46,9 +44,12 @@
     "jest-environment-jsdom": "^29.4.3",
     "nodemon": "^3.1.4",
     "prettier": "^3.0.2",
+    "qualtive-client-web-jsx": "file:/./qualtive-client-web-jsx/",
     "sass": "^1.49.7",
     "ts-jest": "^29.0.0",
     "typescript": "^5.1.6",
-    "uglify-js": "^3.13.9"
+    "uglify-js": "^3.13.9",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   }
 }
