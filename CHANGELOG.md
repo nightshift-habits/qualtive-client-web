@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.17.0
+
+### Added
+
+- Allow passing a promise and/or a function for user and custom attributes
+
+### Fixed
+
+- Removed local dependency of jsx-runtime. This could cause issues installing the package in some environments.
+
 ## 1.16.0
 
 ### Added
