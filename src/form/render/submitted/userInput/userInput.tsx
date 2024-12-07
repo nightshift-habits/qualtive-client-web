@@ -11,9 +11,10 @@ export function renderSubmittedPageUserInput(
   context: _RenderingContext,
   content: (EntryContent | null)[],
   pageIndex: number,
+  pageCount: number,
 ) {
   return (
-    <div class={`_q-page ${pageIndex == context.enquiry.pages.length - 1 ? "_q-current" : "_q-prev"}`}>
+    <div class={`_q-page ${pageIndex == pageCount - 1 ? "_q-current" : "_q-prev"}`}>
       <div class="_q-user-input">
         <div class={userInputClass(content)} />
         <div>

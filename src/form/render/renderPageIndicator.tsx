@@ -1,23 +1,30 @@
 import { _localized } from "../../localized"
 import type { _RenderingContext } from "./types"
 
-export function renderPageIndicator(context: _RenderingContext): {
+export function renderPageIndicator(
+  context: _RenderingContext,
+  currentPage: number,
+  pageCount: number,
+): {
   element: Element
   didChangePage: (currentPage: number) => void
 } | null {
-  if (context.enquiry.pages.length <= 1) return null
+  if (pageCount <= 1) return null
 
-  const labelSpan = (<span>{`1/${context.enquiry.pages.length}`}</span>) as HTMLSpanElement
+  const labelSpan = (<span>{`1/${pageCount}`}</span>) as HTMLSpanElement
   const previousPageButton = (
-    <button type="button" title={_localized("form.page-back", context.options?.locale)} disabled>
+    <button type="button" title={_localized("form.page-back", context.options?.locale)} disabled={currentPage == 0}>
       {"<-"}
     </button>
   ) as HTMLButtonElement
   previousPageButton.onclick = context.previousPage
 
-  let maxPage = 0
-  const rows = [renderPageRow(context, 0), renderPageRow(context, 1)]
-  rows[0].button.disabled = true
+  let maxPage = currentPage
+  const rows: ReturnType<typeof renderPageRow>[] = []
+  while (rows.length <= Math.min(pageCount - 1, currentPage + 1)) {
+    rows.push(renderPageRow(context, rows.length))
+  }
+  rows[currentPage].button.disabled = true
 
   const listElement = (<ul>{rows.map((x) => x.element)}</ul>) as HTMLUListElement
 
@@ -33,7 +40,7 @@ export function renderPageIndicator(context: _RenderingContext): {
       previousPageButton.disabled = currentPage == 0
 
       maxPage = Math.max(maxPage, currentPage)
-      while (rows.length <= Math.min(context.enquiry.pages.length - 1, currentPage + 1)) {
+      while (rows.length <= Math.min(pageCount - 1, currentPage + 1)) {
         const row = renderPageRow(context, rows.length)
         rows.push(row)
         listElement.appendChild(row.element)
@@ -53,7 +60,7 @@ export function renderPageIndicator(context: _RenderingContext): {
       }
       rows.forEach((x) => (x.button.disabled = false))
       rows[currentPage].button.disabled = true
-      labelSpan.innerText = `${currentPage + 1}/${context.enquiry.pages.length}`
+      labelSpan.innerText = `${currentPage + 1}/${pageCount}`
     },
   }
 }

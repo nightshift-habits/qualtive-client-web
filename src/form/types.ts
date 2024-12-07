@@ -1,9 +1,9 @@
-import type { Entry, EntryContent, EntryReference, User } from "../types"
-import { type GetEnquiryOptions } from "../getEnquiry"
+import type { _Options, Entry, EntryContent, EntryContentPage, EntryReference, User } from "../types"
 import { type PostOptions } from "../post"
 
-export type RenderEnquiryOptions = GetEnquiryOptions &
-  PostOptions & {
+export type RenderEnquiryOptions = _Options &
+  PostOptions &
+  RenderEnquirySubmittedOptions & {
     /**
      * User who entered feedback. For example the logged in user on the site. Optional.
      */
@@ -15,15 +15,6 @@ export type RenderEnquiryOptions = GetEnquiryOptions &
     customAttributes?: Entry["customAttributes"]
 
     /**
-     * Option to override if dark appearance should be used or not. Default is auto.
-     *
-     * - auto: Dark mode is used if the user prefers dark mode.
-     * - never: Dark mode will never be used.
-     * - always: Dark mode will always be used.
-     */
-    darkMode?: "auto" | "never" | "always"
-
-    /**
      * Optional function that is called when the form was submitted. First parameter contains the reference sent entry.
      *
      * This function can return a promise to indicate that the form is still processing.
@@ -31,11 +22,22 @@ export type RenderEnquiryOptions = GetEnquiryOptions &
      * Note: Throwing in this function will be logged to console and not shown to the end user.
      */
     onSubmitted?: (entry: EntryReference & PostedEntry) => Promise<void> | void
-
-    _containerElement?: HTMLElement
-    _noClickElement?: HTMLElement
-    _skipStyles?: boolean
   }
+
+export type RenderEnquirySubmittedOptions = _Options & {
+  /**
+   * Option to override if dark appearance should be used or not. Default is auto.
+   *
+   * - auto: Dark mode is used if the user prefers dark mode.
+   * - never: Dark mode will never be used.
+   * - always: Dark mode will always be used.
+   */
+  darkMode?: "auto" | "never" | "always"
+
+  _containerElement?: HTMLElement
+  _noClickElement?: HTMLElement
+  _skipStyles?: boolean
+}
 
 /**
  * Optional options to use when posting feedback using built in form-UI.
@@ -98,4 +100,9 @@ export type PostedEntry = {
    * Entry content.
    */
   content: EntryContent[]
+
+  /**
+   * Pages of content.
+   */
+  pages: EntryContentPage[]
 }

@@ -1,6 +1,6 @@
 import { _localized } from "../../localized"
 import type { Enquiry, EntryContent } from "../../types"
-import type { RenderEnquiryOptions } from "../types"
+import type { PostedEntry, RenderEnquiryOptions } from "../types"
 import { post } from "../../post"
 import { renderPage } from "./inputs/renderPage"
 import { _RenderingContext } from "./types"
@@ -90,7 +90,7 @@ export function renderEnquiry(
   const pagerElement = (<div class="_q-pager">{pages[0]}</div>) as HTMLDivElement
   const form = (<form>{pagerElement}</form>) as HTMLFormElement
 
-  const pageIndicator = renderPageIndicator(renderingContext)
+  const pageIndicator = renderPageIndicator(renderingContext, 0, enquiry.pages.length)
 
   contentElement.appendChild(form)
   if (pageIndicator) contentElement.appendChild(pageIndicator.element)
@@ -136,10 +136,15 @@ export function renderEnquiry(
     )
       .then((newEntryReference) => {
         if (options?.onSubmitted) {
-          const result = options.onSubmitted({
+          const postedEntryPages = content.map((content) => ({
+            content: content.filter((x): x is EntryContent => !!x),
+          }))
+          const postedEntry: PostedEntry = {
             id: newEntryReference.id,
-            content: content.flatMap((x) => x).filter((x): x is EntryContent => !!x),
-          })
+            pages: postedEntryPages,
+            content: postedEntryPages.flatMap((x) => x.content),
+          }
+          const result = options.onSubmitted(postedEntry)
           if (result instanceof Promise) {
             return result.catch((error) => console.error("Caught error in onSubmitted callback", error))
           }
@@ -152,7 +157,9 @@ export function renderEnquiry(
           switch (submittedContent.type) {
             case "userInput":
               pagerElement.removeChild(pages[currentPage])
-              pages = content.map((page, index) => renderSubmittedPageUserInput(renderingContext, page, index))
+              pages = content.map((page, index) =>
+                renderSubmittedPageUserInput(renderingContext, page, index, enquiry.pages.length),
+              )
               pagerElement.appendChild(pages[currentPage])
               contentElement.insertBefore(pagerElement, form)
               contentElement.removeChild(form)

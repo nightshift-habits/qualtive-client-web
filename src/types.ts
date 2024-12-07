@@ -385,6 +385,13 @@ export type EnquirySubmittedContentImage = {
 }
 
 /**
+ * Page of content for an entry.
+ */
+export type EntryContentPage = {
+  content: EntryContent[]
+}
+
+/**
  * Section of content for an entry. Determined by the content of a Enquiry.
  *
  * Only difference between the content of an Entry and a Enquiry is that EntryContent accepts input while EnquiryContent is only for display.
