@@ -107,6 +107,14 @@ export const post = (collection: Collection, entry: Entry, options?: PostOptions
       timeZoneIdentifier = null
     }
 
+    let references: { type: string; id: string }[] | undefined
+    try {
+      const cookie = document.cookie.match(/qualtiveREFs=([^;]+)/)?.[1]
+      references = cookie ? JSON.parse(decodeURIComponent(cookie)) : []
+    } catch (error) {
+      console.error("Error parsing Qualtive references cookie", error)
+    }
+
     const body = {
       questionId: /^-?\d+$/.test(enquiryId) ? parseInt(enquiryId) : enquiryId,
       content,
@@ -120,14 +128,22 @@ export const post = (collection: Collection, entry: Entry, options?: PostOptions
       attributes: customAttributes,
       attributeHints,
       source,
+      references,
     }
 
-    return _fetch({
+    return _fetch<EntryReference>({
       ...(options || {}),
       method: "POST",
       path: "/feedback/entries/",
       containerId,
       body,
+    }).then((entryReference) => {
+      try {
+        document.cookie = "qualtiveREFs=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"
+      } catch (error) {
+        console.error("Error deleting Qualtive references cookie", error)
+      }
+      return entryReference
     })
   })
 }
