@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.18.0
+
+### Added
+
+- `onSubmitted`-callback function can now return a promise which will be awaited before the submitted state is shown.
+- Added a new `renderEnquirySubmitted`-function which can be used to render the submitted state of an already submitted entry.
+- Pick up and delete breadcrumb references from other packages. For example, this is used for the new [qualtive-web-sentry](https://github.com/nightshift-habits/qualtive-client-web-sentry)-package which includes Sentry events in posted entries.
+
+### Improved
+
+- Renamed `presentEnquiry`-function from `present`-function. The old naming is deprecated and will be removed in the next major version.
+
 ## 1.17.0
 
 ### Added
