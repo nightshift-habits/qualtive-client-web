@@ -523,6 +523,7 @@ export type _Options = {
    * The locale to use. Defaults to `navigator?.language || en-us`.
    */
   locale?: string
+
   /**
    * Method to use for networking.
    *
@@ -533,8 +534,9 @@ export type _Options = {
    * - a function: Allows you to handle request yourself. See RequestCaller-type for variables and expected result.
    */
   networking?: "auto" | "fetch" | "xmlhttprequest" | RequestCaller | null
+
   /**
-   * The remote url to post feedback too. Must include scheme and host. For debug usages only.
+   * The remote url to post feedback too. Must include scheme and host. For testing and internal usages only.
    */
   _remoteUrl?: string | null
 }
