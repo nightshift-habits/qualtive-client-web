@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.19.0
+
+### Added
+
+- Support for image components on submitted page having a optional link.
+- Support for new link component on submitted page.
+
+### Improved
+
+- Resolving locale does not have a dependency on `window.navigator` anymore allowing for easier usage in a server side environment.
+
 ## 1.18.0
 
 ### Added
