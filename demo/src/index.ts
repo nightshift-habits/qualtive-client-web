@@ -114,6 +114,11 @@ const staticEnquiry: qualtive.Enquiry = {
         type: "confirmationText",
         text: "Tack, skickat!",
       },
+      {
+        type: "link",
+        text: "Vår hemsida",
+        url: "https://qualtive.io",
+      },
     ],
   },
   container: {

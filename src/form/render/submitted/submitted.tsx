@@ -5,6 +5,7 @@ import { _renderBody } from "./body"
 import { _renderImage } from "./image"
 import { _renderConfirmationText } from "./confirmationText"
 import { _renderName } from "./name"
+import { _renderLink } from "./link"
 
 export function renderSubmittedPage(
   context: _RenderingContext,
@@ -23,5 +24,7 @@ export function renderSubmittedPage(
       return _renderImage(context, content)
     case "confirmationText":
       return _renderConfirmationText(context, content)
+    case "link":
+      return _renderLink(context, content)
   }
 }

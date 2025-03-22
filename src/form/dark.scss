@@ -11,6 +11,14 @@
 
 #_q-container,
 ._q-content {
+  a._q-contained {
+    &:link,
+    &:visited {
+      color: #fff;
+    }
+  }
+
+  a,
   button {
     &._q-contained {
       border-color: #fff;

@@ -75,17 +75,21 @@
     display: flex;
     flex-direction: column;
   }
-  button {
-    background: transparent;
-    border: none;
-    border-radius: 0;
+  a._q-contained {
     display: flex;
-    &:not(:disabled) {
-      &,
-      * {
-        cursor: pointer !important;
-      }
+    span {
+      cursor: pointer !important;
     }
+    &:link,
+    &:visited {
+      color: #000;
+    }
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+  a,
+  button {
     &._q-contained {
       border-radius: 20px;
       height: 40px;
@@ -97,6 +101,7 @@
       outline: none;
       border: 1px solid #333;
       padding: 0 30px;
+      &a,
       &[type="button"] {
         span {
           color: #333;
@@ -172,6 +177,18 @@
       span {
         font-size: 13px;
         font-weight: 600;
+      }
+    }
+  }
+  button {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    &:not(:disabled) {
+      &,
+      * {
+        cursor: pointer !important;
       }
     }
   }

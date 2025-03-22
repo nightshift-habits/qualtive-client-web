@@ -316,6 +316,7 @@ export type EnquirySubmittedContent =
   | EnquirySubmittedContentTitle
   | EnquirySubmittedContentBody
   | EnquirySubmittedContentImage
+  | EnquirySubmittedContentLink
 
 /**
  * Section showing the name of the enquiry.
@@ -387,6 +388,23 @@ export type EnquirySubmittedContentImage = {
    * Optional URL that the image links to. If provided, the image will be wrapped in a link. The link will open in a new tab.
    */
   linkURL: string | null
+}
+
+/**
+ * Link button that opens a URL when a button is tapped/clicked.
+ */
+export type EnquirySubmittedContentLink = {
+  type: "link"
+
+  /**
+   * Text to display on the button.
+   */
+  text: string
+
+  /**
+   * URL to open in a new tab when clicked.
+   */
+  url: string
 }
 
 /**
