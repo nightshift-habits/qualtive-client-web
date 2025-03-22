@@ -382,6 +382,11 @@ export type EnquirySubmittedContentImage = {
      */
     url: string
   }
+
+  /**
+   * Optional URL that the image links to. If provided, the image will be wrapped in a link. The link will open in a new tab.
+   */
+  linkURL: string | null
 }
 
 /**

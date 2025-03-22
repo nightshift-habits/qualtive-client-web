@@ -100,6 +100,7 @@ const staticEnquiry: qualtive.Enquiry = {
         attachment: {
           url: "https://storage.googleapis.com/qualtive-user/feedback/attachments/qualtive/6216079997140992",
         },
+        linkURL: "https://qualtive.io",
       },
       {
         type: "title",
