@@ -56,7 +56,11 @@ export function renderPage(
   }
   return (
     <div class={`_q-page ${pageIndex == 0 ? "_q-current" : "_q-next"}`}>
-      {pageIndex == 0 && <h2>{context.enquiry.name}</h2>}
+      {pageIndex == 0 && (
+        <h2 style={context.enquiry.theme.font.value === "heptaSlab" ? "font-family: var(--font-qh)" : undefined}>
+          {context.enquiry.name}
+        </h2>
+      )}
       {page.content.map((content, index) => {
         switch (content.type) {
           case "title":

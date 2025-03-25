@@ -1,7 +1,15 @@
 import type { EnquiryContentTitle, EntryContentTitle } from "../../../types"
 import type { _RenderingContext } from "../types"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function _renderInputTitle(_: _RenderingContext, enquiryContent: EnquiryContentTitle, __: EntryContentTitle) {
-  return <h2>{enquiryContent.text}</h2>
+export function _renderInputTitle(
+  context: _RenderingContext,
+  enquiryContent: EnquiryContentTitle,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  content: EntryContentTitle,
+) {
+  return (
+    <h2 style={context.enquiry.theme.font.value === "heptaSlab" ? "font-family: var(--font-qh)" : undefined}>
+      {enquiryContent.text}
+    </h2>
+  )
 }

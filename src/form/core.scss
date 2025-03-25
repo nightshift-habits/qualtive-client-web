@@ -39,10 +39,17 @@
   src: url(https://static.qualtive.io/fonts/Poppins-SemiBold.ttf);
   font-display: swap;
 }
+@font-face {
+  font-family: QH;
+  font-weight: 600;
+  src: url(https://static.qualtive.io/fonts/HeptaSlab-SemiBold.ttf);
+  font-display: swap;
+}
 
 ._q-content {
   --font-qf: Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --font-qp: Poppins, QP, Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-qh: HeptaSlab, QH, Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
 
 #_q-no-click {
