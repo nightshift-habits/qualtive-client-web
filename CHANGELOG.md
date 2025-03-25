@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.20.0
+
+### Added
+
+- Support for theme customization including:
+  - Predefined and custom background styles (plain or sponda pattern)
+  - Font family selection (default or Hepta Slab)
+  - Corner style options (rounded or square)
+- Container visibility mode setting (`public` or `private`) to control response visibility
+- New font families: Poppins and Hepta Slab
+
+### Improved
+
+- Enhanced title styling with larger font size (28px) and better line height
+- More consistent font family handling across components
+- Better layout for confirmation text with improved flex properties
+
+### Fixed
+
+- Confirmation text checkmark truncated if text is long
+
 ## 1.19.0
 
 ### Added
