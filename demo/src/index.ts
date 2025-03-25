@@ -121,10 +121,22 @@ const staticEnquiry: qualtive.Enquiry = {
       },
     ],
   },
+  theme: {
+    background: {
+      type: "predefined",
+      value: "sponda",
+    },
+    font: {
+      type: "predefined",
+      value: "heptaSlab",
+    },
+    cornerStyle: "square",
+  },
   container: {
     id: "qualtive",
     logo: null,
     isWhiteLabel: false,
+    visibilityMode: "public",
   },
 }
 
