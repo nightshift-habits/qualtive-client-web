@@ -1,3 +1,10 @@
+._q-rounded {
+  ._q-attachments {
+    button {
+      border-radius: 6px !important;
+    }
+  }
+}
 ._q-attachments {
   margin: 0 0 20px !important;
   display: flex;
@@ -35,7 +42,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    border-radius: 6px !important;
     width: 40px;
     height: 40px;
     background-repeat: no-repeat !important;
@@ -55,11 +61,15 @@
   }
 }
 
+._q-rounded {
+  #_q-drop-indication {
+    border-radius: 2px;
+  }
+}
 #_q-drop-indication {
   position: fixed;
   z-index: 99999999;
   margin: 20px;
-  border-radius: 2px;
   border: 2px dashed #c7cacd;
   pointer-events: none;
   cursor: copy !important;

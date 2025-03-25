@@ -18,7 +18,7 @@ export function _renderInputAttachments(
           y="0.5"
           width="39"
           height="39"
-          rx="5.5"
+          rx={context.enquiry.theme.cornerStyle === "rounded" ? "5.5" : "0"}
           stroke="#000"
           stroke-opacity="0.4"
           stroke-dasharray="4 4"

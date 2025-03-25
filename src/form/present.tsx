@@ -78,7 +78,7 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
   let supportLinkElement: Element | undefined
 
   const containerElement = (
-    <div id="_q-container" class="_q-out" style={`max-width:490px;min-height:${estimatedHeight}px`}>
+    <div id="_q-container" class={"_q-out"} style={`max-width:490px;min-height:${estimatedHeight}px`}>
       <div class="_q-header">{closeButton}</div>
     </div>
   ) as HTMLDivElement
@@ -95,6 +95,9 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
       enquiryRender = { unmount: () => {} }
       containerElement.appendChild(<p class="_q-error">{enquiryOrError.message}</p>)
     } else {
+      if (enquiryOrError.theme.cornerStyle === "rounded") {
+        containerElement.classList.add("_q-rounded")
+      }
       enquiryRender = renderEnquiry(enquiryOrError, containerElement, {
         ...(options || {}),
         _containerElement: containerElement,

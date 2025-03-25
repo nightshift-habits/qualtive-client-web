@@ -1,3 +1,12 @@
+._q-rounded {
+  ._q-user-input {
+    > div {
+      &:first-child {
+        border-radius: 2px;
+      }
+    }
+  }
+}
 ._q-user-input {
   display: flex;
   gap: 20px;
@@ -6,7 +15,6 @@
     &:first-child {
       flex: 0 0 4px;
       background: #e5e5e5;
-      border-radius: 2px;
       align-self: stretch;
       &._q-s0 {
         background: #ff9c9c;

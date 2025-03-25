@@ -1,3 +1,10 @@
+._q-rounded {
+  ._q-contact-details {
+    input {
+      border-radius: 6px;
+    }
+  }
+}
 ._q-contact-details {
   margin: 0 0 20px !important;
   svg {
@@ -7,7 +14,6 @@
   input {
     border: 1px solid #c7cacd;
     color: #333;
-    border-radius: 6px;
     font-size: 13px;
     width: 100%;
     padding: 6px 12px 7px 30px !important;

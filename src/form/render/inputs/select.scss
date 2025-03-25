@@ -1,3 +1,14 @@
+._q-rounded {
+  ._q-options {
+    label {
+      > span {
+        > input {
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
 ._q-options {
   margin: 0 0 20px !important;
   display: flex;
@@ -25,7 +36,6 @@
       > input {
         border: 1px solid #c7cacd;
         color: #333;
-        border-radius: 6px;
         font-size: 13px;
         width: 100%;
         padding: 6px 12px !important;
