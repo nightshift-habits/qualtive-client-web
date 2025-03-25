@@ -127,6 +127,11 @@ export type EnquiryContainer = {
     urlVector: string
     urlVectorDark: string
   } | null
+
+  /**
+   * Visibility mode of the container. If `public`, the responses are publicly visible for other users. If `private`, the responses are only visible to the workspace users.
+   */
+  visibilityMode: "public" | "private"
 }
 
 export type EnquiryPage = {
