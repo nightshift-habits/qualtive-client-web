@@ -104,9 +104,116 @@ export type Enquiry = {
   submittedPage: EnquirySubmittedPage
 
   /**
+   * Theme of the enquiry. Controls the appearance properties of the enquiry.
+   */
+  theme: EnquiryTheme
+
+  /**
    * Details about the container the enquiry belongs to.
    */
   container: EnquiryContainer
+}
+
+/**
+ * Theme configuration for an enquiry. Controls the visual appearance of the enquiry form.
+ */
+export type EnquiryTheme = {
+  /**
+   * Background configuration for the enquiry form. This has no effect when using the sheet or inline presentation.
+   */
+  background: EnquiryThemeBackground
+
+  /**
+   * Font configuration for the enquiry form. Only affects the title of the enquiry.
+   */
+  font: EnquiryThemeFont
+
+  /**
+   * Controls the corner style of UI elements in the form.
+   * - "rounded": Elements have rounded corners
+   * - "square": Elements have sharp corners
+   */
+  cornerStyle: "rounded" | "square"
+}
+
+/**
+ * Background configuration for an enquiry theme. Can be either predefined or custom.
+ */
+export type EnquiryThemeBackground = EnquiryThemeBackgroundPredefined | EnquiryThemeBackgroundCustom
+
+/**
+ * Predefined background configuration using built-in background styles.
+ */
+export type EnquiryThemeBackgroundPredefined = {
+  /**
+   * Indicates this is a predefined background configuration.
+   */
+  type: "predefined"
+
+  /**
+   * The predefined background style to use.
+   * - "plain": Simple solid background
+   * - "sponda": Sponda-style background pattern with a gradient
+   */
+  value: "plain" | "sponda"
+}
+
+/**
+ * Custom background configuration allowing custom colors and image attachments.
+ */
+export type EnquiryThemeBackgroundCustom = {
+  /**
+   * Indicates this is a custom background configuration.
+   */
+  type: "custom"
+
+  /**
+   * Optional background image attachment. If null, only the background color will be used.
+   */
+  attachment: {
+    /**
+     * MIME type of the background image (e.g. "image/jpeg", "image/png").
+     */
+    contentType: string
+
+    /**
+     * URL to the background image resource.
+     */
+    url: string
+  } | null
+
+  /**
+   * Background color configuration.
+   */
+  color: {
+    /**
+     * CSS color value (e.g. "#FF0000").
+     */
+    value: string
+  }
+}
+
+/**
+ * Font configuration for an enquiry theme. Currently only supports predefined fonts.
+ */
+export type EnquiryThemeFont = EnquiryThemeFontPredefined
+
+/**
+ * Predefined font configuration using built-in font families.
+ */
+export type EnquiryThemeFontPredefined = {
+  /**
+   * Indicates this is a predefined font configuration.
+   */
+  type: "predefined"
+
+  /**
+   * The font family to use.
+   * - "default": System default font stack
+   * - "heptaSlab": Hepta Slab font family
+   * - Or any other supported font family string
+   */
+  value: "default" | "heptaSlab" | string
 }
 
 export type EnquiryContainer = {
