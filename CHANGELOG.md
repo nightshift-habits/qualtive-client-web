@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.20.1
+
+### Fixed
+
+- Missing rounded styling when rendering inline
+
 ## 1.20.0
 
 ### Added
