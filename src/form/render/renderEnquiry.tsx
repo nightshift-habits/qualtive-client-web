@@ -52,7 +52,9 @@ export function renderEnquiry(
 
   const styleElement = options?._skipStyles ? null : renderStyles(options)
 
-  const contentElement = (<div class="_q-content" />) as HTMLDivElement
+  const contentElement = (
+    <div class={"_q-content" + (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "")} />
+  ) as HTMLDivElement
 
   const renderingContext: _RenderingContext = {
     containerId: enquiry.container.id,
