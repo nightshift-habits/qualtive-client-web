@@ -53,7 +53,13 @@ export function renderEnquiry(
   const styleElement = options?._skipStyles ? null : renderStyles(options)
 
   const contentElement = (
-    <div class={"_q-content" + (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "")} />
+    <div
+      class={
+        "_q-content" +
+        (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "") +
+        (enquiry.container.isWhiteLabel ? " _q-white-label" : "")
+      }
+    />
   ) as HTMLDivElement
 
   const renderingContext: _RenderingContext = {

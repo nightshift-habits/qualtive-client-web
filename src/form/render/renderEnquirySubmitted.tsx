@@ -17,7 +17,15 @@ export function renderEnquirySubmitted(
 
   const styleElement = options?._skipStyles ? null : renderStyles(options)
 
-  const contentElement = (<div class="_q-content _q-sent" />) as HTMLDivElement
+  const contentElement = (
+    <div
+      class={
+        "_q-content _q-sent" +
+        (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "") +
+        (enquiry.container.isWhiteLabel ? " _q-white-label" : "")
+      }
+    />
+  ) as HTMLDivElement
 
   const renderingContext: _RenderingContext = {
     containerId: enquiry.container.id,

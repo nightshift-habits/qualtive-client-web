@@ -340,8 +340,15 @@
 ._q-content {
   display: flex;
   flex-direction: column;
-  padding: 10px 0 !important;
+  padding: 0 !important;
   overflow: hidden;
+  &._q-white-label {
+    & > *:last-child,
+    > ._q-pager:last-child ._q-page > *:last-child,
+    form:last-child ._q-page > *:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
 }
 #_q-container {
   ._q-content {
