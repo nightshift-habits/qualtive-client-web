@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.21.0
+
+### Improved
+
+- Adjusted font sizes and margins
+
+### Fixed
+
+- Some additional margin when presented inline
+
 ## 1.20.1
 
 ### Fixed
