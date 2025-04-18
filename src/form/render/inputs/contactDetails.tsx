@@ -14,7 +14,7 @@ export function _renderInputContactDetails(context: _RenderingContext, enquiryCo
   }
 
   return [
-    <h3>{enquiryContent.title}</h3>,
+    <h2>{enquiryContent.title}</h2>,
     <div class="_q-contact-details">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path

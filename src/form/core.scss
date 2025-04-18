@@ -40,6 +40,12 @@
   font-display: swap;
 }
 @font-face {
+  font-family: QP;
+  font-weight: 400;
+  src: url(https://static.qualtive.io/fonts/Poppins-Regular.ttf);
+  font-display: swap;
+}
+@font-face {
   font-family: QH;
   font-weight: 600;
   src: url(https://static.qualtive.io/fonts/HeptaSlab-SemiBold.ttf);
@@ -117,7 +123,7 @@
       align-items: center;
       align-self: center;
       gap: 5px;
-      margin: 0 0 20px;
+      margin: 0 0 14px;
       outline: none;
       border: 1px solid #333;
       padding: 0 30px;
@@ -215,30 +221,41 @@
   ul {
     list-style: none;
   }
-  h2 {
-    font-size: 28px;
+  h1 {
+    font-size: 26px;
     font-weight: 600;
-    line-height: 46px;
-    margin: 0 0 15px;
+    line-height: 34px;
+    margin: 0 0 30px;
     color: #000;
     font-family: var(--font-qp);
   }
-  h3 {
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0 0 10px;
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin: 0 0 14px;
     color: #000;
+    font-family: var(--font-qp);
+    &:first-child {
+      font-size: 22px;
+      line-height: 30px;
+      margin: 0 0 30px;
+    }
+  }
+  h2 + p {
+    margin-top: -10px;
   }
   p {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 22px;
     color: #333;
-    margin: 0 0 10px;
+    margin: 0 0 14px;
     cursor: text !important;
     user-select: text !important;
     -moz-user-select: text !important;
     -webkit-user-select: text !important;
+    font-family: var(--font-qp);
     &._q-error {
       color: #e33737;
     }
