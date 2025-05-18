@@ -194,9 +194,9 @@ export type EnquiryThemeBackgroundCustom = {
 }
 
 /**
- * Font configuration for an enquiry theme. Currently only supports predefined fonts.
+ * Font configuration for an enquiry theme. Supports both predefined and custom fonts.
  */
-export type EnquiryThemeFont = EnquiryThemeFontPredefined
+export type EnquiryThemeFont = EnquiryThemeFontPredefined | EnquiryThemeFontCustom
 
 /**
  * Predefined font configuration using built-in font families.
@@ -214,6 +214,21 @@ export type EnquiryThemeFontPredefined = {
    * - Or any other supported font family string
    */
   value: "default" | "heptaSlab" | string
+}
+
+/**
+ * Custom font configuration using a custom font family.
+ */
+export type EnquiryThemeFontCustom = {
+  /**
+   * Indicates this is a custom font configuration.
+   */
+  type: "custom"
+
+  /**
+   * Remote URL to the custom font family.
+   */
+  url: string
 }
 
 export type EnquiryContainer = {

@@ -15,7 +15,7 @@ export function renderEnquirySubmitted(
 ): { unmount: () => void } {
   let currentPage = entry.pages.length - 1
 
-  const styleElement = options?._skipStyles ? null : renderStyles(options)
+  const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
 
   const contentElement = (
     <div

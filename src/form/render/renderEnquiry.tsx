@@ -50,7 +50,7 @@ export function renderEnquiry(
       .filter((x): x is EntryContent | null => x !== undefined),
   )
 
-  const styleElement = options?._skipStyles ? null : renderStyles(options)
+  const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
 
   const contentElement = (
     <div

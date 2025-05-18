@@ -8,7 +8,15 @@ export function _renderInputTitle(
   content: EntryContentTitle,
 ) {
   return (
-    <h2 style={context.enquiry.theme.font.value === "heptaSlab" ? "font-family: var(--font-qh)" : undefined}>
+    <h2
+      style={
+        context.enquiry.theme.font.type === "custom"
+          ? "font-family: var(--font-qc)"
+          : context.enquiry.theme.font.value === "heptaSlab"
+            ? "font-family: var(--font-qh)"
+            : undefined
+      }
+    >
       {enquiryContent.text}
     </h2>
   )

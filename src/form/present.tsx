@@ -4,7 +4,7 @@ import { getEnquiry } from "../getEnquiry"
 import { _localized } from "../localized"
 import { Form, FormOptions, PostedEntry } from "./types"
 import { renderEnquiry } from "./render/renderEnquiry"
-import { renderStyles } from "./render/renderStyles"
+import { customFontStyle, renderStyles } from "./render/renderStyles"
 
 const estimatedHeight = 450
 
@@ -54,7 +54,7 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
     options?.onDismiss?.(postedEntry)
   }
 
-  const styleElement = renderStyles(options)
+  const styleElement = renderStyles(options, null)
 
   // Add root elements
   const noClickElement = (<div id="_q-no-click" />) as HTMLDivElement
@@ -97,6 +97,9 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
     } else {
       if (enquiryOrError.theme.cornerStyle === "rounded") {
         containerElement.classList.add("_q-rounded")
+      }
+      if (enquiryOrError.theme.font.type === "custom") {
+        styleElement.innerHTML += customFontStyle(enquiryOrError.theme.font)
       }
       enquiryRender = renderEnquiry(enquiryOrError, containerElement, {
         ...(options || {}),
