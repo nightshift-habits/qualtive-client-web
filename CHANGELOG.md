@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.22.0
+
+### Added
+
+- Support for custom fonts in enquiry themes.
+
 ## 1.21.0
 
 ### Improved
