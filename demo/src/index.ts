@@ -55,6 +55,41 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
   }
 })
 
+const staticEnquirySubmittedPage: qualtive.LegacyEnquirySubmittedPage = {
+  content: [
+    {
+      type: "name",
+    },
+    {
+      type: "userInput",
+    },
+    {
+      type: "image",
+      attachment: {
+        url: "https://storage.googleapis.com/qualtive-user/feedback/attachments/qualtive/6216079997140992",
+      },
+      linkURL: "https://qualtive.io",
+    },
+    {
+      type: "title",
+      text: "Så når du oss:",
+    },
+    {
+      type: "body",
+      text: "Vi svarar normal inom 48h. Vid brådskande ärenden är du välkommen att nå oss på telefon 123456673.",
+    },
+    {
+      type: "confirmationText",
+      text: "Tack, skickat!",
+    },
+    {
+      type: "link",
+      text: "Vår hemsida",
+      url: "https://qualtive.io",
+    },
+  ],
+}
+
 const staticEnquiry: qualtive.Enquiry = {
   id: 7927746166530402,
   slug: "how-does-the-client-web-library-work",
@@ -87,40 +122,8 @@ const staticEnquiry: qualtive.Enquiry = {
       ],
     },
   ],
-  submittedPage: {
-    content: [
-      {
-        type: "name",
-      },
-      {
-        type: "userInput",
-      },
-      {
-        type: "image",
-        attachment: {
-          url: "https://storage.googleapis.com/qualtive-user/feedback/attachments/qualtive/6216079997140992",
-        },
-        linkURL: "https://qualtive.io",
-      },
-      {
-        type: "title",
-        text: "Så når du oss:",
-      },
-      {
-        type: "body",
-        text: "Vi svarar normal inom 48h. Vid brådskande ärenden är du välkommen att nå oss på telefon 123456673.",
-      },
-      {
-        type: "confirmationText",
-        text: "Tack, skickat!",
-      },
-      {
-        type: "link",
-        text: "Vår hemsida",
-        url: "https://qualtive.io",
-      },
-    ],
-  },
+  submittedPage: staticEnquirySubmittedPage,
+  submittedPages: [{ ...staticEnquirySubmittedPage, conditions: [] }],
   theme: {
     background: {
       type: "predefined",
