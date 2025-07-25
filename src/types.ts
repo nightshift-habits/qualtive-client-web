@@ -472,6 +472,7 @@ export type EnquirySubmittedContent =
   | EnquirySubmittedContentName
   | EnquirySubmittedContentConfirmationText
   | EnquirySubmittedContentUserInput
+  | EnquirySubmittedContentUserInputScore
   | EnquirySubmittedContentTitle
   | EnquirySubmittedContentBody
   | EnquirySubmittedContentImage
@@ -497,10 +498,17 @@ export type EnquirySubmittedContentConfirmationText = {
 }
 
 /**
- * Section showing the name of the enquiry.
+ * Section showing the user's submitted input.
  */
 export type EnquirySubmittedContentUserInput = {
   type: "userInput"
+}
+
+/**
+ * Section showing the user's submitted input score.
+ */
+export type EnquirySubmittedContentUserInputScore = {
+  type: "userInputScore"
 }
 
 /**
