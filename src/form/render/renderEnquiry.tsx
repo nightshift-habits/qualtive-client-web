@@ -9,6 +9,7 @@ import { renderPageIndicator } from "./renderPageIndicator"
 import { renderStyles } from "./renderStyles"
 import { renderSubmittedPage } from "./submitted/submitted"
 import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
+import { determineSubmittedPage } from "./renderEnquirySubmitted"
 
 export function renderEnquiry(
   enquiry: Enquiry,
@@ -142,26 +143,31 @@ export function renderEnquiry(
       },
       options,
     )
-      .then((newEntryReference) => {
+      .then(async (newEntryReference) => {
+        const postedEntryPages = content.map((content) => ({
+          content: content.filter((x): x is EntryContent => !!x),
+        }))
+        const postedEntry: PostedEntry = {
+          id: newEntryReference.id,
+          pages: postedEntryPages,
+          content: postedEntryPages.flatMap((x) => x.content),
+        }
         if (options?.onSubmitted) {
-          const postedEntryPages = content.map((content) => ({
-            content: content.filter((x): x is EntryContent => !!x),
-          }))
-          const postedEntry: PostedEntry = {
-            id: newEntryReference.id,
-            pages: postedEntryPages,
-            content: postedEntryPages.flatMap((x) => x.content),
-          }
-          const result = options.onSubmitted(postedEntry)
-          if (result instanceof Promise) {
-            return result.catch((error) => console.error("Caught error in onSubmitted callback", error))
+          try {
+            const result = options.onSubmitted(postedEntry)
+            if (result instanceof Promise) {
+              await result
+            }
+          } catch (error) {
+            console.error("Caught error in onSubmitted callback", error)
           }
         }
+        return postedEntry
       })
-      .then(() => {
+      .then((postedEntry) => {
         contentElement.className = contentElement.className.replace("_q-sending", "_q-sent")
         let basedElement: Element | undefined
-        enquiry.submittedPage.content.forEach((submittedContent) => {
+        determineSubmittedPage(enquiry, postedEntry).content.forEach((submittedContent) => {
           switch (submittedContent.type) {
             case "userInput":
               pagerElement.removeChild(pages[currentPage])

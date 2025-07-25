@@ -1,4 +1,4 @@
-import type { Enquiry } from "../../types"
+import type { Enquiry, EnquirySubmittedPage, EnquirySubmittedPageCondition } from "../../types"
 import type { PostedEntry, RenderEnquirySubmittedOptions } from "../types"
 import { _RenderingContext } from "./types"
 import { renderStrengthenBy } from "./renderStrengthenBy"
@@ -14,6 +14,8 @@ export function renderEnquirySubmitted(
   options?: RenderEnquirySubmittedOptions,
 ): { unmount: () => void } {
   let currentPage = entry.pages.length - 1
+  const submittedPage = determineSubmittedPage(enquiry, entry)
+  const hasUserInputComponent = submittedPage.content.some((x) => x.type === "userInput")
 
   const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
 
@@ -47,13 +49,15 @@ export function renderEnquirySubmitted(
 
   const pageIndicator = renderPageIndicator(renderingContext, currentPage, entry.pages.length)
 
-  contentElement.appendChild(pagerElement)
+  if (hasUserInputComponent) {
+    contentElement.appendChild(pagerElement)
+  }
   if (pageIndicator) contentElement.appendChild(pageIndicator.element)
   if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(options))
   domNode.appendChild(contentElement)
 
   let basedElement: Element | undefined
-  enquiry.submittedPage.content.forEach((submittedContent) => {
+  submittedPage.content.forEach((submittedContent) => {
     switch (submittedContent.type) {
       case "userInput":
         basedElement = pageIndicator?.element ?? pagerElement
@@ -123,5 +127,47 @@ export function renderEnquirySubmitted(
       }
       domNode.removeChild(contentElement)
     },
+  }
+}
+
+export function determineSubmittedPage(enquiry: Enquiry, entry: PostedEntry): EnquirySubmittedPage {
+  const score = getPagesScores(entry)
+  return (
+    enquiry.submittedPages
+      .filter((page) => isConditionsSatisfied(page.conditions, score))
+      // Assume more conditions == more specific == better match
+      .sort((a, b) => b.conditions.length - a.conditions.length)[0]
+  )
+}
+
+export function getPagesScores(entry: PostedEntry): number | null {
+  const scores: number[] = []
+  for (const page of entry.pages) {
+    for (const content of page.content) {
+      switch (content.type) {
+        case "score":
+          if (typeof content.value === "number") {
+            scores.push(content.value)
+          }
+          break
+      }
+    }
+  }
+  if (scores.length === 0) return null
+
+  return scores.reduce((a, b) => a + b, 0) / scores.length
+}
+
+export function isConditionsSatisfied(conditions: EnquirySubmittedPageCondition[], score: number | null): boolean {
+  return conditions.every((condition) => isConditionSatisfied(condition, score))
+}
+
+export function isConditionSatisfied(condition: EnquirySubmittedPageCondition, score: number | null): boolean {
+  switch (condition.type) {
+    case "score":
+      if (score === null) return false
+      return condition.ranges.some(
+        (range) => (range.lower === null || range.lower < score) && (range.upper === null || range.upper > score),
+      )
   }
 }
