@@ -11,6 +11,7 @@ describe("getEnquiry", () => {
     expect(question.pages.length).toBeGreaterThan(0)
     expect(question.pages[0].content.length).toBeGreaterThan(0)
     expect(question.submittedPage.content.length).toBeGreaterThan(0)
+    expect(question.submittedPages.length).toBeGreaterThan(0)
   })
 
   it("should handle not found", async () => {
