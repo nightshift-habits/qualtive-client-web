@@ -99,9 +99,14 @@ export type Enquiry = {
   pages: EnquiryPage[]
 
   /**
-   * Enquiry submitted page. The content and structure of the enquiry to present to the user once submitted.
+   * @deprecated Use submittedPages instead.
    */
-  submittedPage: EnquirySubmittedPage
+  submittedPage: LegacyEnquirySubmittedPage
+
+  /**
+   * Enquiry submitted pages. The content and structure of the enquiry to present to the user once submitted.
+   */
+  submittedPages: EnquirySubmittedPage[]
 
   /**
    * Theme of the enquiry. Controls the appearance properties of the enquiry.
@@ -268,6 +273,33 @@ export type EnquirySubmittedPage = {
    * Page content. The content and structure of the enquiry to present to the user once submitted.
    */
   content: EnquirySubmittedContent[]
+
+  /**
+   * Conditions that determine when a submitted page should be shown.
+   */
+  conditions: EnquirySubmittedPageCondition[]
+}
+
+/**
+ * @deprecated Use EnquirySubmittedPage instead.
+ */
+export type LegacyEnquirySubmittedPage = {
+  /**
+   * Page content. The content and structure of the enquiry to present to the user once submitted.
+   */
+  content: EnquirySubmittedContent[]
+}
+
+export type EnquirySubmittedPageCondition = EnquirySubmittedPageConditionScore
+
+export type EnquirySubmittedPageConditionScore = {
+  type: "score"
+  ranges: EnquirySubmittedPageConditionScoreRange[]
+}
+
+export type EnquirySubmittedPageConditionScoreRange = {
+  lower: number | null
+  upper: number | null
 }
 
 /**
