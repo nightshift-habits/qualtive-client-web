@@ -1,5 +1,6 @@
 import type { _Options, Entry, EntryContent, EntryContentPage, EntryReference, User } from "../types"
 import { type PostOptions } from "../post"
+import { type GetEnquiryOptions } from "../getEnquiry"
 
 export type RenderEnquiryOptions = _Options &
   PostOptions &
@@ -42,38 +43,39 @@ export type RenderEnquirySubmittedOptions = _Options & {
 /**
  * Optional options to use when posting feedback using built in form-UI.
  */
-export type FormOptions = RenderEnquiryOptions & {
-  /**
-   * Localized form title to show on top of the form. Default is `"Leave feedback"`.
-   * @deprecated No longer used.
-   */
-  title?: string
+export type FormOptions = RenderEnquiryOptions &
+  GetEnquiryOptions & {
+    /**
+     * Localized form title to show on top of the form. Default is `"Leave feedback"`.
+     * @deprecated No longer used.
+     */
+    title?: string
 
-  /**
-   * Optional link to customer support. If this property has a value a link the custom support will be displayed in the form. Default is `null`.
-   */
-  supportURL?: string
+    /**
+     * Optional link to customer support. If this property has a value a link the custom support will be displayed in the form. Default is `null`.
+     */
+    supportURL?: string
 
-  /**
-   * Option to set size of form. Default is compact.
-   *
-   * - compact: Compact width. Preferred to be used in short forms.
-   * - wide: Wider width. Preferred to be used in longer forms.
-   *
-   * @deprecated No longer used.
-   */
-  size?: "compact" | "wide"
+    /**
+     * Option to set size of form. Default is compact.
+     *
+     * - compact: Compact width. Preferred to be used in short forms.
+     * - wide: Wider width. Preferred to be used in longer forms.
+     *
+     * @deprecated No longer used.
+     */
+    size?: "compact" | "wide"
 
-  /**
-   * Option to disallow dismissal of the form by clicking escape on the keyboard. Default is false.
-   */
-  disallowKeyboardDismiss?: boolean
+    /**
+     * Option to disallow dismissal of the form by clicking escape on the keyboard. Default is false.
+     */
+    disallowKeyboardDismiss?: boolean
 
-  /**
-   * Optional function that is called when the form is dismissed. First parameter contains the reference sent entry or null if the form was cancelled.
-   */
-  onDismiss?: (entry: (EntryReference & PostedEntry) | null) => void
-}
+    /**
+     * Optional function that is called when the form is dismissed. First parameter contains the reference sent entry or null if the form was cancelled.
+     */
+    onDismiss?: (entry: (EntryReference & PostedEntry) | null) => void
+  }
 
 /**
  * Reference to a presented form.
