@@ -2,7 +2,7 @@ import * as qualtive from "qualtive-web"
 
 let inlineRender: ReturnType<typeof qualtive.renderEnquiry> | null
 
-function getOptions() {
+function getOptions(): qualtive.FormOptions {
   return {
     darkMode: (document.getElementById("darkmode") as HTMLSelectElement).value as "auto",
     supportURL: (document.getElementById("supportURL") as HTMLInputElement).value,
