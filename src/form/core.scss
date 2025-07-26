@@ -11,6 +11,7 @@
 @use "./render/submitted/userInput/select" as submittedSelect;
 @use "./render/submitted/image";
 @use "./render/submitted/confirmationText";
+@use "./render/submitted/userInputScore";
 @use "./render/renderEnquiry";
 @use "./render/renderStrengthenBy";
 @use "./render/inputs/scoreStars";

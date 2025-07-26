@@ -23,6 +23,11 @@ export type RenderEnquiryOptions = _Options &
      * Note: Throwing in this function will be logged to console and not shown to the end user.
      */
     onSubmitted?: (entry: EntryReference & PostedEntry) => Promise<void> | void
+
+    /**
+     * Optional function that is called after the submitted page was rendered. First parameter contains the reference sent entry.
+     */
+    onSubmittedPageShown?: (entry: EntryReference & PostedEntry) => Promise<void> | void
   }
 
 export type RenderEnquirySubmittedOptions = _Options & {

@@ -59,6 +59,13 @@ document.querySelectorAll("*[data-collection]").forEach((button) => {
 const staticEnquirySubmittedPage: qualtive.LegacyEnquirySubmittedPage = {
   content: [
     {
+      type: "confirmationText",
+      text: "Tack, skickat!",
+    },
+    {
+      type: "userInputScore",
+    },
+    {
       type: "name",
     },
     {
@@ -78,10 +85,6 @@ const staticEnquirySubmittedPage: qualtive.LegacyEnquirySubmittedPage = {
     {
       type: "body",
       text: "Vi svarar normal inom 48h. Vid brådskande ärenden är du välkommen att nå oss på telefon 123456673.",
-    },
-    {
-      type: "confirmationText",
-      text: "Tack, skickat!",
     },
     {
       type: "link",
@@ -124,7 +127,23 @@ const staticEnquiry: qualtive.Enquiry = {
     },
   ],
   submittedPage: staticEnquirySubmittedPage,
-  submittedPages: [{ ...staticEnquirySubmittedPage, conditions: [] }],
+  submittedPages: [
+    { ...staticEnquirySubmittedPage, conditions: [] },
+    {
+      ...staticEnquirySubmittedPage,
+      conditions: [
+        {
+          type: "score",
+          ranges: [
+            {
+              lower: 50,
+              upper: null,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   theme: {
     background: {
       type: "predefined",

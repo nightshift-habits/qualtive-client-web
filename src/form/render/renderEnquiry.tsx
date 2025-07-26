@@ -3,7 +3,7 @@ import type { Enquiry, EntryContent } from "../../types"
 import type { PostedEntry, RenderEnquiryOptions } from "../types"
 import { post } from "../../post"
 import { renderPage } from "./inputs/renderPage"
-import { _RenderingContext } from "./types"
+import { _RenderingContext, _RenderingContextSubmitted } from "./types"
 import { renderStrengthenBy } from "./renderStrengthenBy"
 import { renderPageIndicator } from "./renderPageIndicator"
 import { renderStyles } from "./renderStyles"
@@ -11,6 +11,7 @@ import { renderSubmittedPage } from "./submitted/submitted"
 import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
 import { determineSubmittedPage } from "./renderEnquirySubmitted"
 import { _parsePadding } from "./utils"
+import { _renderUserInputScore } from "./submitted/userInputScore"
 
 export function renderEnquiry(
   enquiry: Enquiry,
@@ -111,7 +112,9 @@ export function renderEnquiry(
 
   contentElement.appendChild(form)
   if (pageIndicator) contentElement.appendChild(pageIndicator.element)
-  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(renderingContext, options))
+
+  const strengthenByElement = !enquiry.container.isWhiteLabel ? renderStrengthenBy(renderingContext, options) : null
+  if (strengthenByElement) contentElement.appendChild(strengthenByElement)
   domNode.appendChild(contentElement)
 
   let errorSpan: HTMLSpanElement | undefined
@@ -172,15 +175,28 @@ export function renderEnquiry(
         }
         return postedEntry
       })
-      .then((postedEntry) => {
+      .then(async (postedEntry) => {
         contentElement.className = contentElement.className.replace("_q-sending", "_q-sent")
 
         if (pageIndicator) {
           pageIndicator.element.style.paddingBottom = "0"
         }
 
+        const submittedPage = determineSubmittedPage(enquiry, postedEntry)
+        const userInputScoreValue = submittedPage.conditions.some(
+          (x) => x.type === "score" && x.ranges.some((y) => y.lower === 50),
+        )
+          ? 100
+          : 0
+
+        const renderingContextSubmitted: _RenderingContextSubmitted = {
+          ...renderingContext,
+          userInputScoreValue,
+        }
+
         let basedElement: Element | undefined
-        determineSubmittedPage(enquiry, postedEntry).content.forEach((submittedContent) => {
+        let parentElement = contentElement
+        submittedPage.content.forEach((submittedContent) => {
           switch (submittedContent.type) {
             case "userInput":
               pagerElement.removeChild(pages[currentPage])
@@ -188,22 +204,43 @@ export function renderEnquiry(
                 renderSubmittedPageUserInput(renderingContext, page, index, enquiry.pages.length),
               )
               pagerElement.appendChild(pages[currentPage])
-              contentElement.insertBefore(pagerElement, form)
+              parentElement.insertBefore(
+                pagerElement,
+                basedElement ? basedElement.nextSibling : parentElement.children[0],
+              )
+              basedElement = pagerElement
+              if (pageIndicator) {
+                parentElement.insertBefore(pageIndicator.element, basedElement.nextSibling)
+                basedElement = pageIndicator.element
+              }
               contentElement.removeChild(form)
-              basedElement = pageIndicator?.element ?? pagerElement
               pagerElement.style.transition = "none"
               pagerElement.style.height = pages[currentPage].getBoundingClientRect().height + "px"
               setTimeout(() => {
                 pagerElement.style.transition = ""
               }, 10)
               break
+            case "userInputScore": {
+              const wrapperElement = (
+                <div class={`_q-user-input-score-wrapper _q-s${userInputScoreValue}`} />
+              ) as HTMLDivElement
+              const element = _renderUserInputScore(renderingContextSubmitted, submittedContent)
+              wrapperElement.appendChild(element)
+              parentElement.insertBefore(
+                wrapperElement,
+                basedElement ? basedElement.nextSibling : parentElement.children[0],
+              )
+              basedElement = element
+              parentElement = wrapperElement
+              if (strengthenByElement) {
+                parentElement.appendChild(strengthenByElement)
+              }
+              break
+            }
             default: {
-              const element = renderSubmittedPage(renderingContext, submittedContent)
+              const element = renderSubmittedPage(renderingContextSubmitted, submittedContent)
               if (element) {
-                contentElement.insertBefore(
-                  element,
-                  basedElement ? basedElement.nextSibling : contentElement.children[0],
-                )
+                parentElement.insertBefore(element, basedElement ? basedElement.nextSibling : parentElement.children[0])
                 basedElement = element
               }
             }
@@ -211,6 +248,16 @@ export function renderEnquiry(
         })
         if (form.parentElement) {
           contentElement.removeChild(form)
+        }
+        if (options?.onSubmittedPageShown) {
+          try {
+            const result = options.onSubmittedPageShown(postedEntry)
+            if (result instanceof Promise) {
+              await result
+            }
+          } catch (error) {
+            console.error("Caught error in onSubmittedPageShown callback", error)
+          }
         }
       })
       .catch((error) => {

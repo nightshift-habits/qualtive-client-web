@@ -17,3 +17,7 @@ export type _RenderingContext = {
   user: RenderEnquiryOptions["user"]
   padding: [string, string, string, string]
 }
+
+export type _RenderingContextSubmitted = _RenderingContext & {
+  userInputScoreValue: number
+}

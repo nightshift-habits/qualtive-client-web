@@ -107,9 +107,9 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
         _containerElement: containerElement,
         _noClickElement: noClickElement,
         _skipStyles: true,
-        onSubmitted: (entry) => {
+        onSubmittedPageShown: async (entry) => {
           postedEntry = entry
-          options?.onSubmitted?.(entry)
+          await options?.onSubmittedPageShown?.(entry)
 
           const dismissButton = (
             <button type="button" class="_q-contained" style="margin-left:auto;margin-right:auto">
@@ -127,12 +127,17 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
           ) as HTMLButtonElement
           dismissButton.onclick = dismiss
 
-          const contentElement = containerElement.children[1]
-          if (contentElement.children[contentElement.children.length - 1].className == "_q-qlogo") {
-            contentElement.insertBefore(dismissButton, contentElement.children[contentElement.children.length - 1])
+          let parentElement = containerElement.children[1]
+          if (
+            parentElement.children[parentElement.children.length - 1].className.includes("_q-user-input-score-wrapper")
+          ) {
+            parentElement = parentElement.children[parentElement.children.length - 1]
+          }
+          if (parentElement.children[parentElement.children.length - 1].children[0]?.className == "_q-qlogo") {
+            parentElement.insertBefore(dismissButton, parentElement.children[parentElement.children.length - 1])
           } else {
             dismissButton.style.marginBottom = "0"
-            contentElement.appendChild(<div style="padding: 0 0 30px">{dismissButton}</div>)
+            parentElement.appendChild(<div style="padding: 0 0 30px">{dismissButton}</div>)
           }
         },
       })

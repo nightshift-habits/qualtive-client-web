@@ -1,0 +1,14 @@
+._q-user-input-score-wrapper {
+  &._q-s0 {
+    background: linear-gradient(to bottom, transparent 0px, transparent 30px, #5b2929 31px, #5b2929 100%);
+    &:first-child {
+      background: #5b2929;
+    }
+  }
+  &._q-s100 {
+    background: linear-gradient(to bottom, transparent 0px, transparent 30px, #1a3d29 31px, #1a3d29 100%);
+    &:first-child {
+      background: #1a3d29;
+    }
+  }
+}

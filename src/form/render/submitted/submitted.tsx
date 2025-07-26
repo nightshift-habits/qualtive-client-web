@@ -1,19 +1,22 @@
 import type { EnquirySubmittedContent } from "../../../types"
-import type { _RenderingContext } from "../types"
+import type { _RenderingContextSubmitted } from "../types"
 import { _renderTitle } from "./title"
 import { _renderBody } from "./body"
 import { _renderImage } from "./image"
 import { _renderConfirmationText } from "./confirmationText"
 import { _renderName } from "./name"
 import { _renderLink } from "./link"
+import { _renderUserInputScore } from "./userInputScore"
 
 export function renderSubmittedPage(
-  context: _RenderingContext,
+  context: _RenderingContextSubmitted,
   content: EnquirySubmittedContent,
 ): Element | null | undefined {
   switch (content.type) {
     case "userInput":
       return null // Managed by the renderEnquiry using the same paging logic as input
+    case "userInputScore":
+      return _renderUserInputScore(context, content)
     case "name":
       return _renderName(context, content)
     case "title":

@@ -1,12 +1,13 @@
 import type { Enquiry, EnquirySubmittedPage, EnquirySubmittedPageCondition } from "../../types"
 import type { PostedEntry, RenderEnquirySubmittedOptions } from "../types"
-import { _RenderingContext } from "./types"
+import { _RenderingContextSubmitted } from "./types"
 import { renderStrengthenBy } from "./renderStrengthenBy"
 import { renderPageIndicator } from "./renderPageIndicator"
 import { renderStyles } from "./renderStyles"
 import { renderSubmittedPage } from "./submitted/submitted"
 import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
 import { _parsePadding } from "./utils"
+import { _renderUserInputScore } from "./submitted/userInputScore"
 
 export function renderEnquirySubmitted(
   enquiry: Enquiry,
@@ -16,7 +17,11 @@ export function renderEnquirySubmitted(
 ): { unmount: () => void } {
   let currentPage = entry.pages.length - 1
   const submittedPage = determineSubmittedPage(enquiry, entry)
-  const hasUserInputComponent = submittedPage.content.some((x) => x.type === "userInput")
+  const userInputScoreValue = submittedPage.conditions.some(
+    (x) => x.type === "score" && x.ranges.some((y) => y.lower === 50),
+  )
+    ? 100
+    : 0
 
   const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
   const padding = _parsePadding(options?.padding)
@@ -28,11 +33,11 @@ export function renderEnquirySubmitted(
         (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "") +
         (enquiry.container.isWhiteLabel ? " _q-white-label" : "")
       }
-      style={`padding:${padding[0]} 0 0`}
+      style={submittedPage.content[0].type === "userInputScore" ? undefined : `padding:${padding[0]} 0 0`}
     />
   ) as HTMLDivElement
 
-  const renderingContext: _RenderingContext = {
+  const renderingContext: _RenderingContextSubmitted = {
     containerId: enquiry.container.id,
     containerElement: options?._containerElement,
     noClickElement: options?._noClickElement,
@@ -45,6 +50,7 @@ export function renderEnquirySubmitted(
     user: undefined,
     invalidateCanSend: () => {},
     padding,
+    userInputScoreValue,
   }
   const pages = entry.pages.map((page, index) =>
     renderSubmittedPageUserInput(renderingContext, page.content, index, entry.pages.length),
@@ -53,23 +59,32 @@ export function renderEnquirySubmitted(
 
   const pageIndicator = renderPageIndicator(renderingContext, currentPage, entry.pages.length)
 
-  if (hasUserInputComponent) {
-    contentElement.appendChild(pagerElement)
-  }
-  if (pageIndicator) contentElement.appendChild(pageIndicator.element)
-  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(renderingContext, options))
   domNode.appendChild(contentElement)
 
   let basedElement: HTMLElement | undefined
+  let parentElement = contentElement
   submittedPage.content.forEach((submittedContent) => {
     switch (submittedContent.type) {
       case "userInput":
+        parentElement.insertBefore(pagerElement, basedElement ? basedElement.nextSibling : parentElement.children[0])
+        if (pageIndicator) parentElement.insertBefore(pageIndicator.element, pagerElement.nextSibling)
         basedElement = pageIndicator?.element ?? pagerElement
         break
+      case "userInputScore": {
+        const wrapperElement = (
+          <div class={`_q-user-input-score-wrapper _q-s${userInputScoreValue}`} />
+        ) as HTMLDivElement
+        const element = _renderUserInputScore(renderingContext, submittedContent)
+        wrapperElement.appendChild(element)
+        parentElement.insertBefore(wrapperElement, basedElement ? basedElement.nextSibling : parentElement.children[0])
+        basedElement = element as HTMLElement
+        parentElement = wrapperElement
+        break
+      }
       default: {
         const element = renderSubmittedPage(renderingContext, submittedContent)
         if (element) {
-          contentElement.insertBefore(element, basedElement ? basedElement.nextSibling : contentElement.children[0])
+          parentElement.insertBefore(element, basedElement ? basedElement.nextSibling : parentElement.children[0])
           basedElement = element as HTMLElement
         }
       }
@@ -80,7 +95,9 @@ export function renderEnquirySubmitted(
       basedElement.style.marginBottom = "0"
     }
     const paddingElement = (<div style={`padding: 0 0 ${padding[2]}`} />) as HTMLDivElement
-    contentElement.insertBefore(paddingElement, basedElement ? basedElement.nextSibling : contentElement.children[0])
+    parentElement.insertBefore(paddingElement, basedElement ? basedElement.nextSibling : parentElement.children[0])
+  } else {
+    parentElement.appendChild(renderStrengthenBy(renderingContext, options))
   }
 
   // Set initial height of pager. Using auto height first with delay before computing in case of the content is being animated with a size change
