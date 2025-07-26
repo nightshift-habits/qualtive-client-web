@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.23.0
+
+### Added
+
+- Support for multiple condition-based submitted pages.
+- Support for new user input score component.
+- Added new callback `onSubmittedPageShown` which is called after the submitted page was rendered.
+- Allows for custom padding when rendering inline.
+
+### Fixed
+
+- Exposed TypeScript types for all form related types.
+
 ## 1.22.0
 
 ### Added
