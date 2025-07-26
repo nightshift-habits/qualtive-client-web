@@ -6,6 +6,7 @@ import { renderPageIndicator } from "./renderPageIndicator"
 import { renderStyles } from "./renderStyles"
 import { renderSubmittedPage } from "./submitted/submitted"
 import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
+import { _parsePadding } from "./utils"
 
 export function renderEnquirySubmitted(
   enquiry: Enquiry,
@@ -18,6 +19,7 @@ export function renderEnquirySubmitted(
   const hasUserInputComponent = submittedPage.content.some((x) => x.type === "userInput")
 
   const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
+  const padding = _parsePadding(options?.padding)
 
   const contentElement = (
     <div
@@ -26,6 +28,7 @@ export function renderEnquirySubmitted(
         (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "") +
         (enquiry.container.isWhiteLabel ? " _q-white-label" : "")
       }
+      style={`padding:${padding[0]} 0 0`}
     />
   ) as HTMLDivElement
 
@@ -41,6 +44,7 @@ export function renderEnquirySubmitted(
     setPage,
     user: undefined,
     invalidateCanSend: () => {},
+    padding,
   }
   const pages = entry.pages.map((page, index) =>
     renderSubmittedPageUserInput(renderingContext, page.content, index, entry.pages.length),
@@ -53,10 +57,10 @@ export function renderEnquirySubmitted(
     contentElement.appendChild(pagerElement)
   }
   if (pageIndicator) contentElement.appendChild(pageIndicator.element)
-  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(options))
+  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(renderingContext, options))
   domNode.appendChild(contentElement)
 
-  let basedElement: Element | undefined
+  let basedElement: HTMLElement | undefined
   submittedPage.content.forEach((submittedContent) => {
     switch (submittedContent.type) {
       case "userInput":
@@ -66,11 +70,18 @@ export function renderEnquirySubmitted(
         const element = renderSubmittedPage(renderingContext, submittedContent)
         if (element) {
           contentElement.insertBefore(element, basedElement ? basedElement.nextSibling : contentElement.children[0])
-          basedElement = element
+          basedElement = element as HTMLElement
         }
       }
     }
   })
+  if (enquiry.container.isWhiteLabel) {
+    if (basedElement) {
+      basedElement.style.marginBottom = "0"
+    }
+    const paddingElement = (<div style={`padding: 0 0 ${padding[2]}`} />) as HTMLDivElement
+    contentElement.insertBefore(paddingElement, basedElement ? basedElement.nextSibling : contentElement.children[0])
+  }
 
   // Set initial height of pager. Using auto height first with delay before computing in case of the content is being animated with a size change
   pagerElement.style.height = "auto"

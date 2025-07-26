@@ -1,6 +1,7 @@
 import { uploadAttachment } from "../../../attachment"
 import type { AttachmentContentType, EnquiryContentAttachments, EntryContentAttachments } from "../../../types"
 import type { _RenderingContext } from "../types"
+import { _renderHorizontalPadding } from "../utils"
 
 export function _renderInputAttachments(
   context: _RenderingContext,
@@ -33,7 +34,11 @@ export function _renderInputAttachments(
     </label>
   ) as HTMLLabelElement
 
-  const containerElement = <div class="_q-attachments">{fileLabelElement}</div>
+  const containerElement = (
+    <div class="_q-attachments" style={_renderHorizontalPadding(context.padding)}>
+      {fileLabelElement}
+    </div>
+  )
 
   function addFile(file: File) {
     if (file.type != "image/png" && file.type != "image/jpeg") return

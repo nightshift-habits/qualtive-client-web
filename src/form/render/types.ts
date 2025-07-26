@@ -15,4 +15,5 @@ export type _RenderingContext = {
   setPage: (newPage: number) => void
   invalidateCanSend: () => void
   user: RenderEnquiryOptions["user"]
+  padding: [string, string, string, string]
 }

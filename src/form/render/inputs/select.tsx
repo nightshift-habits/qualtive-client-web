@@ -1,6 +1,7 @@
 import { _localized } from "../../../localized"
 import type { EnquiryContentSelect, EntryContentSelect } from "../../../types"
 import type { _RenderingContext } from "../types"
+import { _renderHorizontalPadding } from "../utils"
 
 export function _renderInputSelect(
   context: _RenderingContext,
@@ -10,7 +11,7 @@ export function _renderInputSelect(
   const inputName = Math.random()
 
   return (
-    <div class="_q-options">
+    <div class="_q-options" style={_renderHorizontalPadding(context.padding)}>
       {enquiryContent.options.map((option) => {
         const inputElement = (<input type="radio" name={inputName} value={option} />) as HTMLInputElement
         inputElement.onchange = () => {

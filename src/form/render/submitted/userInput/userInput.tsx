@@ -6,6 +6,7 @@ import { _renderScore } from "./score"
 import { _renderAttachments } from "./attachments"
 import { _renderSelect } from "./select"
 import { _renderMultiselect } from "./multiselect"
+import { _renderHorizontalPadding } from "../../utils"
 
 export function renderSubmittedPageUserInput(
   context: _RenderingContext,
@@ -14,7 +15,10 @@ export function renderSubmittedPageUserInput(
   pageCount: number,
 ) {
   return (
-    <div class={`_q-page ${pageIndex == pageCount - 1 ? "_q-current" : "_q-prev"}`}>
+    <div
+      class={`_q-page ${pageIndex == pageCount - 1 ? "_q-current" : "_q-prev"}`}
+      style={_renderHorizontalPadding(context.padding)}
+    >
       <div class="_q-user-input">
         <div class={userInputClass(content)} />
         <div>

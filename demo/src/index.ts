@@ -11,6 +11,7 @@ function getOptions(): qualtive.FormOptions {
     metadataCollection: (document.getElementById("metadataCollection") as HTMLSelectElement).value as "nonPersonal",
     userTrackingConsent: (document.getElementById("userTrackingConsent") as HTMLSelectElement).value as "granted",
     previewToken: (document.getElementById("previewToken") as HTMLInputElement).value || null,
+    padding: "20px",
   }
 }
 

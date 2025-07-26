@@ -3,6 +3,7 @@ import type { EnquiryContentScore, EntryContentScore } from "../../../types"
 import { renderSmiley } from "./scoreSmiley"
 import { renderThumbDown, renderThumbUp } from "./scoreThumbs"
 import { renderStar } from "./scoreStars"
+import { _renderHorizontalPadding } from "../utils"
 
 export function _renderInputScore(
   context: _RenderingContext,
@@ -96,15 +97,19 @@ export function _renderInputScore(
     }
   }
 
-  return enquiryContent.leadingText || enquiryContent.trailingText
-    ? [
-        <div class="_q-texts">
-          <span>{enquiryContent.leadingText}</span>
-          <span>{enquiryContent.trailingText}</span>
-        </div>,
-        scoresElement,
-      ]
-    : scoresElement
+  return (
+    <div style={_renderHorizontalPadding(context.padding)}>
+      {enquiryContent.leadingText || enquiryContent.trailingText
+        ? [
+            <div class="_q-texts">
+              <span>{enquiryContent.leadingText}</span>
+              <span>{enquiryContent.trailingText}</span>
+            </div>,
+            scoresElement,
+          ]
+        : scoresElement}
+    </div>
+  )
 }
 
 function renderLabels(

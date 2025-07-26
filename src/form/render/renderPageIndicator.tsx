@@ -1,12 +1,13 @@
 import { _localized } from "../../localized"
 import type { _RenderingContext } from "./types"
+import { _renderHorizontalPadding } from "./utils"
 
 export function renderPageIndicator(
   context: _RenderingContext,
   currentPage: number,
   pageCount: number,
 ): {
-  element: Element
+  element: HTMLDivElement
   didChangePage: (currentPage: number) => void
 } | null {
   if (pageCount <= 1) return null
@@ -30,12 +31,12 @@ export function renderPageIndicator(
 
   return {
     element: (
-      <div class="_q-page-indicator">
+      <div class="_q-page-indicator" style={_renderHorizontalPadding(context.padding)}>
         {previousPageButton}
         {listElement}
         {labelSpan}
       </div>
-    ),
+    ) as HTMLDivElement,
     didChangePage: (currentPage) => {
       previousPageButton.disabled = currentPage == 0
 

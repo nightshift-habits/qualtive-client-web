@@ -10,6 +10,7 @@ import { renderStyles } from "./renderStyles"
 import { renderSubmittedPage } from "./submitted/submitted"
 import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
 import { determineSubmittedPage } from "./renderEnquirySubmitted"
+import { _parsePadding } from "./utils"
 
 export function renderEnquiry(
   enquiry: Enquiry,
@@ -52,6 +53,7 @@ export function renderEnquiry(
   )
 
   const styleElement = options?._skipStyles ? null : renderStyles(options, enquiry)
+  const padding = _parsePadding(options?.padding)
 
   const contentElement = (
     <div
@@ -60,6 +62,7 @@ export function renderEnquiry(
         (enquiry.theme.cornerStyle === "rounded" ? " _q-rounded" : "") +
         (enquiry.container.isWhiteLabel ? " _q-white-label" : "")
       }
+      style={`padding:${padding[0]} 0 0`}
     />
   ) as HTMLDivElement
 
@@ -94,16 +97,21 @@ export function renderEnquiry(
           }
         })
     },
+    padding,
   }
+
   let pages = enquiry.pages.map((page, index) => renderPage(renderingContext, page, index, content[index]))
   const pagerElement = (<div class="_q-pager">{pages[0]}</div>) as HTMLDivElement
   const form = (<form>{pagerElement}</form>) as HTMLFormElement
 
   const pageIndicator = renderPageIndicator(renderingContext, 0, enquiry.pages.length)
+  if (pageIndicator && enquiry.container.isWhiteLabel) {
+    pageIndicator.element.style.paddingBottom = padding[2]
+  }
 
   contentElement.appendChild(form)
   if (pageIndicator) contentElement.appendChild(pageIndicator.element)
-  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(options))
+  if (!enquiry.container.isWhiteLabel) contentElement.appendChild(renderStrengthenBy(renderingContext, options))
   domNode.appendChild(contentElement)
 
   let errorSpan: HTMLSpanElement | undefined
@@ -166,6 +174,11 @@ export function renderEnquiry(
       })
       .then((postedEntry) => {
         contentElement.className = contentElement.className.replace("_q-sending", "_q-sent")
+
+        if (pageIndicator) {
+          pageIndicator.element.style.paddingBottom = "0"
+        }
+
         let basedElement: Element | undefined
         determineSubmittedPage(enquiry, postedEntry).content.forEach((submittedContent) => {
           switch (submittedContent.type) {

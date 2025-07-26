@@ -1,5 +1,6 @@
 import type { EnquiryContentMultiselect, EntryContentMultiselect } from "../../../types"
 import type { _RenderingContext } from "../types"
+import { _renderHorizontalPadding } from "../utils"
 
 export function _renderInputMultiselect(
   context: _RenderingContext,
@@ -9,7 +10,7 @@ export function _renderInputMultiselect(
   const inputName = Math.random()
 
   return (
-    <div class="_q-options">
+    <div class="_q-options" style={_renderHorizontalPadding(context.padding)}>
       {enquiryContent.options.map((option) => {
         const inputElement = (<input type="checkbox" name={inputName} value={option} />) as HTMLInputElement
         inputElement.onchange = () => {

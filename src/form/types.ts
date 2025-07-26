@@ -35,10 +35,22 @@ export type RenderEnquirySubmittedOptions = _Options & {
    */
   darkMode?: "auto" | "never" | "always"
 
+  /**
+   * Option to add padding to the form. Defaults to `0`.
+   */
+  padding?: PaddingValue
+
   _containerElement?: HTMLElement
   _noClickElement?: HTMLElement
   _skipStyles?: boolean
 }
+
+export type PaddingValueUnit = `var(--${string})` | `${number}px` | `${number}rem` | `${number}em` | "0"
+export type PaddingValue =
+  | PaddingValueUnit
+  | `${PaddingValueUnit} ${PaddingValueUnit}`
+  | `${PaddingValueUnit} ${PaddingValueUnit} ${PaddingValueUnit}`
+  | `${PaddingValueUnit} ${PaddingValueUnit} ${PaddingValueUnit} ${PaddingValueUnit}`
 
 /**
  * Optional options to use when posting feedback using built in form-UI.

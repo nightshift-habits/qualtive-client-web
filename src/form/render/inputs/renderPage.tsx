@@ -56,7 +56,14 @@ export function renderPage(
     button.onclick = context.nextPage
   }
   return (
-    <div class={`_q-page ${pageIndex == 0 ? "_q-current" : "_q-next"}`}>
+    <div
+      class={`_q-page ${pageIndex == 0 ? "_q-current" : "_q-next"}`}
+      style={
+        context.enquiry.pages.length === 1 && context.enquiry.container.isWhiteLabel
+          ? `padding-bottom:${context.padding[2]}`
+          : undefined
+      }
+    >
       {pageIndex == 0 && _renderInputName(context)}
       {page.content.map((content, index) => {
         switch (content.type) {

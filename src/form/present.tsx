@@ -103,6 +103,7 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
       }
       enquiryRender = renderEnquiry(enquiryOrError, containerElement, {
         ...(options || {}),
+        padding: "0 50px 30px",
         _containerElement: containerElement,
         _noClickElement: noClickElement,
         _skipStyles: true,
@@ -111,7 +112,7 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
           options?.onSubmitted?.(entry)
 
           const dismissButton = (
-            <button type="button" class="_q-contained">
+            <button type="button" class="_q-contained" style="margin-left:auto;margin-right:auto">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path
                   d="M1 1L11 11M11 1L1 11L11 1Z"
@@ -130,7 +131,8 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
           if (contentElement.children[contentElement.children.length - 1].className == "_q-qlogo") {
             contentElement.insertBefore(dismissButton, contentElement.children[contentElement.children.length - 1])
           } else {
-            contentElement.appendChild(dismissButton)
+            dismissButton.style.marginBottom = "0"
+            contentElement.appendChild(<div style="padding: 0 0 30px">{dismissButton}</div>)
           }
         },
       })

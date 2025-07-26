@@ -1,6 +1,7 @@
 import { _localized } from "../../../localized"
 import type { EnquiryContentText, EntryContentText } from "../../../types"
 import type { _RenderingContext } from "../types"
+import { _renderHorizontalPadding } from "../utils"
 
 export function _renderInputText(
   context: _RenderingContext,
@@ -19,5 +20,5 @@ export function _renderInputText(
     context.invalidateCanSend()
   }
 
-  return textareaElement
+  return <div style={_renderHorizontalPadding(context.padding)}>{textareaElement}</div>
 }
