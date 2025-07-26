@@ -33,30 +33,10 @@
   src: url(https://static.qualtive.io/fonts/Inter-SemiBold.woff);
   font-display: swap;
 }
-@font-face {
-  font-family: QP;
-  font-weight: 600;
-  src: url(https://static.qualtive.io/fonts/Poppins-SemiBold.ttf);
-  font-display: swap;
-}
-@font-face {
-  font-family: QP;
-  font-weight: 400;
-  src: url(https://static.qualtive.io/fonts/Poppins-Regular.ttf);
-  font-display: swap;
-}
-@font-face {
-  font-family: QH;
-  font-weight: 600;
-  src: url(https://static.qualtive.io/fonts/HeptaSlab-SemiBold.ttf);
-  font-display: swap;
-}
 
 ._q-content {
   --font-qf: Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-qp: Poppins, QP, Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-qh: HeptaSlab, QH, Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-qc: QC, Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-qb: QB, Inter, QF, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
 
 #_q-no-click {
@@ -228,7 +208,7 @@
     line-height: 34px;
     margin: 0 0 30px;
     color: #000;
-    font-family: var(--font-qp);
+    font-family: var(--font-qb);
   }
   h2 {
     font-size: 16px;
@@ -236,7 +216,7 @@
     line-height: 24px;
     margin: 0 0 14px;
     color: #000;
-    font-family: var(--font-qp);
+    font-family: var(--font-qb);
     &:first-child {
       font-size: 22px;
       line-height: 30px;

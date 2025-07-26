@@ -7,17 +7,5 @@ export function _renderInputTitle(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   content: EntryContentTitle,
 ) {
-  return (
-    <h2
-      style={
-        context.enquiry.theme.font.type === "custom"
-          ? "font-family: var(--font-qc)"
-          : context.enquiry.theme.font.value === "heptaSlab"
-            ? "font-family: var(--font-qh)"
-            : undefined
-      }
-    >
-      {enquiryContent.text}
-    </h2>
-  )
+  return <h2>{enquiryContent.text}</h2>
 }

@@ -15,6 +15,7 @@ import { _renderInputBody } from "./body"
 import { _renderInputContactDetails } from "./contactDetails"
 import { _renderInputImage } from "./image"
 import { _renderInputMultiselect } from "./multiselect"
+import { _renderInputName } from "./name"
 import { _renderInputScore } from "./score"
 import { _renderInputSelect } from "./select"
 import { _renderInputText } from "./text"
@@ -56,19 +57,7 @@ export function renderPage(
   }
   return (
     <div class={`_q-page ${pageIndex == 0 ? "_q-current" : "_q-next"}`}>
-      {pageIndex == 0 && (
-        <h1
-          style={
-            context.enquiry.theme.font.type === "custom"
-              ? "font-family: var(--font-qc)"
-              : context.enquiry.theme.font.value === "heptaSlab"
-                ? "font-family: var(--font-qh)"
-                : undefined
-          }
-        >
-          {context.enquiry.name}
-        </h1>
-      )}
+      {pageIndex == 0 && _renderInputName(context)}
       {page.content.map((content, index) => {
         switch (content.type) {
           case "title":
