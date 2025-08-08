@@ -7,6 +7,7 @@ import { _renderConfirmationText } from "./confirmationText"
 import { _renderName } from "./name"
 import { _renderLink } from "./link"
 import { _renderUserInputScore } from "./userInputScore"
+import { _renderReviewLinks } from "./reviewLinks"
 
 export function renderSubmittedPage(
   context: _RenderingContextSubmitted,
@@ -29,5 +30,7 @@ export function renderSubmittedPage(
       return _renderConfirmationText(context, content)
     case "link":
       return _renderLink(context, content)
+    case "reviewLinks":
+      return _renderReviewLinks(context, content)
   }
 }

@@ -1,0 +1,23 @@
+._q-review-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  a {
+    margin: 0 !important;
+    width: 100%;
+    background: #fff;
+    display: flex;
+
+    span {
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      font-family: var(--font-qp) !important;
+    }
+    picture {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
