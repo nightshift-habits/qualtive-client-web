@@ -477,6 +477,7 @@ export type EnquirySubmittedContent =
   | EnquirySubmittedContentBody
   | EnquirySubmittedContentImage
   | EnquirySubmittedContentLink
+  | EnquirySubmittedContentReviewLinks
 
 /**
  * Section showing the name of the enquiry.
@@ -572,6 +573,42 @@ export type EnquirySubmittedContentLink = {
    * URL to open in a new tab when clicked.
    */
   url: string
+}
+
+/**
+ * Group of review links to external sites like Google Reviews, Trustpilot, etc.
+ */
+export type EnquirySubmittedContentReviewLinks = {
+  type: "reviewLinks"
+
+  /**
+   * Links to render as buttons.
+   */
+  links: EnquirySubmittedContentReviewLinksLink[]
+}
+export type EnquirySubmittedContentReviewLinksLink = {
+  /**
+   * Display title for the link button when no logo is provided.
+   */
+  title: string
+  /**
+   * URL to open on click.
+   */
+  url: string
+  /**
+   * Optional logo image URL to show instead of the title.
+   */
+  logo: {
+    urlVector: string
+    urlVectorDark: string
+  } | null
+  /**
+   * Optional small icon image URL to show alongside the title if logo is not available.
+   */
+  icon: {
+    urlRaster: string
+    urlRasterDark: string
+  } | null
 }
 
 /**
