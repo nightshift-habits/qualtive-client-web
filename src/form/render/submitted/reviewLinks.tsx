@@ -1,9 +1,10 @@
 import type { _RenderingContext } from "../types"
 import type { EnquirySubmittedContentReviewLinks } from "../../../types"
+import { _renderHorizontalPadding } from "../utils"
 
-export function _renderReviewLinks(_: _RenderingContext, content: EnquirySubmittedContentReviewLinks) {
+export function _renderReviewLinks(context: _RenderingContext, content: EnquirySubmittedContentReviewLinks) {
   return (
-    <div class="_q-review-links">
+    <div class="_q-review-links" style={_renderHorizontalPadding(context.padding)}>
       {content.links.map((link, index) => (
         <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" class="_q-contained">
           {link.logo ? (
