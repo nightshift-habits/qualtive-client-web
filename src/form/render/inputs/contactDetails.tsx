@@ -15,7 +15,7 @@ export function _renderInputContactDetails(context: _RenderingContext, enquiryCo
   }
 
   return [
-    <h2>{enquiryContent.title}</h2>,
+    <h2 style={_renderHorizontalPadding(context.padding)}>{enquiryContent.title}</h2>,
     <div class="_q-contact-details" style={_renderHorizontalPadding(context.padding)}>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path
