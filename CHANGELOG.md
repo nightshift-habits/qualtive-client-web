@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.24.2
+
+### Fixed
+
+- Fixed layout issue with padding for contact details component.
+
+## 1.24.1
+
+### Fixed
+
+- Fixed layout issue with padding for review links component.
+
 ## 1.24.0
 
 ### Added
