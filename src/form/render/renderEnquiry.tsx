@@ -1,5 +1,5 @@
 import { _localized } from "../../localized"
-import type { Enquiry, EntryContent } from "../../types"
+import type { Enquiry, EntryContent, CustomAttributes, EntryContentText, EnquiryContentText } from "../../types"
 import type { PostedEntry, RenderEnquiryOptions } from "../types"
 import { post } from "../../post"
 import { renderPage } from "./inputs/renderPage"
@@ -12,6 +12,7 @@ import { renderSubmittedPageUserInput } from "./submitted/userInput/userInput"
 import { determineSubmittedPage } from "./renderEnquirySubmitted"
 import { _parsePadding } from "./utils"
 import { _renderUserInputScore } from "./submitted/userInputScore"
+import { resolve } from "../../utils"
 
 export function renderEnquiry(
   enquiry: Enquiry,
@@ -79,24 +80,7 @@ export function renderEnquiry(
     setPage,
     user: options?.user,
     invalidateCanSend: () => {
-      renderingContext.submitButton!.disabled = !content
-        .flatMap((x) => x)
-        .some((x) => {
-          switch (x?.type) {
-            case "title":
-              return false
-            case "score":
-              return typeof x.value == "number"
-            case "text":
-            case "select":
-              return typeof x.value == "string"
-            case "multiselect":
-            case "attachments":
-              return x.values.length > 0
-            default:
-              return false
-          }
-        })
+      renderingContext.submitButton!.disabled = !_isAnyConterntFilled(enquiry, content)
     },
     padding,
   }
@@ -133,24 +117,9 @@ export function renderEnquiry(
     post(
       [enquiry.container.id, enquiry.id],
       {
-        content: content
-          .flatMap((x) => x)
-          .filter((x): x is EntryContent => !!x)
-          .map((x) => {
-            switch (x.type) {
-              case "attachments":
-                return {
-                  type: "attachments",
-                  values: x.values.map((y) => ({
-                    id: y.id,
-                  })),
-                }
-              default:
-                return x
-            }
-          }),
+        content: _computeContentForPost(enquiry, content),
         user: renderingContext.user,
-        customAttributes: options?.customAttributes,
+        customAttributes: _computeAttributesForPost(enquiry, content, options),
       },
       options,
     )
@@ -340,4 +309,94 @@ export function renderEnquiry(
       domNode.removeChild(contentElement)
     },
   }
+}
+
+function _isAnyConterntFilled(enquiry: Enquiry, content: (EntryContent | null)[][]): boolean {
+  for (let pageIndex = 0; pageIndex < enquiry.pages.length; pageIndex++) {
+    const page = enquiry.pages[pageIndex]
+    for (let sectionIndex = 0; sectionIndex < page.content.length; sectionIndex++) {
+      const section = page.content[sectionIndex]
+      const entry = content[pageIndex]?.[sectionIndex]
+      switch (entry?.type) {
+        case "title":
+          return false
+        case "score":
+          return typeof entry.value == "number"
+        case "text":
+          switch ((section as EnquiryContentText).storageTarget.type) {
+            case "attribute":
+              return false
+            default:
+              return typeof entry.value == "string"
+          }
+        case "select":
+          return typeof entry.value == "string"
+        case "multiselect":
+        case "attachments":
+          return entry.values.length > 0
+        default:
+          return false
+      }
+    }
+  }
+  return false
+}
+
+function _computeContentForPost(enquiry: Enquiry, content: (EntryContent | null)[][]): EntryContent[] {
+  return enquiry.pages.flatMap((page, pageIndex) =>
+    page.content
+      .map((section, sectionIndex): EntryContent | null => {
+        const entry = content[pageIndex]?.[sectionIndex] as EntryContent | null | undefined
+        if (!entry) return null
+
+        // Skip content?
+        switch (section.type) {
+          case "text":
+            switch (section.storageTarget.type) {
+              case "attribute":
+                return null
+            }
+        }
+
+        // Final mapping
+        switch (entry.type) {
+          case "attachments":
+            return {
+              type: "attachments",
+              values: entry.values.map((y) => ({ id: y.id })),
+            }
+          default:
+            return entry
+        }
+      })
+      .filter((x): x is EntryContent => !!x),
+  )
+}
+
+function _computeAttributesForPost(
+  enquiry: Enquiry,
+  content: (EntryContent | null)[][],
+  options: RenderEnquiryOptions | undefined,
+): Promise<CustomAttributes> {
+  return resolve(options?.customAttributes).then((customAttributes) => {
+    const derived = { ...(customAttributes || {}) }
+    enquiry.pages.forEach((page, pageIndex) => {
+      page.content.forEach((section, sectionIndex) => {
+        switch (section.type) {
+          case "text":
+            switch (section.storageTarget.type) {
+              case "attribute": {
+                const entry = content[pageIndex][sectionIndex] as EntryContentText | null
+                if (entry?.value && entry.value.length > 0) {
+                  derived[section.storageTarget.attribute] = entry.value
+                }
+                break
+              }
+            }
+            break
+        }
+      })
+    })
+    return derived
+  })
 }

@@ -244,21 +244,21 @@
     }
   }
   &._q-rounded {
-    textarea {
+    textarea,
+    input[type="text"] {
       border-radius: 6px;
     }
   }
-  textarea {
+  textarea,
+  input[type="text"] {
     margin: 0 0 20px;
     width: 100%;
-    resize: none;
     border: 1px solid #c7cacd;
 
     padding: 12px 12px;
     font-size: 14px;
     font-weight: 400;
     outline: 0;
-    height: 100px;
     line-height: 20px;
     color: #333;
     background: transparent;
@@ -272,6 +272,10 @@
     &::placeholder {
       color: #333;
     }
+  }
+  textarea {
+    height: 100px;
+    resize: none;
   }
   a {
     text-decoration: none;

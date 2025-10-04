@@ -373,6 +373,29 @@ export type EnquiryContentScore = {
 export type EnquiryContentText = {
   type: "text"
   placeholder: string | null
+  storageTarget: EnquiryContentTextStorageTarget
+}
+
+/**
+ * Storage target for text input.
+ */
+export type EnquiryContentTextStorageTarget =
+  | EnquiryContentTextStorageTargetText
+  | EnquiryContentTextStorageTargetAttribute
+
+/**
+ * Text storage target that stores the value as text.
+ */
+export type EnquiryContentTextStorageTargetText = {
+  type: "text"
+}
+
+/**
+ * Text storage target that stores the value as a custom attribute.
+ */
+export type EnquiryContentTextStorageTargetAttribute = {
+  type: "attribute"
+  attribute: string
 }
 
 /**

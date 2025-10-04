@@ -8,17 +8,21 @@ export function _renderInputText(
   enquiryContent: EnquiryContentText,
   entryContent: EntryContentText,
 ) {
-  const textareaElement = (
-    <textarea
-      placeholder={enquiryContent.placeholder || _localized("form.text-placeholder", context.options?.locale)}
-    />
-  ) as HTMLTextAreaElement
+  const placeholder = enquiryContent.placeholder || _localized("form.text-placeholder", context.options?.locale)
+  const element = (
+    enquiryContent.storageTarget.type === "attribute" ? (
+      <input type="text" placeholder={placeholder} />
+    ) : (
+      <textarea placeholder={placeholder} />
+    )
+  ) as HTMLInputElement | HTMLTextAreaElement
 
-  textareaElement.oninput = () => {
-    const text = textareaElement.value.trim() == "" ? null : textareaElement.value
+  element.oninput = () => {
+    const value = element.value
+    const text = value.trim() == "" ? null : value
     entryContent.value = text
     context.invalidateCanSend()
   }
 
-  return <div style={_renderHorizontalPadding(context.padding)}>{textareaElement}</div>
+  return <div style={_renderHorizontalPadding(context.padding)}>{element}</div>
 }

@@ -110,6 +110,9 @@ const staticEnquiry: qualtive.Enquiry = {
         {
           type: "text",
           placeholder: "Type here…",
+          storageTarget: {
+            type: "text",
+          },
         },
         {
           type: "attachments",

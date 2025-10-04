@@ -115,7 +115,8 @@
       color: #de5e35;
     }
   }
-  textarea {
+  textarea,
+  input[type="text"] {
     border: 1px solid #4f4f4f;
     color: #bdbdbd;
     &::placeholder {
