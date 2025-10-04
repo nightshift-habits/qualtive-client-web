@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.25.0
+
+### Added
+
+- Support for text component's new storage target as attributes.
+
 ## 1.24.2
 
 ### Fixed
