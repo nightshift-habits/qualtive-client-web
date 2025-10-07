@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.25.1
+
+### Fixed
+
+- Fixed issue with can send button not being enabled in some cases.
+
 ## 1.25.0
 
 ### Added
