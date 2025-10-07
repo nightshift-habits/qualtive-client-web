@@ -319,23 +319,35 @@ function _isAnyConterntFilled(enquiry: Enquiry, content: (EntryContent | null)[]
       const entry = content[pageIndex]?.[sectionIndex]
       switch (entry?.type) {
         case "title":
-          return false
+          break
         case "score":
-          return typeof entry.value == "number"
+          if (typeof entry.value === "number") {
+            return true
+          }
+          break
         case "text":
           switch ((section as EnquiryContentText).storageTarget.type) {
             case "attribute":
-              return false
+              break
             default:
-              return typeof entry.value == "string"
+              if (typeof entry.value == "string") {
+                return true
+              }
           }
+          break
         case "select":
-          return typeof entry.value == "string"
+          if (typeof entry.value == "string") {
+            return true
+          }
+          break
         case "multiselect":
         case "attachments":
-          return entry.values.length > 0
+          if (entry.values.length > 0) {
+            return true
+          }
+          break
         default:
-          return false
+          break
       }
     }
   }
