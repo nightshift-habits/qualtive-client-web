@@ -215,6 +215,16 @@ export function renderEnquiry(
             }
           }
         })
+        if (enquiry.container.isWhiteLabel) {
+          if (basedElement) {
+            ;(basedElement as HTMLElement).style.marginBottom = "0"
+          }
+          const paddingElement = (<div style={`padding:0 0 ${padding[2]};margin-top:0 !important`} />) as HTMLDivElement // the margin-top is to avoid double margins if the ._q-pager is last child (the ._q-pager can not have margin-bottom so adds margin to it's next sibling)
+          parentElement.insertBefore(
+            paddingElement,
+            basedElement ? basedElement.nextSibling : parentElement.children[0],
+          )
+        }
         if (form.parentElement) {
           contentElement.removeChild(form)
         }
