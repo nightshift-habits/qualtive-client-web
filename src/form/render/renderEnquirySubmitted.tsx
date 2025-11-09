@@ -94,7 +94,7 @@ export function renderEnquirySubmitted(
     if (basedElement) {
       basedElement.style.marginBottom = "0"
     }
-    const paddingElement = (<div style={`padding: 0 0 ${padding[2]}`} />) as HTMLDivElement
+    const paddingElement = (<div style={`padding:0 0 ${padding[2]};margin-top:0 !important`} />) as HTMLDivElement // the margin-top is to avoid double margins if the ._q-pager is last child (the ._q-pager can not have margin-bottom so adds margin to it's next sibling)
     parentElement.insertBefore(paddingElement, basedElement ? basedElement.nextSibling : parentElement.children[0])
   } else {
     parentElement.appendChild(renderStrengthenBy(renderingContext, options))

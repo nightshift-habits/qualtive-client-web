@@ -4,6 +4,9 @@
   transition: 0.3s height;
   will-change: height;
 }
+._q-pager + * {
+  margin-top: 20px !important;
+}
 ._q-page {
   position: absolute;
   width: 100%;
