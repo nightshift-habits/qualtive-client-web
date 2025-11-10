@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.26.0
+
+### Added
+
+- Support for required user contact details
+
+### Fixed
+
+- Missing margin for user content in submitted enquiry in some cases
+- Missing padding bottom for rendered inline and white labeled
+
 ## 1.25.1
 
 ### Fixed
