@@ -1,22 +1,22 @@
+import { _localized } from "../../../localized"
 import type { EnquiryContentContactDetails } from "../../../types"
 import type { _RenderingContext } from "../types"
 import { _renderHorizontalPadding } from "../utils"
+import { renderErrorIcon } from "../../icons"
 
 export function _renderInputContactDetails(context: _RenderingContext, enquiryContent: EnquiryContentContactDetails) {
   if (context.user?.email) return null
 
-  const inputElement = (<input type="email" placeholder={enquiryContent.placeholder} />) as HTMLInputElement
-  inputElement.oninput = () => {
-    if (context.user) {
-      context.user.email = inputElement.value
-    } else {
-      context.user = { email: inputElement.value }
-    }
-  }
+  const isRequired = context.enquiry.isUserContactDetailsRequired
 
-  return [
-    <h2 style={_renderHorizontalPadding(context.padding)}>{enquiryContent.title}</h2>,
-    <div class="_q-contact-details" style={_renderHorizontalPadding(context.padding)}>
+  const wrapperElement = (
+    <div style={_renderHorizontalPadding(context.padding)} class="_q-contact-details-wrapper" />
+  ) as HTMLDivElement
+
+  const inputElement = (<input type="email" placeholder={enquiryContent.placeholder} />) as HTMLInputElement
+
+  const inputContainer = (
+    <div class="_q-contact-details">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path
           d="M1.01362 2.79893C0.688797 2.61331 0.274993 2.72617 0.0893716 3.05101C-0.0962504 3.37583 0.0166076 3.78964 0.341444 3.97526L1.01362 2.79893ZM6.10384 6.48787L6.43993 5.89969L6.10384 6.48787ZM7.89639 6.48787L8.23248 7.07605L7.89639 6.48787ZM13.6588 3.97526C13.9836 3.78964 14.0965 3.37583 13.9109 3.05101C13.7253 2.72617 13.3114 2.61331 12.9866 2.79893L13.6588 3.97526ZM12.6453 2.48387V11.5161H14.0001V2.48387H12.6453ZM11.5162 12.6452H2.48399V14H11.5162V12.6452ZM1.35495 11.5161V2.48387H0.000114592V11.5161H1.35495ZM11.5162 0H2.48399V1.35484H11.5162V0ZM2.48399 12.6452C1.86043 12.6452 1.35495 12.1397 1.35495 11.5161H0.000114592C0.000114592 12.8879 1.11218 14 2.48399 14V12.6452ZM12.6453 11.5161C12.6453 12.1397 12.1398 12.6452 11.5162 12.6452V14C12.8881 14 14.0001 12.8879 14.0001 11.5161H12.6453ZM14.0001 2.48387C14.0001 1.11207 12.8881 0 11.5162 0V1.35484C12.1398 1.35484 12.6453 1.86032 12.6453 2.48387H14.0001ZM1.35495 2.48387C1.35495 1.86032 1.86043 1.35484 2.48399 1.35484V0C1.11218 0 0.000114592 1.11207 0.000114592 2.48387H1.35495ZM0.341444 3.97526L5.76775 7.07605L6.43993 5.89969L1.01362 2.79893L0.341444 3.97526ZM8.23248 7.07605L13.6588 3.97526L12.9866 2.79893L7.5603 5.89969L8.23248 7.07605ZM5.76775 7.07605C6.53143 7.5124 7.4688 7.5124 8.23248 7.07605L7.5603 5.89969C7.21319 6.09804 6.78704 6.09804 6.43993 5.89969L5.76775 7.07605Z"
@@ -24,6 +24,53 @@ export function _renderInputContactDetails(context: _RenderingContext, enquiryCo
         />
       </svg>
       {inputElement}
-    </div>,
-  ]
+    </div>
+  ) as HTMLDivElement
+
+  const hintElement = isRequired ? (
+    <div class="_q-required-hint">{_localized("form.required", context.options?.locale)}</div>
+  ) : null
+
+  wrapperElement.appendChild(inputContainer)
+  if (hintElement) {
+    wrapperElement.appendChild(hintElement)
+  }
+
+  let errorBannerElement: HTMLDivElement | null = null
+
+  const setError = (isError: boolean) => {
+    if (isRequired) {
+      if (isError) {
+        if (!errorBannerElement) {
+          errorBannerElement = (
+            <div class="_q-field-error-banner">
+              {renderErrorIcon()}
+              <span>{_localized("form.required-field-missing", context.options?.locale)}</span>
+            </div>
+          ) as HTMLDivElement
+          wrapperElement.insertBefore(errorBannerElement, inputContainer)
+        }
+        wrapperElement.className = "_q-contact-details-wrapper _q-field-error"
+      } else {
+        if (errorBannerElement) {
+          wrapperElement.removeChild(errorBannerElement)
+          errorBannerElement = null
+        }
+        wrapperElement.className = "_q-contact-details-wrapper"
+      }
+    }
+  }
+
+  context.contactDetails = { setError }
+
+  inputElement.oninput = () => {
+    const value = inputElement.value.trim()
+    if (context.user) {
+      context.user.email = value
+    } else {
+      context.user = { email: value }
+    }
+  }
+
+  return [<h2 style={_renderHorizontalPadding(context.padding)}>{enquiryContent.title}</h2>, wrapperElement]
 }

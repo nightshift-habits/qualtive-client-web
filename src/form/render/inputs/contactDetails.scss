@@ -5,8 +5,15 @@
     }
   }
 }
-._q-contact-details {
+._q-contact-details-wrapper {
   margin: 0 0 20px !important;
+  &._q-field-error {
+    background: #ffd7d7;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+}
+._q-contact-details {
   svg {
     position: absolute;
     transform: translate(10px, 8px);
@@ -26,5 +33,31 @@
     &::placeholder {
       color: #333;
     }
+  }
+}
+
+._q-required-hint {
+  font-size: 11px;
+  font-family: var(--font-qp);
+  color: #333;
+  text-align: right;
+  margin: 5px 0 0 !important;
+}
+
+._q-field-error-banner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px !important;
+  svg {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+  }
+  span {
+    font-size: 13px;
+    font-family: var(--font-qf);
+    color: #eb5757;
+    font-weight: 400;
   }
 }

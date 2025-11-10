@@ -24,6 +24,9 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.strengthen": "Strengthen by ",
     "form.page-back": "View previous page",
     "form.page-exact": "View page {page}",
+    "form.required": "*Required",
+    "form.required-field-missing": "Please fill in this field",
+    "form.required-fields-missing": "Please fill in required fields",
   },
   "sv-se": {
     "ops.fallback-error": "Kunde inte slutföra åtgärd.",
@@ -50,5 +53,8 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.strengthen": "Förstärkt med ",
     "form.page-back": "Visa föregående sida",
     "form.page-exact": "Visa sida {page}",
+    "form.required": "*Obligatorisk",
+    "form.required-field-missing": "Vänligen fyll i detta fält",
+    "form.required-fields-missing": "Vänligen fyll i obligatoriska fält",
   },
 } as { [key: string]: { [key: string]: string } }

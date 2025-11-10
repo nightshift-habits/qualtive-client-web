@@ -13,6 +13,7 @@ import { determineSubmittedPage } from "./renderEnquirySubmitted"
 import { _parsePadding } from "./utils"
 import { _renderUserInputScore } from "./submitted/userInputScore"
 import { resolve } from "../../utils"
+import { renderErrorIcon } from "../icons"
 
 export function renderEnquiry(
   enquiry: Enquiry,
@@ -89,6 +90,18 @@ export function renderEnquiry(
   const pagerElement = (<div class="_q-pager">{pages[0]}</div>) as HTMLDivElement
   const form = (<form>{pagerElement}</form>) as HTMLFormElement
 
+  function invalidateHeight() {
+    const currentPageElement = pages[currentPage]
+    if (currentPageElement) {
+      const oldTransition = pagerElement!.style.transition
+      pagerElement!.style.transition = "none"
+      pagerElement!.style.height = currentPageElement.getBoundingClientRect().height + "px"
+      setTimeout(() => {
+        pagerElement!.style.transition = oldTransition
+      }, 10)
+    }
+  }
+
   const pageIndicator = renderPageIndicator(renderingContext, 0, enquiry.pages.length)
   if (pageIndicator && enquiry.container.isWhiteLabel) {
     pageIndicator.element.style.paddingBottom = padding[2]
@@ -102,10 +115,35 @@ export function renderEnquiry(
   domNode.appendChild(contentElement)
 
   let errorSpan: HTMLSpanElement | undefined
+  let topBannerElement: HTMLDivElement | undefined
 
   form.onsubmit = (event) => {
     event.preventDefault()
     if (contentElement.className.indexOf("_q-sending") != -1) return
+
+    if (enquiry.isUserContactDetailsRequired) {
+      const hasEmail = !!(renderingContext.user?.email && renderingContext.user.email.trim().length > 0)
+      if (!hasEmail) {
+        if (!topBannerElement) {
+          topBannerElement = (
+            <div class="_q-required-top-banner">
+              {renderErrorIcon()}
+              <span>{_localized("form.required-fields-missing", options?.locale)}</span>
+            </div>
+          ) as HTMLDivElement
+          form.insertBefore(topBannerElement, pagerElement)
+        }
+        renderingContext.contactDetails?.setError(true)
+        invalidateHeight()
+        return
+      }
+    }
+    renderingContext.contactDetails?.setError(false)
+    if (topBannerElement) {
+      topBannerElement.parentElement?.removeChild(topBannerElement)
+      topBannerElement = undefined
+    }
+    invalidateHeight()
 
     contentElement.className = contentElement.className.replace("_q-error", "") + " _q-sending"
     if (errorSpan) {

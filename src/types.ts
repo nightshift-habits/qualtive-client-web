@@ -117,6 +117,11 @@ export type Enquiry = {
    * Details about the container the enquiry belongs to.
    */
   container: EnquiryContainer
+
+  /**
+   * Whether user contact details (email) are required for submission.
+   */
+  isUserContactDetailsRequired: boolean
 }
 
 /**

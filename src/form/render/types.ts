@@ -16,6 +16,9 @@ export type _RenderingContext = {
   invalidateCanSend: () => void
   user: RenderEnquiryOptions["user"]
   padding: [string, string, string, string]
+  contactDetails?: {
+    setError: (isError: boolean) => void
+  }
 }
 
 export type _RenderingContextSubmitted = _RenderingContext & {

@@ -98,6 +98,7 @@ const staticEnquiry: qualtive.Enquiry = {
   id: 7927746166530402,
   slug: "how-does-the-client-web-library-work",
   name: "How does the client web library work for you?",
+  isUserContactDetailsRequired: true,
   pages: [
     {
       content: [
@@ -125,6 +126,11 @@ const staticEnquiry: qualtive.Enquiry = {
         {
           type: "multiselect",
           options: ["Option A", "Option B", "Option C"],
+        },
+        {
+          type: "contactDetails",
+          title: "Contact details",
+          placeholder: "Enter your email",
         },
       ],
     },

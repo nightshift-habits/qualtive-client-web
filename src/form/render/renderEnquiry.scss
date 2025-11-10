@@ -30,3 +30,25 @@
     margin-top: 0 !important;
   }
 }
+
+._q-required-top-banner {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background: #fcf1d1;
+  padding: 15px !important;
+  margin: 0 0 20px !important;
+  width: 100%;
+  svg {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+  }
+  span {
+    font-size: 13px;
+    font-family: var(--font-qp);
+    color: #eb5757;
+    font-weight: 500;
+  }
+}
