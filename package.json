@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nodemon --watch src --ext scss --exec 'npm run build:css' & nodemon --watch src --ext js,jsx,ts,tsx --exec 'npm run build:ts && cd demo && npm run dev'",
     "lint": "eslint src/",
+    "format": "prettier --write .",
     "test": "jest --coverage",
     "build:css": "sh ./scripts/build-css.sh",
     "build:ts": "webpack && tsc --emitDeclarationOnly --declaration --project tsconfig.json",
