@@ -6,6 +6,21 @@ import { _fetch } from "./networking"
 import { resolve } from "./utils"
 
 /**
+ * Submission verification for protecting against spam and abuse.
+ */
+export type SubmissionVerification = {
+  /**
+   * Recaptcha token. Required if using Recaptcha for submission verification.
+   */
+  recaptchaToken?: string | null
+
+  /**
+   * Additional properties for enterprise use.
+   */
+  [key: string]: unknown
+}
+
+/**
  * Optional options to use when posting feedback using custom UI.
  */
 export type PostOptions = _Options & {
@@ -25,6 +40,11 @@ export type PostOptions = _Options & {
    * - "denied": No unique id will be stored on device.
    */
   userTrackingConsent?: "granted" | "denied" | null
+
+  /**
+   * Optional submission verification for protecting against spam and abuse.
+   */
+  submissionVerification?: SubmissionVerification | null
 }
 
 /**
@@ -115,7 +135,7 @@ export const post = (collection: Collection, entry: Entry, options?: PostOptions
       console.error("Error parsing Qualtive references cookie", error)
     }
 
-    const body = {
+    const body: Record<string, unknown> = {
       questionId: /^-?\d+$/.test(enquiryId) ? parseInt(enquiryId) : enquiryId,
       content,
       user: {
@@ -129,6 +149,10 @@ export const post = (collection: Collection, entry: Entry, options?: PostOptions
       attributeHints,
       source,
       references,
+    }
+
+    if (options?.submissionVerification) {
+      body.submissionVerification = options.submissionVerification
     }
 
     return _fetch<EntryReference>({
