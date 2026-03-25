@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.27.0
+
+### Added
+
+- Support for passing submission verification data.
+
 ## 1.26.0
 
 ### Added
