@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.27.1
+
+### Fixed
+
+- Added `aria-modal` to the presented form container for assistive technologies.
+
 ## 1.27.0
 
 ### Added
