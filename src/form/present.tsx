@@ -78,7 +78,7 @@ export const presentEnquiry = (collectionOrEnquiry: Collection | Enquiry, option
   let supportLinkElement: Element | undefined
 
   const containerElement = (
-    <div id="_q-container" class={"_q-out"} style={`max-width:490px;min-height:${estimatedHeight}px`}>
+    <div id="_q-container" aria-modal="true" class={"_q-out"} style={`max-width:490px;min-height:${estimatedHeight}px`}>
       <div class="_q-header">{closeButton}</div>
     </div>
   ) as HTMLDivElement
