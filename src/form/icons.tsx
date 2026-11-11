@@ -8,3 +8,39 @@ export function renderErrorIcon() {
     </svg>
   )
 }
+
+export function renderCopyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" stroke="#333" stroke-width="1.5" />
+      <path
+        d="M10.5 5.5V3.5C10.5 2.67 9.83 2 9 2H4C3.17 2 2.5 2.67 2.5 3.5V8.5C2.5 9.33 3.17 10 4 10H5.5"
+        stroke="#333"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  )
+}
+
+export function renderCheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M3 8.5L6.5 12L13 4.5" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+
+export function renderArrowDownIcon() {
+  return (
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8 2V18M8 18L2 12M8 18L14 12"
+        stroke="#000"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}

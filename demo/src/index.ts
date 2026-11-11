@@ -139,7 +139,24 @@ const staticEnquiry: qualtive.Enquiry = {
   submittedPages: [
     { ...staticEnquirySubmittedPage, conditions: [] },
     {
-      ...staticEnquirySubmittedPage,
+      content: [
+        { type: "userInput" },
+        { type: "userInputScore" },
+        { type: "title", text: "Dela gärna din upplevelse – det hjälper oss massor." },
+        {
+          type: "reviewLinks",
+          links: (["googleReviews", "tripadvisor"] as const).map((label) => ({
+            title: label,
+            url: "https://qualtive.io",
+            logo: {
+              urlVector: `https://static.qualtive.io/review-links/logos/${label}.svg`,
+              urlVectorDark: `https://static.qualtive.io/review-links/logos/${label}-dark.svg`,
+            },
+            icon: null,
+            reference: { type: "known", label },
+          })),
+        },
+      ],
       conditions: [
         {
           type: "score",

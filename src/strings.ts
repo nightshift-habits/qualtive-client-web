@@ -27,6 +27,9 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.required": "*Required",
     "form.required-field-missing": "Please fill in this field",
     "form.required-fields-missing": "Please fill in required fields",
+    "form.review-links.copy": "Copy my text",
+    "form.review-links.copied": "Text copied!",
+    "form.review-links.paste": "Paste it on one of these:",
   },
   "sv-se": {
     "ops.fallback-error": "Kunde inte slutföra åtgärd.",
@@ -56,5 +59,8 @@ export const strings: { [collection: string]: { [key: string]: string | undefine
     "form.required": "*Obligatorisk",
     "form.required-field-missing": "Vänligen fyll i detta fält",
     "form.required-fields-missing": "Vänligen fyll i obligatoriska fält",
+    "form.review-links.copy": "Kopiera min text",
+    "form.review-links.copied": "Text kopierad!",
+    "form.review-links.paste": "Klistra in på någon av följande:",
   },
 } as { [key: string]: { [key: string]: string } }

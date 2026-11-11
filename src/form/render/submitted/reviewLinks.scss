@@ -21,4 +21,42 @@
       justify-content: center;
     }
   }
+
+  button._q-review-links-copy {
+    margin: 0 !important;
+    width: 100%;
+    background: #fff !important;
+    border: 2px solid #000 !important;
+    gap: 8px !important;
+
+    span {
+      color: #000 !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      font-family: var(--font-qp) !important;
+    }
+
+    &._q-copied {
+      background: #1c6e3d !important;
+      border-color: #1c6e3d !important;
+      span {
+        color: #fff !important;
+      }
+      path[stroke] {
+        stroke: #fff !important;
+      }
+    }
+  }
+
+  p._q-review-links-paste {
+    margin: 4px 0 0 !important;
+    text-align: center;
+    color: #000;
+  }
+
+  ._q-review-links-arrow {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 4px !important;
+  }
 }
