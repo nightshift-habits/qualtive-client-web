@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.28.0
+
+### Added
+
+- Copy button in review links so users can copy their written feedback before pasting it on a review site.
+- Tracking of when users copy their text and which review link they open.
+- `reference` on review links identifying which review link it is.
+
 ## 1.27.1
 
 ### Fixed

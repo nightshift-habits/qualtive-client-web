@@ -6,6 +6,6 @@ module.exports = {
   moduleDirectories: ["node_modules", "src"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/", "/coverage/"],
   transform: {
-    "^.+\\.js?$": "babel-jest",
+    "^.+\\.js?$": ["babel-jest", { presets: [["@babel/preset-env", { targets: { node: "current" } }]] }],
   },
 }

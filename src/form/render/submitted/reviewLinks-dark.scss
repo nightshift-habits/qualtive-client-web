@@ -2,4 +2,30 @@
   a {
     background: #000;
   }
+
+  button._q-review-links-copy {
+    background: #000 !important;
+    border-color: #fff !important;
+
+    span {
+      color: #fff !important;
+    }
+    rect[stroke],
+    path[stroke] {
+      stroke: #fff !important;
+    }
+
+    &._q-copied {
+      background: #2e9e5b !important;
+      border-color: #2e9e5b !important;
+    }
+  }
+
+  p._q-review-links-paste {
+    color: #fff;
+  }
+
+  ._q-review-links-arrow path[stroke] {
+    stroke: #fff;
+  }
 }

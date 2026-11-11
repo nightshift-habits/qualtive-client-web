@@ -637,7 +637,20 @@ export type EnquirySubmittedContentReviewLinksLink = {
     urlRaster: string
     urlRasterDark: string
   } | null
+  /**
+   * Identifies which review link this is, for example to track which link the user opened.
+   */
+  reference: EnquirySubmittedContentReviewLinksLinkReference
 }
+export type EnquirySubmittedContentReviewLinksLinkReference =
+  | {
+      type: "known"
+      label: "googleReviews" | "tripadvisor" | "trustpilot" | "facebookReviews"
+    }
+  | {
+      type: "custom"
+      id: number
+    }
 
 /**
  * Page of content for an entry.

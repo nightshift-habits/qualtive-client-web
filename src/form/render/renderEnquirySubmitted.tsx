@@ -50,6 +50,7 @@ export function renderEnquirySubmitted(
     user: undefined,
     invalidateCanSend: () => {},
     padding,
+    entry,
     userInputScoreValue,
   }
   const pages = entry.pages.map((page, index) =>

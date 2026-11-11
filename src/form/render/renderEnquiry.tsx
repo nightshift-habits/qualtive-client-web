@@ -198,6 +198,7 @@ export function renderEnquiry(
 
         const renderingContextSubmitted: _RenderingContextSubmitted = {
           ...renderingContext,
+          entry: postedEntry,
           userInputScoreValue,
         }
 

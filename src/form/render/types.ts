@@ -1,5 +1,5 @@
 import type { Enquiry } from "../../types"
-import type { FormOptions, RenderEnquiryOptions } from "../types"
+import type { FormOptions, PostedEntry, RenderEnquiryOptions } from "../types"
 
 export type _RenderingContext = {
   containerId: string
@@ -22,5 +22,6 @@ export type _RenderingContext = {
 }
 
 export type _RenderingContextSubmitted = _RenderingContext & {
+  entry: PostedEntry
   userInputScoreValue: number
 }
